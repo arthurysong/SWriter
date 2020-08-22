@@ -1,4 +1,4 @@
-import credentials from './credentials/credentials.json';
+import credentials from '../credentials/credentials.json';
 
 export const oauth = () => {
   var oauth2Endpoint = 'https://accounts.google.com/o/oauth2/v2/auth';
@@ -10,12 +10,18 @@ export const oauth = () => {
 
   // Parameters to pass to OAuth 2.0 endpoint.
   var params = {'client_id': credentials.web.client_id,
-                  'redirect_uri': 'http://localhost:3000/auth',
+                  // 'client_secret': credentials.web.client_secret,
+                  // 'grant_type': 'authorization_code',
+                  'redirect_uri': 'http://localhost:3000/client',
+                  // 'response_type': 'code',
                   'response_type': 'token',
                   'scope': 'https://www.googleapis.com/auth/drive',
                   'include_granted_scopes': 'true',
-                  'state': 'oauth',};
-                  // 'prompt': 'consent'};
+                  'state': 'oauth',
+                  // 'access_type': 'offline',
+                  // 'approval_prompt': 'force',
+                  // 'prompt': 'consent',
+                };
 
   // Add form parameters as hidden input values.
   for (var p in params) {

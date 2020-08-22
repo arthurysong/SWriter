@@ -3,13 +3,14 @@ import { useHistory } from 'react-router-dom'
 import qs from 'qs';
 import axios from 'axios';
 
-const Client = ({ }) => {
+const Client = () => {
     const [files, setFiles] = useState([]);
     // console.log(match);
 
     const history = useHistory();
     // console.log(history);
     useEffect(() => {
+        console.log(history.location);
         const queryObject = qs.parse(history.location.hash);
         console.log(queryObject);
         if (queryObject['#state'] === 'oauth') {
@@ -21,6 +22,7 @@ const Client = ({ }) => {
             })
                 .then(resp => {
                     console.log(resp.data.items);
+                    localStorage.setItem('refresh_token', queryObject.code);
                     setFiles(resp.data.items.map(i => i.title))
                     // resp.data.items.forEach((i, index) => {
                     //     setFiles(files => [...files, i.title])
@@ -36,7 +38,7 @@ const Client = ({ }) => {
 
     // console.log('files', files)
     return <div>
-        You are authorized.
+        Welcome to your Client
         {/* File titles */}
         {files.length > 0 && files.map((f, index) => <h6 key={index}>
             {f}
