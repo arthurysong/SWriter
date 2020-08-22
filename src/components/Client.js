@@ -2,17 +2,16 @@ import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import qs from 'qs';
 import axios from 'axios';
-// import { }
 
-const Authorized = ({ }) => {
+const Client = ({ }) => {
     const [files, setFiles] = useState([]);
     // console.log(match);
 
     const history = useHistory();
     // console.log(history);
-    // console.log(queryObject);
     useEffect(() => {
         const queryObject = qs.parse(history.location.hash);
+        console.log(queryObject);
         if (queryObject['#state'] === 'oauth') {
             // we are authorized..
             axios.get('https://www.googleapis.com/drive/v2/files', {
@@ -35,7 +34,7 @@ const Authorized = ({ }) => {
         }
     }, [history])
 
-    console.log('files', files)
+    // console.log('files', files)
     return <div>
         You are authorized.
         {/* File titles */}
@@ -45,4 +44,4 @@ const Authorized = ({ }) => {
     </div>
 }
 
-export default Authorized
+export default Client
