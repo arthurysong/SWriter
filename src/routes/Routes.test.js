@@ -19,7 +19,9 @@ describe('Routes component', () => {
 
     it('Path / should redirect to /login if no token', () => {
         const wrapper = memoryRouter('/')
-        console.log(localStorage);
+        // console.log(localStorage);
         // expect(wrapper.find(Client))
     })
+
+    
 })
