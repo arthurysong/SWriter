@@ -1,12 +1,17 @@
 import { mount } from "enzyme"
 import React from 'react';
-import { MemoryRouter } from 'react-router-dom';
+import { Router } from 'react-router-dom';
+import { createMemoryHistory } from 'history';
 import Routes from '../routes/Routes';
 
 export const memoryRouter = route => {
-    return mount(
-        <MemoryRouter initialEntries={[ `${route}` ]}>
+    const history = createMemoryHistory({ initialEntries: [route] });
+
+    return {
+        wrapper: mount(
+        <Router history={history}>
             <Routes/>
-        </MemoryRouter>
-    )
-}   
+        </Router>
+    ), 
+        history
+}}   
