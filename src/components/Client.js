@@ -4,9 +4,14 @@ import qs from 'qs';
 import axios from 'axios';
 import Markdown from 'markdown-to-jsx';
 import './Client.scss';
+import MdEditor from 'react-markdown-editor-lite';
+import 'react-markdown-editor-lite/lib/index.css';
+import produce from 'immer';
 
 const Client = ({ history }) => {
+    const [editorText, setEditorText] = useState('# What??');
     const [files, setFiles] = useState([]);
+    const [fileIndex, setFileIndex] = useState(undefined);
     useEffect(() => {
         const queryObject = qs.parse(history.location.hash);
         // axios.get('https://www.googleapis.com/drive/v2/files', {
@@ -96,10 +101,20 @@ const Client = ({ history }) => {
 
     return <div data-test="client" className="client">
         <h1>Welcome to your Client</h1>
-        {files.length > 0 && files.map((f, index) => <Markdown key={index} className="client__fileTitle">{f.title}</Markdown>)}
-        {/* {files.length > 0 && files.map((f, index) => <h6 key={index}>
-            {f}
-        </h6>)} */}
+        {files.length > 0 && files.map((f, index) => 
+            <Markdown onClick={() => {
+                setEditorText(f.content)
+                setFileIndex(index)
+                }} 
+                key={index} 
+                className="client__fileTitle">{f.title}</Markdown>)}
+        <MdEditor 
+            value={editorText}
+            renderHTML={(text) => <Markdown >{text}</ Markdown>} 
+            onChange={({ html, text }) => {
+                setEditorText(text)
+                setFiles(produce(files, draft => { draft[fileIndex].content = text }))
+            }}/>
     </div>
 }
 
