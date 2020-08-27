@@ -14,40 +14,21 @@ const Client = ({ history }) => {
     const [fileIndex, setFileIndex] = useState(undefined);
     useEffect(() => {
         const queryObject = qs.parse(history.location.hash);
-        // axios.get('https://www.googleapis.com/drive/v2/files', {
-        //     headers: {
-        //         authorization: `Bearer ${queryObject.access_token}`
-        //     }
-        // })
-        //     .then(resp => {
-        //         console.log(resp.data)
-        //         setFiles(resp.data.items.map(i => i.title))
-        //         localStorage.setItem('access_token', queryObject.access_token);
-
-        //     })
-        //     .catch(err => {
-        //         if (err.response.status === 401) {
-        //             localStorage.setItem('access_token', undefined);
-
-        //             history.replace('/login');
-        //         }
-        //     });
-
-        // const response = await axios.$get('/api/slider', { params });
         axios.get('https://www.googleapis.com/drive/v3/files', {
             headers: { authorization: `Bearer ${queryObject.access_token}` },
             params: { q: "mimeType='application/vnd.google-apps.folder'andname='SWriter'" }})
             .then(resp => {
-                console.log(resp.data)
+                console.log(resp);
                 // also we should set localStorage
                 localStorage.setItem('access_token', queryObject.access_token);
 
                 // if we have 'swriter folder' we can use that to create files in
                 // if we don't have 'swriter' we need to create a SWriter folder
+                // console.log(resp.data.files.length)
                 if (resp.data.files.length) {
                     // show the files in SWriter
                     const id = resp.data.files[0].id;
-                    console.log(id)
+                    // console.log(id)
                     // axios.get(`https://www.googleapis.com/drive/v2/files/${id}/children`, {
                     //     headers: { authorization: `Bearer ${queryObject.access_token}` }})
                     //     // we can only search for files..
@@ -56,13 +37,14 @@ const Client = ({ history }) => {
                     //         console.log(resp.data);
 
                     //     })
+                    // console.log('hello?')
                     axios.get(`https://www.googleapis.com/drive/v2/files/${id}/children`, {
                         headers: { authorization: `Bearer ${queryObject.access_token}` },
                         // })
                         params: { q: "mimeType!='application/vnd.google-apps.folder'" }})
                         // here we can grab all the folders and get content for each file?
                         .then(resp => {
-                            console.log('only files', resp.data)
+                            // console.log('only files', resp.data)
                             resp.data.items.forEach(i => {
                                 // setFiles(files => [])
                                 axios.get(`https://www.googleapis.com/drive/v3/files/${i.id}/export`, {
@@ -74,8 +56,8 @@ const Client = ({ history }) => {
                                 // },
                             })
                                 .then(resp =>{
-                                    console.log(resp.data)
-                                    console.log(resp.data.split('\n')[0])
+                                    // console.log('text', resp)
+                                    // console.log(resp.data.split('\n')[0])
                                     const file = {
                                         title: resp.data.split('\n')[0],          
                                         content: resp.data,          
@@ -88,12 +70,24 @@ const Client = ({ history }) => {
 
                 } else {
                     // create a new folder called SWriter
+                    axios.post('https://www.googleapis.com/drive/v3/files', 
+                    {
+                        "mimeType": "application/vnd.google-apps.folder",
+                        "name": "SWriter"
+                    }, {
+                        headers: { 
+                            authorization: `Bearer ${queryObject.access_token}`,
+                            "Accept": "application/json",
+                            "Content-Type": "application/json",
+                        }})
+                        .then(resp => console.log('SWriter successfully created'));
                 }
             })
             .catch(err => {
-                if (err.response.status === 401) {
+                // console.log('i should be called');
+                // console.log(err.response.status)
+                if (err.response?.status === 401) {
                     localStorage.setItem('access_token', undefined);
-
                     history.replace('/login');
                 }
             })
@@ -108,13 +102,13 @@ const Client = ({ history }) => {
                 }} 
                 key={index} 
                 className="client__fileTitle">{f.title}</Markdown>)}
-        <MdEditor 
+        {files.length > 0 && <MdEditor 
             value={editorText}
             renderHTML={(text) => <Markdown >{text}</ Markdown>} 
             onChange={({ html, text }) => {
                 setEditorText(text)
                 setFiles(produce(files, draft => { draft[fileIndex].content = text }))
-            }}/>
+            }}/>}
     </div>
 }
 

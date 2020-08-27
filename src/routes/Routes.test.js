@@ -35,8 +35,9 @@ describe('Routes component', () => {
         let mock;
         beforeEach(() => {
             mock = new MockAdapter(axios);
-            const items = ['hi', 'bye', 'okay']
-            mock.onGet('https://www.googleapis.com/drive/v2/files').reply(200, { items });
+            // const files = []
+            // mock.onGet('https://www.googleapis.com/drive/v3/files').reply(200, { files });
+            mock.onAny().reply(200);
         })
 
         it('/client should render Client', async () => {
@@ -54,7 +55,7 @@ describe('Routes component', () => {
         let mock;
         beforeEach(() => {
             mock = new MockAdapter(axios);
-            mock.onGet('https://www.googleapis.com/drive/v2/files').reply(401);
+            mock.onGet('https://www.googleapis.com/drive/v3/files').reply(401);
         })
 
         it('/client should redirect to /login', async () => { 
@@ -63,6 +64,7 @@ describe('Routes component', () => {
                 expect(mock.history.get.length).toBe(1);
             }) 
             wrapper.update();
+            // console.log(wrapper.debug())
             expect(wrapper.find(Login)).toHaveLength(1);
             expect(history.location.pathname).toEqual('/login')
         })
