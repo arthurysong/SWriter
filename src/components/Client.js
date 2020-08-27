@@ -6,6 +6,8 @@ import Markdown from 'markdown-to-jsx';
 import './Client.scss';
 import MdEditor from 'react-markdown-editor-lite';
 import 'react-markdown-editor-lite/lib/index.css';
+import Main from './Main';
+import SideBar from './SideBar';
 import produce from 'immer';
 
 const Client = ({ history }) => {
@@ -94,8 +96,10 @@ const Client = ({ history }) => {
     }, [history])
 
     return <div data-test="client" className="client">
-        <h1>Welcome to your Client</h1>
-        {files.length > 0 && files.map((f, index) => 
+        {/* <h1>Welcome to your Client</h1> */}
+        <SideBar />
+        <Main />
+        {/* {files.length > 0 && files.map((f, index) => 
             <Markdown onClick={() => {
                 setEditorText(f.content)
                 setFileIndex(index)
@@ -108,7 +112,7 @@ const Client = ({ history }) => {
             onChange={({ html, text }) => {
                 setEditorText(text)
                 setFiles(produce(files, draft => { draft[fileIndex].content = text }))
-            }}/>}
+            }}/>} */}
     </div>
 }
 

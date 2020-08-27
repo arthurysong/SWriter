@@ -1,0 +1,22 @@
+.sideBar {
+    height: 100%;
+    width: 300px;
+    background-color: #2e2e2e;
+    color: white;
+    input {
+        margin: 10px 10px;
+        // width: 98%;
+        flex: 1;
+    }
+    a {
+        color: #d8d8d8;
+    }
+
+    li {
+        display: inline;
+    }
+
+    table {
+        width: 100%;
+    }
+}
