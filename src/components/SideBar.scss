@@ -3,20 +3,47 @@
     width: 300px;
     background-color: #2e2e2e;
     color: white;
-    input {
-        margin: 10px 10px;
-        // width: 98%;
-        flex: 1;
+    .sideBar__email {
+        text-align: center;
+        margin-top: 24px;
+        opacity: .5;
+        // font-weight: 700;
     }
-    a {
-        color: #d8d8d8;
+    .sideBar__button {
+        background-color: #3aa82d;
+        border-radius: 14px;
+        padding: 8px;
+        text-align: center;
+        margin: 24px 24px 0;
+        &:hover {
+            cursor: pointer;
+            background-color: #308e26;
+        }
     }
 
-    li {
-        display: inline;
-    }
+    .sideBar__notes {
+        margin: 24px 24px 0;
+            // font-size: 12px;
+        .sideBar__note {
+            display: flex;
+            align-items: center;
+            font-size: 12px;
+            opacity: 0.7;
+            margin-top: 10px;
+            
+            .sideBar__title {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
 
-    table {
-        width: 100%;
+            &:hover {
+                cursor: pointer;
+            }
+
+            svg {
+                font-size: 1.5em;
+            }
+        }
     }
 }
