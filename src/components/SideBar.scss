@@ -3,18 +3,34 @@
     width: 300px;
     background-color: #2e2e2e;
     color: white;
-    .sideBar__email {
+    padding: 0 24px;
+    .sideBar__user {
         text-align: center;
         margin-top: 24px;
         opacity: .5;
-        // font-weight: 700;
+        
+        .sideBar__email {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .sideBar__carrot {
+            margin-left: 14px;
+        }
+
+        &:hover {
+            opacity: .8;
+            cursor: pointer;
+        }
     }
+    
     .sideBar__button {
         background-color: #3aa82d;
         border-radius: 14px;
         padding: 8px;
         text-align: center;
-        margin: 24px 24px 0;
+        margin-top: 24px;
         &:hover {
             cursor: pointer;
             background-color: #308e26;
@@ -22,7 +38,7 @@
     }
 
     .sideBar__notes {
-        margin: 24px 24px 0;
+        margin-top: 24px;
         opacity: 0.9;
 
         .sideBar__listItem {

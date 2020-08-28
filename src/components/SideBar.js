@@ -6,16 +6,9 @@ import { useSelector } from 'react-redux';
 
 function SideBar() {
   const files = useSelector(state => state.files);
-  console.log('files', files);
-  // files.length > 0 && files.map((f, index) => 
-  //           <Markdown onClick={() => {
-  //               setEditorText(f.content)
-  //               setFileIndex(index)
-  //               }} 
-  //               key={index} 
-  //               className="client__fileTitle">{f.title}</Markdown>)
+  // console.log('files', files);
   return <div className="sideBar">
-    <div className="sideBar__email">arthursong14@gmail.com</div>
+    <div className="sideBar__user"><span className="sideBar__email">arthursong14@gmail.com</span><i class="sideBar__carrot fa fa-caret-down" /></div>
     <div className="sideBar__button">New Note</div>
     <div className="sideBar__notes">
       
