@@ -23,14 +23,14 @@
 
     .sideBar__notes {
         margin: 24px 24px 0;
-            // font-size: 12px;
-        .sideBar__note {
+        opacity: 0.9;
+
+        .sideBar__listItem {
             display: flex;
             align-items: center;
             font-size: 12px;
-            opacity: 0.7;
             margin-top: 10px;
-            
+
             .sideBar__title {
                 white-space: nowrap;
                 overflow: hidden;
@@ -44,6 +44,14 @@
             svg {
                 font-size: 1.5em;
             }
+        }
+
+        .--file {
+            margin-left: 32px;
+        }
+
+        .--folder {
+            font-size: 14px;
         }
     }
 }
