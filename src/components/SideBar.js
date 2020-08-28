@@ -2,8 +2,11 @@ import React from 'react'
 import './SideBar.scss';
 import InsertDriveFileOutlinedIcon from '@material-ui/icons/InsertDriveFileOutlined';
 import FolderOutlinedIcon from '@material-ui/icons/FolderOutlined';
+import { useSelector } from 'react-redux';
 
 function SideBar(props) {
+  const files = useSelector(state => state.files);
+  console.log('files', files);
   return <div className="sideBar">
     <div className="sideBar__email">arthursong14@gmail.com</div>
     <div className="sideBar__button">New Note</div>
