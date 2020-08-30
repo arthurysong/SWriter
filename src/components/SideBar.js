@@ -3,12 +3,21 @@ import './SideBar.scss';
 import InsertDriveFileOutlinedIcon from '@material-ui/icons/InsertDriveFileOutlined';
 import FolderOutlinedIcon from '@material-ui/icons/FolderOutlined';
 import { useSelector, useDispatch } from 'react-redux';
-import { setEditorFileId } from '../actions';
+import { setEditorFileId, setFileText } from '../actions';
 
 function SideBar() {
   const files = useSelector(state => state.files);
+  const editorFileId = useSelector(state => state.editorFileId);
   const dispatch = useDispatch();
-  // console.log('files', files);
+
+  const clickHandler = f => {
+    if (localStorage.getItem("saved") && editorFileId) {
+      dispatch(setFileText(editorFileId, localStorage.getItem("saved")))
+      localStorage.removeItem("saved")
+    }
+    dispatch(setEditorFileId(f[0]))
+  }
+
   return <div className="sideBar">
     <div className="sideBar__user">
       <div className="sideBar__email">arthursong14@gmail.com</div>
@@ -17,7 +26,8 @@ function SideBar() {
     <div className="sideBar__button">New Note</div>
     <div className="sideBar__notes">
     {Object.keys(files).length > 0 && Object.entries(files).map((f, index) => 
-      <div key={index} className="sideBar__listItem" onClick={() => dispatch(setEditorFileId(f[0]))}>
+    // Here onClick should save the current content... 
+      <div key={index} className="sideBar__listItem" onClick={() => clickHandler(f)}> 
         <InsertDriveFileOutlinedIcon />&nbsp;
         <span className="sideBar__title">{f[1].name}</span>
       </div>)}
