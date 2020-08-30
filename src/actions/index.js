@@ -2,6 +2,7 @@ import axios from 'axios';
 
 export const setFileName = file => ({ type: 'SET_FILE_NAME', file })
 export const setFileText = (id, text) => ({ type: 'SET_FILE_TEXT', id, text})
+export const setEditorFileId = id => ({ type: 'SET_EDITOR_FILE_ID', id })
 
 export const fetchFiles = (queryObject, history) => dispatch => {
     axios.get('https://www.googleapis.com/drive/v3/files', {
@@ -29,6 +30,7 @@ export const fetchFiles = (queryObject, history) => dispatch => {
                             axios.get(`https://www.googleapis.com/drive/v3/files/${i.id}/export`, {
                                 headers: { authorization: `Bearer ${queryObject.access_token}` }, 
                                 params: { mimeType: "text/plain" },
+                                // params: { mimeType: "text/html" },
                             })
                                 .then(resp =>{
                                     console.log('text', resp)

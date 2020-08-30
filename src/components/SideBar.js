@@ -2,17 +2,25 @@ import React from 'react'
 import './SideBar.scss';
 import InsertDriveFileOutlinedIcon from '@material-ui/icons/InsertDriveFileOutlined';
 import FolderOutlinedIcon from '@material-ui/icons/FolderOutlined';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { setEditorFileId } from '../actions';
 
 function SideBar() {
   const files = useSelector(state => state.files);
+  const dispatch = useDispatch();
   // console.log('files', files);
   return <div className="sideBar">
-    {/* <div className="sideBar__user"><span className="sideBar__email">arthursong14@gmail.com</span><i class="sideBar__carrot fa fa-caret-down" /></div> */}
-    <div className="sideBar__user"><div className="sideBar__email">arthursong14@gmail.com</div><i class="sideBar__carrot fa fa-caret-down" /></div>
+    <div className="sideBar__user">
+      <div className="sideBar__email">arthursong14@gmail.com</div>
+      <i className="sideBar__carrot fa fa-caret-down" />
+    </div>
     <div className="sideBar__button">New Note</div>
     <div className="sideBar__notes">
-    {Object.keys(files).length > 0 && Object.entries(files).map((f, index) => <div key={index} className="sideBar__listItem"><InsertDriveFileOutlinedIcon />&nbsp;<span className="sideBar__title">{f[1].name}</span></div>)}
+    {Object.keys(files).length > 0 && Object.entries(files).map((f, index) => 
+      <div key={index} className="sideBar__listItem" onClick={() => dispatch(setEditorFileId(f[0]))}>
+        <InsertDriveFileOutlinedIcon />&nbsp;
+        <span className="sideBar__title">{f[1].name}</span>
+      </div>)}
     </div>
   </div>
 }
