@@ -9,7 +9,7 @@ export const fetchFiles = (queryObject, history) => dispatch => {
         headers: { authorization: `Bearer ${queryObject.access_token}` },
         params: { q: "mimeType='application/vnd.google-apps.folder'andname='SWriter'" }})
         .then(resp => {
-            console.log(resp.data);
+            // console.log(resp.data);
             localStorage.setItem('access_token', queryObject.access_token);
 
             if (resp.data.files.length) {
@@ -18,13 +18,13 @@ export const fetchFiles = (queryObject, history) => dispatch => {
                     headers: { authorization: `Bearer ${queryObject.access_token}` },
                     params: { q: "mimeType!='application/vnd.google-apps.folder'" }})
                     .then(resp => {
-                        console.log('only files', resp.data)
+                        // console.log('only files', resp.data)
                         resp.data.items.forEach(i => {
                             axios.get(`https://www.googleapis.com/drive/v3/files/${i.id}/`, {
                                 headers: { authorization: `Bearer ${queryObject.access_token}` }, 
                             })
                                 .then(resp => {
-                                    console.log('item desc', resp.data)
+                                    // console.log('item desc', resp.data)
                                     dispatch(setFileName(resp.data))
                                 });
                             axios.get(`https://www.googleapis.com/drive/v3/files/${i.id}/export`, {
@@ -33,7 +33,7 @@ export const fetchFiles = (queryObject, history) => dispatch => {
                                 // params: { mimeType: "text/html" },
                             })
                                 .then(resp =>{
-                                    console.log('text', resp)
+                                    // console.log('text', resp)
                                     dispatch(setFileText(i.id, resp.data))
                                 })
                         })

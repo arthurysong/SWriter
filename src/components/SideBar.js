@@ -18,6 +18,7 @@ function SideBar() {
     dispatch(setEditorFileId(f[0]))
   }
 
+  console.log(files);
   return <div className="sideBar">
     <div className="sideBar__user">
       <div className="sideBar__email">arthursong14@gmail.com</div>
@@ -27,7 +28,7 @@ function SideBar() {
     <div className="sideBar__notes">
     {Object.keys(files).length > 0 && Object.entries(files).map((f, index) => 
     // Here onClick should save the current content... 
-      <div key={index} className="sideBar__listItem" onClick={() => clickHandler(f)}> 
+      <div key={index} className={`sideBar__listItem ${f[0] === editorFileId ? '--active' : ''}`} onClick={() => clickHandler(f)}> 
         <InsertDriveFileOutlinedIcon />&nbsp;
         <span className="sideBar__title">{f[1].name}</span>
       </div>)}
