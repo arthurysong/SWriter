@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import './Main.scss';
 import { useSelector, useDispatch } from 'react-redux';
-import { setFileText } from '../actions';
+import { setFileText, saveFile } from '../actions';
 import { debounce } from 'lodash'
 import Editor from 'rich-markdown-editor';
 
@@ -15,6 +15,7 @@ const Main = () => {
     const changeHandler = debounce(value => {
         localStorage.setItem("saved", value());
         console.log('save to google drive');
+        dispatch(saveFile(value()))
         // save in google drive.
     }, 250)
 

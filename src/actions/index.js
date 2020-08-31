@@ -60,3 +60,14 @@ export const fetchFiles = (queryObject, history) => dispatch => {
             }
         })
 }
+
+export const saveFile = body => dispatch => {
+    axios.put(`https://www.googleapis.com/upload/drive/v2/files/${"1qgjtmuv7MA9NkksL2LcB6Q5dZuad63OTI1gNAoicJ7o"}`, body, { 
+        headers: {
+            authorization: `Bearer ${localStorage.getItem('access_token')}`,
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+    }})
+        .then(resp => console.log(resp))
+        .catch(err => console.log(err));
+}
