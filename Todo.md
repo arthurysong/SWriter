@@ -1,6 +1,7 @@
 Logging out.
 NoteBooks and files.
-Creating a new Note.
-File name is displayed on top of the content and can be changed.
-When active a file should be highlighted.
+Creating a new note.
+And deleting notes.
 Saving spinner.
+Note should be ordered...
+Use localStorage in dispatch actions

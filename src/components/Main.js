@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './Main.scss';
 import { useSelector, useDispatch } from 'react-redux';
-import {  setFileName, saveFileContent, saveFileName } from '../actions';
+import {  setFileName, saveFileContent, saveFileName, fetchFiles, setEditorFileId } from '../actions';
 import { debounce } from 'lodash'
 import Editor from 'rich-markdown-editor';
 
@@ -11,8 +11,13 @@ const Main = () => {
     const editorFileId = useSelector(state => state.editorFileId);
     const [titleChanged, setTitleChanged] = useState(false);
 
+    useEffect(() => {
+        if (localStorage.getItem("last_saved_id", editorFileId)) dispatch(setEditorFileId(localStorage.getItem("last_saved_id"))) 
+    }, []);
+
     const changeHandler = debounce(value => {
         localStorage.setItem("saved_content", value());
+        localStorage.setItem("last_saved_id", editorFileId)
         console.log('save to google drive');
         dispatch(saveFileContent(editorFileId, value()))
     }, 250)
@@ -39,7 +44,9 @@ const Main = () => {
                     
             </div>}
             <div className="main__contentContainer">
-                {file && <Editor className="main__content" defaultValue={file.text} value={file.text} onChange={changeHandler}/>}
+                {console.log('text', file?.text)}
+                {file && <Editor className="main__content" value={file.text} onChange={changeHandler}/>}
+                {/* {file && <Editor className="main__content" value={""} onChange={changeHandler}/>} */}
             </div>
     </div>
 }

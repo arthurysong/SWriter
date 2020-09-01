@@ -4,22 +4,24 @@ export const setFileId = id => ({ type: 'SET_FILE_ID', id })
 export const setFileName = (id, name) => ({ type: 'SET_FILE_NAME', id, name })
 export const setFileText = (id, text) => ({ type: 'SET_FILE_TEXT', id, text})
 export const setEditorFileId = id => ({ type: 'SET_EDITOR_FILE_ID', id })
+// export const addNewNote = id => ({ type: 'NEW_NOTE', id })
 
 export const fetchFiles = (queryObject, history) => dispatch => {
     axios.get('https://www.googleapis.com/drive/v3/files', {
         headers: { authorization: `Bearer ${queryObject.access_token}` },
         params: { q: "mimeType='application/vnd.google-apps.folder'andname='SWriter'" }})
         .then(resp => {
-            // console.log(resp.data);
+            console.log(resp.data);
+            localStorage.setItem('swriter_id', resp.data.files[0].id)
             localStorage.setItem('access_token', queryObject.access_token);
 
             if (resp.data.files.length) {
                 const id = resp.data.files[0].id;
                 axios.get(`https://www.googleapis.com/drive/v2/files/${id}/children`, {
                     headers: { authorization: `Bearer ${queryObject.access_token}` },
-                    params: { q: "mimeType!='application/vnd.google-apps.folder'" }})
+                    params: { q: "mimeType='application/vnd.google-apps.document'" }})
                     .then(resp => {
-                        // console.log('only files', resp.data)
+                        console.log('only files', resp.data)
                         resp.data.items.forEach(i => {
                             dispatch(setFileId(i.id))
                             axios.get(`https://www.googleapis.com/drive/v3/files/${i.id}/`, {
@@ -85,5 +87,41 @@ export const saveFileName = (id, name) => dispatch => {
             "Content-Type": "application/json",
     }})
         .then(resp => console.log(resp))
+        .catch(err => console.log(err));
+}
+
+export const postNewNote = id => dispatch => {
+    // axios.post('https://www.googleapis.com/drive/v3/files', {
+    console.log(localStorage.getItem('access_token'))
+    // const body = 
+    //     `
+    //     --foo_bar
+    //     Content-Type: application/json; charset=UTF-8
+
+    //     {
+    //         parents: [localStorage.getItem('swriter_id')],
+    //         "mimeType": "application/vnd.google-apps.document",
+    //     }
+
+    //     --foo_bar
+    //     Content-Type: text/plain
+        
+    //     `
+    axios.post('https://www.googleapis.com/drive/v3/files', {
+        parents: [localStorage.getItem('swriter_id')],
+        "mimeType": "application/vnd.google-apps.document",
+    }, {
+        headers: { 
+            authorization: `Bearer ${localStorage.getItem('access_token')}`,
+            "Accept": "application/json",
+            "Content-Type": "application/json", }
+    })
+        .then(resp => {
+            console.log('note successfully created')
+            dispatch(setFileId(resp.data.id));
+            dispatch(setFileName(resp.data.id, resp.data.name));
+            dispatch(setFileText(resp.data.id, ""));
+            // add new note in reducer.
+        })
         .catch(err => console.log(err));
 }
