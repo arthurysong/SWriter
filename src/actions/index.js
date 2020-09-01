@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-export const setFileName = file => ({ type: 'SET_FILE_NAME', file })
+export const setFileId = id => ({ type: 'SET_FILE_ID', id })
+export const setFileName = (id, name) => ({ type: 'SET_FILE_NAME', id, name })
 export const setFileText = (id, text) => ({ type: 'SET_FILE_TEXT', id, text})
 export const setEditorFileId = id => ({ type: 'SET_EDITOR_FILE_ID', id })
 
@@ -20,12 +21,14 @@ export const fetchFiles = (queryObject, history) => dispatch => {
                     .then(resp => {
                         // console.log('only files', resp.data)
                         resp.data.items.forEach(i => {
+                            dispatch(setFileId(i.id))
                             axios.get(`https://www.googleapis.com/drive/v3/files/${i.id}/`, {
                                 headers: { authorization: `Bearer ${queryObject.access_token}` }, 
                             })
                                 .then(resp => {
                                     // console.log('item desc', resp.data)
-                                    dispatch(setFileName(resp.data))
+                                    const { id, name } = resp.data
+                                    dispatch(setFileName(id, name))
                                 });
                             axios.get(`https://www.googleapis.com/drive/v3/files/${i.id}/export`, {
                                 headers: { authorization: `Bearer ${queryObject.access_token}` }, 
@@ -61,8 +64,21 @@ export const fetchFiles = (queryObject, history) => dispatch => {
         })
 }
 
-export const saveFile = body => dispatch => {
+export const saveFileContent = (id, body) => dispatch => {
     axios.put(`https://www.googleapis.com/upload/drive/v2/files/${"1qgjtmuv7MA9NkksL2LcB6Q5dZuad63OTI1gNAoicJ7o"}`, body, { 
+        headers: {
+            authorization: `Bearer ${localStorage.getItem('access_token')}`,
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+    }})
+        .then(resp => console.log(resp))
+        .catch(err => console.log(err));
+}
+
+export const saveFileName = (id, name) => dispatch => {
+    axios.put(`https://www.googleapis.com/drive/v2/files/${id}`, {
+        "title": name
+    }, { 
         headers: {
             authorization: `Bearer ${localStorage.getItem('access_token')}`,
             "Accept": "application/json",

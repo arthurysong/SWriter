@@ -1,17 +1,73 @@
 .main {
-    height: 100%;
-    width: 100%;
+    // height: 100%;
+    // width: 100%;
 
     // .rc-md-editor {
     // }
 
-    .ProseMirror {
-        height: 94vh;
-        // width: 800px;
-        // padding: 48px;
-        padding: 6vh 30% 0;
-        // padding-top: 4vh;
-        // padding-left: 48px;
+    // .main__content {
+    // height: 94vh;
+    // padding: 6vh 30% 0;
+    height: 100vh;
+    width: 100vw;
+    // flex: 1;
+    // padding: 0 30%;
+    // padding: 2vh 30% 0;
+    // overflow: auto;
+    // }
+    .main__title {
+        height: 12vh;
+        position: relative;
+        // position: fixed;
+        // margin-bottom: 72px;
+        // background-color: white;
+        // padding-bottom: 12px;
+        // border-bottom: 1px solid #e8e8e8;
+
+        .main__label {
+            position: absolute;
+            line-height: 3em;
+            display: block;
+            font-family: 'SFMono-Regular',Consolas,'Liberation Mono',Menlo,Courier,monospace;
+            font-size: 13px;
+            left: -42px;
+            color: #4E5C6E;
+        }
+
+        .main__titleInput {
+            border: none;
+            font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,'Open Sans','Helvetica Neue',sans-serif;
+            font-weight: 400;
+            font-size: 18px;
+
+            &:focus {
+                border: none;
+                outline: none;
+            }
+        }
+    }
+
+    .main__contentContainer {
+        // position: relative;
+        height: 88vh;
+        width: calc(100vw - 225px);
         overflow: auto;
+        // overflow-x: wrap
+        // background-color: #d3d3d3;
+        // text-align: center;
+        // left: 50%;
+        // transform: translate(-50%);
+        // .main__content {
+        //     left: 50%;
+        //     transform: translate(-50%);
+        //     width: 816px;
+        // }
+        display: flex;
+        justify-content: center;
+        .ProseMirror{
+            // left: 50%;
+            // transform: translate(-50%);
+            width: 816px;
+        }
     }
 }

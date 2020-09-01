@@ -3,7 +3,7 @@ import './SideBar.scss';
 import InsertDriveFileOutlinedIcon from '@material-ui/icons/InsertDriveFileOutlined';
 import FolderOutlinedIcon from '@material-ui/icons/FolderOutlined';
 import { useSelector, useDispatch } from 'react-redux';
-import { setEditorFileId, setFileText } from '../actions';
+import { setEditorFileId, setFileText, setFileName } from '../actions';
 
 function SideBar() {
   const files = useSelector(state => state.files);
@@ -11,14 +11,20 @@ function SideBar() {
   const dispatch = useDispatch();
 
   const clickHandler = f => {
-    if (localStorage.getItem("saved") && editorFileId) {
-      dispatch(setFileText(editorFileId, localStorage.getItem("saved")))
-      localStorage.removeItem("saved")
+    if (localStorage.getItem("saved_content") && editorFileId) {
+      dispatch(setFileText(editorFileId, localStorage.getItem("saved_content")))
+      localStorage.removeItem("saved_content")
     }
+
+    // if (localStorage.getItem("saved_title") && editorFileId) {
+    //   dispatch(setFileName(editorFileId, localStorage.getItem("saved_title")))
+    //   localStorage.removeItem("saved_title")
+    // }
+
     dispatch(setEditorFileId(f[0]))
   }
 
-  console.log(files);
+  // console.log(files);
   return <div className="sideBar">
     <div className="sideBar__user">
       <div className="sideBar__email">arthursong14@gmail.com</div>
