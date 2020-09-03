@@ -5,3 +5,5 @@ And deleting notes.
 Saving spinner.
 Note should be ordered...
 Use localStorage in dispatch actions
+Word count
+Read time

@@ -44,9 +44,11 @@ const Main = () => {
                     
             </div>}
             <div className="main__contentContainer">
-                {console.log('text', file?.text)}
-                {file && <Editor className="main__content" value={file.text} onChange={changeHandler}/>}
-                {/* {file && <Editor className="main__content" value={""} onChange={changeHandler}/>} */}
+                {/* {console.log('text', file?.text)} */}
+                {/* {file?.text === "" ? console.log('what???') : undefined} */}
+                {/* {file?.text === "" ? <Editor id={1} className="main__content" value="" onChange={changeHandler}/> : <Editor id={2} className="main__content" defaultValue={file?.text} value={file?.text} onChange={changeHandler}/>} */}
+                {file && <Editor className="main__content" key={editorFileId} defaultValue={file.text} value={file.text} onChange={changeHandler}/>}
+                {/* <Editor value="" /> */}
             </div>
     </div>
 }
