@@ -8,7 +8,6 @@ import { useDispatch } from 'react-redux';
 import { fetchFiles, fetchValidFileIds } from '../actions';
 
 const Client = ({ history }) => {
-    // const [editorText, setEditorText] = useState('# What??');
     const dispatch = useDispatch();
     useEffect(() => {
         const queryObject = qs.parse(history.location.hash);

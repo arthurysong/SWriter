@@ -23,7 +23,7 @@ export const fetchFiles = (queryObject, history) => dispatch => {
         headers: { authorization: `Bearer ${queryObject.access_token}` },
         params: { q: "mimeType='application/vnd.google-apps.folder'andname='SWriter'" }})
         .then(resp => {
-            console.log(resp.data);
+            // console.log(resp.data);
             localStorage.setItem('swriter_id', resp.data.files[0].id)
             localStorage.setItem('access_token', queryObject.access_token);
 
@@ -34,7 +34,7 @@ export const fetchFiles = (queryObject, history) => dispatch => {
                     // params: { q: "mimeType='application/vnd.google-apps.file'" }
                 })
                     .then(resp => {
-                        console.log('only files', resp.data)
+                        // console.log('only files', resp.data)
                         resp.data.items.forEach(i => {
                             dispatch(newFile(i.id))
                             axios.get(`https://www.googleapis.com/drive/v3/files/${i.id}`, {
@@ -50,7 +50,7 @@ export const fetchFiles = (queryObject, history) => dispatch => {
                                 headers: { authorization: `Bearer ${queryObject.access_token}` }, 
                             })
                                 .then(resp =>{
-                                    console.log('text', resp.data)
+                                    // console.log('text', resp.data)
                                     dispatch(setFileText(i.id, resp.data))
                                 })
                                 .catch(err => console.log(err.response.data));

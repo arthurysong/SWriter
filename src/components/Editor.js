@@ -11,8 +11,8 @@ const Editor = ({ file, editorFileId, dispatch }) => {
         dispatch(saveFileContent(editorFileId, value()))
     }, 250)
 
-    return <div className="editor">
-        {file && <MarkdownEditor className="editor__content" key={editorFileId} autoFocus defaultValue={file.text} value={file.text} onChange={changeHandler}/>}
+    return <div className="editor"> {/* I need this outer div for styling reasons. */}
+        <MarkdownEditor className="editor__content" key={editorFileId} autoFocus defaultValue={file?.text} value={file?.text} onChange={changeHandler}/>
     </div>
 }
 
