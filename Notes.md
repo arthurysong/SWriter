@@ -11,3 +11,8 @@ Expose in Child: useImperativeHandle(ref, () => ({
     }
 }))
 Now in parent you can access: childRef.current.exposed_method
+
+4. Error codes:
+403 => Forbidden
+401 => Not Authorized.
+See err data using, err.response.data

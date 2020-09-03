@@ -1,12 +1,24 @@
 import axios from 'axios';
+// import uuidv4 from 'uuid';
 
-export const setFileId = id => ({ type: 'SET_FILE_ID', id })
+export const newFile = id => ({ type: 'NEW_FILE', id })
 export const setFileName = (id, name) => ({ type: 'SET_FILE_NAME', id, name })
 export const setFileText = (id, text) => ({ type: 'SET_FILE_TEXT', id, text})
 export const setEditorFileId = id => ({ type: 'SET_EDITOR_FILE_ID', id })
-// export const addNewNote = id => ({ type: 'NEW_NOTE', id })
+
+export const fetchValidFileIds = () => dispatch => {
+    axios.get('https://www.googleapis.com/drive/v3/files/generateIds', {
+        headers:  { authorization: `Bearer ${localStorage.getItem('access_token')}` }
+    })
+        .then(resp => {
+            // console.log('allo??')
+            // console.log(resp.data);
+            localStorage.setItem('valid_ids', JSON.stringify(resp.data.ids))
+        });
+}
 
 export const fetchFiles = (queryObject, history) => dispatch => {
+    console.log(queryObject.access_token)
     axios.get('https://www.googleapis.com/drive/v3/files', {
         headers: { authorization: `Bearer ${queryObject.access_token}` },
         params: { q: "mimeType='application/vnd.google-apps.folder'andname='SWriter'" }})
@@ -19,30 +31,32 @@ export const fetchFiles = (queryObject, history) => dispatch => {
                 const id = resp.data.files[0].id;
                 axios.get(`https://www.googleapis.com/drive/v2/files/${id}/children`, {
                     headers: { authorization: `Bearer ${queryObject.access_token}` },
-                    params: { q: "mimeType='application/vnd.google-apps.document'" }})
+                    // params: { q: "mimeType='application/vnd.google-apps.file'" }
+                })
                     .then(resp => {
                         console.log('only files', resp.data)
                         resp.data.items.forEach(i => {
-                            dispatch(setFileId(i.id))
-                            axios.get(`https://www.googleapis.com/drive/v3/files/${i.id}/`, {
+                            dispatch(newFile(i.id))
+                            axios.get(`https://www.googleapis.com/drive/v3/files/${i.id}`, {
                                 headers: { authorization: `Bearer ${queryObject.access_token}` }, 
                             })
                                 .then(resp => {
                                     // console.log('item desc', resp.data)
                                     const { id, name } = resp.data
                                     dispatch(setFileName(id, name))
-                                });
-                            axios.get(`https://www.googleapis.com/drive/v3/files/${i.id}/export`, {
+                                })
+                                .catch(err => console.log(err.response.data));
+                            axios.get(`https://www.googleapis.com/drive/v3/files/${i.id}?alt=media`, {
                                 headers: { authorization: `Bearer ${queryObject.access_token}` }, 
-                                params: { mimeType: "text/plain" },
-                                // params: { mimeType: "text/html" },
                             })
                                 .then(resp =>{
-                                    // console.log('text', resp)
+                                    console.log('text', resp.data)
                                     dispatch(setFileText(i.id, resp.data))
                                 })
+                                .catch(err => console.log(err.response.data));
                         })
                     })
+                    .catch(err => console.log(err.response.data))
 
             } else {
                 axios.post('https://www.googleapis.com/drive/v3/files', 
@@ -67,7 +81,7 @@ export const fetchFiles = (queryObject, history) => dispatch => {
 }
 
 export const saveFileContent = (id, body) => dispatch => {
-    axios.put(`https://www.googleapis.com/upload/drive/v2/files/${"1qgjtmuv7MA9NkksL2LcB6Q5dZuad63OTI1gNAoicJ7o"}`, body, { 
+    axios.put(`https://www.googleapis.com/upload/drive/v2/files/${id}`, body, { 
         headers: {
             authorization: `Bearer ${localStorage.getItem('access_token')}`,
             "Accept": "application/json",
@@ -91,37 +105,26 @@ export const saveFileName = (id, name) => dispatch => {
 }
 
 export const postNewNote = id => dispatch => {
-    // axios.post('https://www.googleapis.com/drive/v3/files', {
-    console.log(localStorage.getItem('access_token'))
-    // const body = 
-    //     `
-    //     --foo_bar
-    //     Content-Type: application/json; charset=UTF-8
-
-    //     {
-    //         parents: [localStorage.getItem('swriter_id')],
-    //         "mimeType": "application/vnd.google-apps.document",
-    //     }
-
-    //     --foo_bar
-    //     Content-Type: text/plain
-        
-    //     `
+    const validIds = JSON.parse(localStorage.getItem('valid_ids'));
+    const id = validIds.pop();
+    if (validIds.length) {
+        localStorage.setItem('valid_ids', JSON.stringify(validIds));
+    } else {
+        dispatch(fetchValidFileIds());
+    }
+    // console.log(validIds);
+    dispatch(newFile(id));
+    dispatch(setEditorFileId(id));
+    // console.log(id);
     axios.post('https://www.googleapis.com/drive/v3/files', {
         parents: [localStorage.getItem('swriter_id')],
-        "mimeType": "application/vnd.google-apps.document",
+        "id": id
     }, {
         headers: { 
             authorization: `Bearer ${localStorage.getItem('access_token')}`,
             "Accept": "application/json",
             "Content-Type": "application/json", }
     })
-        .then(resp => {
-            console.log('note successfully created')
-            dispatch(setFileId(resp.data.id));
-            dispatch(setFileName(resp.data.id, resp.data.name));
-            dispatch(setFileText(resp.data.id, ""));
-            // add new note in reducer.
-        })
-        .catch(err => console.log(err));
+        .then(resp => { console.log('note successfully created')})
+        .catch(err => console.log(err.response.data));
 }

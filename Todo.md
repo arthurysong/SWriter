@@ -7,3 +7,5 @@ Note should be ordered...
 Use localStorage in dispatch actions
 Word count
 Read time
+Fix bug with initial requests.
+Create Loader for when client mounts.
