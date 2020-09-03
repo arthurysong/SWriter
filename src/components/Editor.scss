@@ -1,0 +1,14 @@
+.editor {
+    flex: 1;
+    overflow: auto;
+    background-color: #e6e6e6;
+    .editor__content {
+        margin: 0 auto;
+        padding: 24px 42px;
+        width: 816px;
+        .ProseMirror {
+            padding: 42px;
+            box-shadow: 0 4px 6px 0 hsla(0, 0%, 0%, 0.2);
+        }
+    }
+}

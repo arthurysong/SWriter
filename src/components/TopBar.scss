@@ -1,0 +1,32 @@
+.topBar {
+    padding-left: 24px;
+    border-bottom: 1px solid #ddd;
+    height: 70px;
+
+    .topBar__titleLabel {
+        line-height: 2em;
+        display: block;
+        font-family: 'SFMono-Regular',Consolas,'Liberation Mono',Menlo,Courier,monospace;
+        font-size: 13px;
+        color: #4E5C6E;
+    }
+
+    .topBar__titleInput {
+        border: none;
+        font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,'Open Sans','Helvetica Neue',sans-serif;
+        font-weight: 400;
+        font-size: 18px;
+        border-radius: 5px;
+        padding: 4px 8px;
+        border: 1px solid #fff;
+
+        &:hover {
+            border: 1px solid #e9e9e9;
+        }
+
+        &:focus {
+            border: 1px solid #e7e7e7;
+            outline: none;
+        }
+    }
+}
