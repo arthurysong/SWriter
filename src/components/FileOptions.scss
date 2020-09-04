@@ -1,0 +1,64 @@
+.fileOptions {
+    float: right;
+    position: relative;
+
+    &:focus {
+        outline: none;
+    }
+
+    .fileOptions__button {
+        float: right;
+        color: rgba(0, 0, 0, 0.4);
+        padding: 0 6px;
+        margin-right: 14px;
+        z-index: 400;
+
+        &:hover {
+            background-color: #ddd;
+            cursor: pointer;
+        }
+    }
+
+    .fileOptions__dropdown {
+        background-color: white;
+        width: 200px;
+        padding: 12px 0;
+        font-size: 14px;
+        color: rgba(0, 0, 0, 0.7);
+        display: none;
+        box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.2);
+        z-index: 400;
+        position: absolute;
+        top: 20px;
+        right: 20px;
+
+        .fileOptions__dropdownItem {
+            padding: 6px 12px;
+            &:hover {
+                background-color: #eeeeee;
+                cursor: pointer;
+            }
+        }
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+    .--active {
+        display: block;
+        
+        animation: fadeInAnimation ease 1s;
+        animation-iteration-count: 1; 
+        animation-fill-mode: forwards; 
+
+        @keyframes fadeInAnimation { 
+            0% { 
+                opacity: 0; 
+            } 
+            100% { 
+                opacity: 1; 
+            } 
+        } 
+    }
+}
