@@ -10,7 +10,17 @@ const Login = () => {
             &scope=basicProfile,publishPost
             &state=MY_STATE
             &response_type=code
-            &redirect_uri=https://swriter.herokuapp.com`)
+            &redirect_uri=https://mwriter.herokuapp.com/callback`)
+            .then(resp => console.log(resp.data))
+            .catch(err => console.log(err.response.data));
+    }
+
+    const auth2 = () => {
+        axios.get(`https://cors-anywhere.herokuapp.com/https://medium.com/m/oauth/authorize?client_id=${process.env.REACT_APP_MEDIUM_ID}
+            &scope=basicProfile,publishPost
+            &state=MY_STATE
+            &response_type=code
+            &redirect_uri=https://mwriter.herokuapp.com/callback`)
             .then(resp => console.log(resp.data))
             .catch(err => console.log(err.response.data));
     }
@@ -24,6 +34,7 @@ const Login = () => {
         <button onClick={oauth}>Continue With Google</button>    
         {/* Here I want to click and log in via Medium... */}
         <button onClick={auth}>Continue with Medium</button>
+        <button onClick={auth2}>Continue with Medium2</button>
     </div>
 }
 
