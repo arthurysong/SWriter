@@ -5,8 +5,8 @@ import { API_URL } from '../utils/URL';
 
 const Login = () => {
     const auth = () => {
-        // axios.get(`https://medium.com/m/oauth/authorize?client_id=${process.env.REACT_APP_MEDIUM_ID}
-        axios.get(`https://cors-anywhere.herokuapp.com/https://medium.com/m/oauth/authorize?client_id=${process.env.REACT_APP_MEDIUM_ID}
+        // axios.get(`https://cors-anywhere.herokuapp.com/https://medium.com/m/oauth/authorize?client_id=${process.env.REACT_APP_MEDIUM_ID}
+        axios.get(`https://medium.com/m/oauth/authorize?client_id=${process.env.REACT_APP_MEDIUM_ID}
             &scope=basicProfile,publishPost
             &state=MY_STATE
             &response_type=code
