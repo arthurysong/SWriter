@@ -11,6 +11,8 @@ import reducer from './reducer';
 //   reducer,
 //   form: formReducer
 // }), applyMiddleware(thunk))
+// new
+
 const store = createStore(reducer, applyMiddleware(thunk));
 window.store = store
 
