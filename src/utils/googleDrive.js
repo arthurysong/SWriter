@@ -1,4 +1,4 @@
-import credentials from '../credentials/credentials.json';
+// import credentials from '../credentials/credentials.json';
 
 export const oauth = () => {
   var oauth2Endpoint = 'https://accounts.google.com/o/oauth2/v2/auth';
@@ -9,7 +9,8 @@ export const oauth = () => {
   form.setAttribute('action', oauth2Endpoint);
 
   // Parameters to pass to OAuth 2.0 endpoint.
-  var params = {'client_id': credentials.web.client_id,
+  // var params = {'client_id': credentials.web.client_id,
+  var params = {'client_id': process.env.REACT_APP_GOOGLE_ID,
                   'redirect_uri': 'http://localhost:3000/client',
                   'response_type': 'token',
                   'scope': 'https://www.googleapis.com/auth/drive',

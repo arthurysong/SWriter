@@ -13,6 +13,10 @@ const Login = () => {
             .then(resp => console.log(resp.data))
             .catch(err => console.log(err.response.data));
     }
+
+    // console.log('process.env', process.env.REACT_APP_MEDIUM_ID);
+    // console.log('process.env', process.env);
+
     return <div>
         <h1>SWriter</h1>
         <p>Free synced Journal using Google Drive</p>
