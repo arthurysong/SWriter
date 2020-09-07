@@ -16,7 +16,7 @@ const Login = () => {
     }
 
     // console.log('process.env', process.env.REACT_APP_MEDIUM_ID);
-    // console.log('process.env', process.env);
+    console.log('process.env', process.env);
 
     return <div>
         <h1>SWriter</h1>
