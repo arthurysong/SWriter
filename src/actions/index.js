@@ -34,10 +34,21 @@ export const fetchFiles = (queryObject, history) => dispatch => {
                     // params: { q: "mimeType='application/vnd.google-apps.file'" }
                 })
                     .then(resp => {
-                        // console.log('only files', resp.data)
+                        console.log('only files', resp.data)
                         resp.data.items.forEach(i => {
                             dispatch(newFile(i.id))
+                            axios.get(`https://www.googleapis.com/drive/v2/files/${i.id}`, {
+                                headers: { authorization: `Bearer ${queryObject.access_token}` }, 
+                            })
+                                .then(resp => {
+                                    console.log('item desc', resp.data)
+                                    // const { id, name } = resp.data
+                                    // dispatch(setFileName(id, name))
+                                })
+                                .catch(err => console.log(err.response.data));
+
                             axios.get(`https://www.googleapis.com/drive/v3/files/${i.id}`, {
+                            // axios.get(`https://www.googleapis.com/drive/v2/files/${i.id}`, {
                                 headers: { authorization: `Bearer ${queryObject.access_token}` }, 
                             })
                                 .then(resp => {
@@ -126,5 +137,22 @@ export const postNewNote = id => dispatch => {
             "Content-Type": "application/json", }
     })
         .then(resp => { console.log('note successfully created')})
+        .catch(err => console.log(err.response.data));
+}
+
+export const deleteFile = id => dispatch => {
+    dispatch({ type: 'DELETE_FILE', id })
+    axios.delete(`https://www.googleapis.com/drive/v2/files/${id}`, {
+        headers: { authorization: `Bearer ${localStorage.getItem('access_token')}` }
+    })
+        .then(resp => { 
+            if (resp.status === 204) {
+                console.log('successfully deleted') 
+                // i need to remove editorFileId, and also remove last_saved_id from localStorage
+                localStorage.removeItem('last_saved_id');
+                dispatch(setEditorFileId(undefined))
+                
+            }
+        })
         .catch(err => console.log(err.response.data));
 }

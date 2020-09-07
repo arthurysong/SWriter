@@ -10,9 +10,17 @@ const Editor = ({ file, editorFileId, dispatch }) => {
         localStorage.setItem("last_saved_id", editorFileId);
         dispatch(saveFileContent(editorFileId, value()))
     }, 250)
-
+    
+    console.log(file?.text)
     return <div className="editor"> {/* I need this outer div for styling reasons. */}
-        <MarkdownEditor className="editor__content" key={editorFileId} autoFocus defaultValue={file?.text} value={file?.text} onChange={changeHandler}/>
+        <MarkdownEditor 
+        className="editor__content" 
+        key={editorFileId} 
+        autoFocus 
+        defaultValue={file?.text} 
+        value={file?.text} 
+        onChange={changeHandler}
+        onSave={() => console.log('test: saved')}/>
     </div>
 }
 

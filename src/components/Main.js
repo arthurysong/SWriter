@@ -14,9 +14,13 @@ const Main = () => {
         if (localStorage.getItem("last_saved_id", editorFileId)) dispatch(setEditorFileId(localStorage.getItem("last_saved_id"))) 
     }, []);
 
-    return <div className="main">
+    if (file) return <div className="main">
         <TopBar file={file} editorFileId={editorFileId} dispatch={dispatch}/>
         <Editor file={file} editorFileId={editorFileId} dispatch={dispatch}/>
+    </div>
+
+    return <div className="main">
+        <div className="main__placeHolder">Hmm, it's very empty here...</div>
     </div>
 }
 

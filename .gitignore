@@ -24,3 +24,6 @@ yarn-error.log*
 
 # app credentials for OAuth2
 /src/credentials
+
+# env vars.
+.env

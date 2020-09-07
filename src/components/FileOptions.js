@@ -1,9 +1,13 @@
 import React, { useState, useRef } from 'react'
 import './FileOptions.scss';
+import { useSelector, useDispatch } from 'react-redux';
+import { deleteFile } from '../actions';
 
 const FileOptions = () => {
     const [menuState, setMenuState] = useState(false);
     const dropdown = useRef(null);
+    const dispatch = useDispatch();
+    const editorFileId = useSelector(state => state.editorFileId);
 
     const handleBlur = e => {
         const currentTarget = e.currentTarget;
@@ -28,7 +32,7 @@ const FileOptions = () => {
         </div>
         <div className={`fileOptions__dropdown ${menuState ? '--active' : ''}`} >
             <div className="fileOptions__dropdownItem">Export</div>
-            <div className="fileOptions__dropdownItem">Delete</div>
+            <div className="fileOptions__dropdownItem" onClick={() => dispatch(deleteFile(editorFileId))}>Delete</div>
             <div className="fileOptions__dropdownItem">Print</div>
         </div>
     </div>
