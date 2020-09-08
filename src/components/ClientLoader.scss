@@ -1,0 +1,30 @@
+.clientLoader {
+    width: 100vw;
+    height: 100vh;
+    background-color: #eaeaea;
+    // position: relative;
+    text-align: center;
+
+    .clientLoader__box {
+        // margin-top: 50%;
+        display: inline-block;
+        vertical-align: text-top;
+        position: relative;
+        top: 40%;
+        transform: translate(0, -50%);
+        // height: 100%;
+        // top: 50%;
+        // margin: 0 auto;
+        // left: 50%;
+    
+        // text-align: center;
+
+        .clientLoader__text {
+            // display: block;
+            text-transform: uppercase;
+            letter-spacing: 6px;
+            color: #26a65b;
+            margin-bottom: 24px;
+        }
+    }
+}

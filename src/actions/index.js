@@ -156,3 +156,5 @@ export const deleteFile = id => dispatch => {
         })
         .catch(err => console.log(err.response.data));
 }
+
+export const setUserInfo = (name, username, notebooks) => ({ type: 'SET_USER_INFO', name, username, notebooks })

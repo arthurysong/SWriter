@@ -6,8 +6,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setEditorFileId, setFileText, setFileName, postNewNote } from '../actions';
 
 function SideBar() {
-  const files = useSelector(state => state.files);
+  // const files = useSelector(state => state.files);
   const editorFileId = useSelector(state => state.editorFileId);
+  // const entry = use
   const dispatch = useDispatch();
 
   const clickHandler = f => {
@@ -16,10 +17,6 @@ function SideBar() {
       localStorage.removeItem("saved_content")
     }
 
-    // if (localStorage.getItem("saved_title") && editorFileId) {
-    //   dispatch(setFileName(editorFileId, localStorage.getItem("saved_title")))
-    //   localStorage.removeItem("saved_title")
-    // }
 
     dispatch(setEditorFileId(f[0]))
   }
@@ -32,12 +29,12 @@ function SideBar() {
     </div>
     <div className="sideBar__button" onClick={() => { dispatch(postNewNote()) }}>New Note</div>
     <div className="sideBar__notes">
-    {Object.keys(files).length > 0 && Object.entries(files).map((f, index) => 
+    {/* {Object.keys(files).length > 0 && Object.entries(files).map((f, index) => 
     // Here onClick should save the current content... 
       <div key={index} className={`sideBar__listItem ${f[0] === editorFileId ? '--active' : ''}`} onClick={() => clickHandler(f)}> 
         <InsertDriveFileOutlinedIcon />&nbsp;
         <span className="sideBar__title">{f[1].name}</span>
-      </div>)}
+      </div>)} */}
     </div>
   </div>
 }

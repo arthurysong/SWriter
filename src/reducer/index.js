@@ -1,8 +1,10 @@
 import { createReducer } from '@reduxjs/toolkit'
 
 const initialState = {
-    files: {},
+    // files: {},
     editorFileId: undefined,
+    user: {},
+    notebooks: []
 }
 
 export default createReducer(initialState, {
@@ -18,4 +20,9 @@ export default createReducer(initialState, {
     //     delete state.files[action.dummyId];
     // }
     // NEW_DUMMY_FILE: (state, action) => { state.files[action.]}
+    SET_USER_INFO: (state, action) => { 
+        state.user.name = action.name;
+        state.user.username = action.username;
+        state.notebooks = action.notebooks;
+    }
 })

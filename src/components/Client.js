@@ -10,8 +10,8 @@ import { useDispatch } from 'react-redux';
 const Client = ({ history }) => {
     const dispatch = useDispatch();
     useEffect(() => {
-        const queryObject = qs.parse(history.location.hash);
-        console.log(qs.parse(history.location.search));
+        // const queryObject = qs.parse(history.location.hash);
+        // console.log(qs.parse(history.location.search));
         // dispatch(fetchFiles(queryObject, history));
         // if (!localStorage.getItem('valid_ids') || localStorage.getItem('valid_ids') === "[]") dispatch(fetchValidFileIds());
     }, [history])
