@@ -5,14 +5,14 @@ import axios from 'axios'
 import { API_URL } from '../utils/URL';
 
 const Login = () => {
-    console.log('process.env', process.env);
+    // console.log('process.env', process.env);
 
     return <div>
         <h1>SWriter</h1>
         <p>Free synced Journal using Google Drive</p>
         {/* <button onClick={oauth}>Continue With Google</button>     */}
         {/* Here I want to click and log in via Medium... */}
-        {/* <button onClick={auth}>Continue with Medium</button> */}
+        {/* <button onClick={oauth}>Continue with Google</button> */}
         <button onClick={oauth2}>Continue with Medium</button>
     </div>
 }

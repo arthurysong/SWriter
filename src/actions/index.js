@@ -1,4 +1,6 @@
 import axios from 'axios';
+import { API_URL } from '../utils/URL';
+import qs from 'qs';
 // import uuidv4 from 'uuid';
 
 export const newFile = id => ({ type: 'NEW_FILE', id })
@@ -157,4 +159,40 @@ export const deleteFile = id => dispatch => {
         .catch(err => console.log(err.response.data));
 }
 
-export const setUserInfo = (name, username, notebooks) => ({ type: 'SET_USER_INFO', name, username, notebooks })
+export const setUser = user => ({ type: 'SET_USER', user })
+
+export const getUser = (queryObject, history, setLoading) => dispatch => {
+    // console.log(queryObject);
+    // console.log(localStorage);
+    if (localStorage.getItem('access_token') && localStorage.getItem('access_token') !== "undefined" && localStorage.getItem('refresh_token') && localStorage.getItem('refresh_token') !== "undefined") {
+        return axios.post(`${API_URL}/users/medium`, {
+            access_token: localStorage.getItem('access_token'),
+            refresh_token: localStorage.getItem('refresh_token'),
+        })
+            .then(resp => {
+                // console.log(resp.data)
+                const { access_token, user } = resp.data;
+                localStorage.setItem('access_token', access_token);
+                dispatch(setUser(user));
+                setTimeout(() => setLoading(false), 1000);
+            })
+            .catch(err => console.log(err));
+
+    } else {
+        return axios.post(`${API_URL}/users/medium-oauth`, {
+            queryObject
+        })
+            .then(resp => {
+                // console.log(resp.data)
+                const { access_token, refresh_token, user } = resp.data;
+                localStorage.setItem('access_token', access_token);
+                localStorage.setItem('refresh_token', refresh_token);
+                dispatch(setUser(user));
+                setTimeout(() => setLoading(false), 1000);
+            })
+            .catch(err => {
+                // console.log("error", err)
+                history.replace('/login');
+            });
+    }
+}

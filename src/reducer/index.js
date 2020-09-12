@@ -4,7 +4,7 @@ const initialState = {
     // files: {},
     editorFileId: undefined,
     user: {},
-    notebooks: []
+    // notebooks: []
 }
 
 export default createReducer(initialState, {
@@ -20,9 +20,10 @@ export default createReducer(initialState, {
     //     delete state.files[action.dummyId];
     // }
     // NEW_DUMMY_FILE: (state, action) => { state.files[action.]}
-    SET_USER_INFO: (state, action) => { 
-        state.user.name = action.name;
-        state.user.username = action.username;
-        state.notebooks = action.notebooks;
-    }
+    // SET_USER_INFO: (state, action) => { 
+    //     state.user.name = action.name;
+    //     state.user.username = action.username;
+    //     state.notebooks = action.notebooks;
+    // }
+    SET_USER: (state, action) => { state.user = action.user }
 })
