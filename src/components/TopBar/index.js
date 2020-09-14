@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './TopBar.scss';
-import { setFileName, saveFileName } from '../actions'
-import FileOptions from './FileOptions';
+import { setFileName, saveFileName } from '../../actions'
+import FileOptions from '../FileOptions';
 
 const TopBar = ({ file, editorFileId, dispatch }) => {
     const [titleChanged, setTitleChanged] = useState(false);

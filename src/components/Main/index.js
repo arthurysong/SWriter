@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react'
 import './Main.scss';
 import { useSelector, useDispatch } from 'react-redux';
-import { setEditorFileId } from '../actions';
-import TopBar from './TopBar';
-import Editor from './Editor';
+import { setEditorFileId } from '../../actions';
+import TopBar from '../TopBar';
+import Editor from '../Editor';
 
 const Main = () => {
     const dispatch = useDispatch();

@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
 import './Client.scss';
 import 'react-markdown-editor-lite/lib/index.css';
-import Main from './Main';
-import SideBar from './SideBar';
+import Main from '../Main';
+import SideBar from '../SideBar';
 import { useDispatch } from 'react-redux';
 // import { fetchFiles, fetchValidFileIds } from '../actions';
 

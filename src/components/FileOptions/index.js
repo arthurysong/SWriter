@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react'
 import './FileOptions.scss';
 import { useSelector, useDispatch } from 'react-redux';
-import { deleteFile } from '../actions';
+import { deleteFile } from '../../actions';
 
 const FileOptions = () => {
     const [menuState, setMenuState] = useState(false);

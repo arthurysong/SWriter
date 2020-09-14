@@ -3,7 +3,7 @@ import { Route, Redirect, Switch } from 'react-router-dom';
 import Login from '../components/Login'
 import Client from '../components/Client'
 import Invalid from '../components/Invalid'
-import Test from '../components/Test';
+// import Test from '../components/Test';
 import ClientLoader from '../components/ClientLoader';
 
 const Routes = () => {
@@ -12,7 +12,7 @@ const Routes = () => {
         <Route path="/login" component={Login} />
         {/* <Route path="/client" render={props => <Client {...props} />} /> */}
         <Route path="/client" render={props => <ClientLoader {...props}/>} />
-        <Route path="/test" component={Test} />
+        {/* <Route path="/test" component={Test} /> */}
         <Route exact path='*' component={Invalid} />
     </Switch>
 }

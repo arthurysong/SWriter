@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux';
-import Client from './Client';
-import { getUser } from '../actions';
+import Client from '../Client';
+import { getUser } from '../../actions';
 import PacmanLoader from 'react-spinners/PacmanLoader';
 import qs from 'qs';
 import './ClientLoader.scss';
@@ -12,6 +12,7 @@ const ClientLoader = ({ history }) => {
 
     useEffect(() => {
         const queryObject = qs.parse(history.location.search.substring(1));
+        console.log(history.location.search.substring(1));
         dispatch(getUser(queryObject, history, setLoading));
     }, [])
 

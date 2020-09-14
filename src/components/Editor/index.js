@@ -1,7 +1,7 @@
 import React from 'react'
 import MarkdownEditor from 'rich-markdown-editor';
 import { debounce } from 'lodash'
-import { saveFileContent } from '../actions'
+import { saveFileContent } from '../../actions'
 import './Editor.scss';
 
 const Editor = ({ file, editorFileId, dispatch }) => {

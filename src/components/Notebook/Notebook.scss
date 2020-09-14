@@ -1,0 +1,51 @@
+.notebook {
+    
+    .notebook__listItem {
+        display: flex;
+        align-items: center;
+        font-size: 12px;
+        // margin-top: 10px;
+        padding: 4px 10px;
+        .notebook__carrot {
+            margin-left: 4px;
+            width: 6px;
+        }
+    
+        .notebook__bookIcon {
+            margin-left: 8px;
+        }
+    
+        .notebook__title {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+    
+        }
+    
+        svg {
+            font-size: 1.5em;
+        }
+    
+        &:hover {
+            cursor: pointer;
+            background-color: #4e4e4e;
+        }
+    
+        &:active {
+            background-color: #6e6e6e;
+        }
+    }
+}
+
+.--active {
+    background-color: #6e6e6e;
+    font-weight: 600;
+}
+
+.--file {
+    margin-left: 32px;
+}
+
+.--folder {
+    font-size: 14px;
+}

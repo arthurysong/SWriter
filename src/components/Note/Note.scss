@@ -1,0 +1,21 @@
+.note {
+    display: block;
+    align-items: center;
+    font-size: 12px;
+    padding: 4px 0px 4px 24px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    svg {
+        font-size: 1.5em;
+    }
+
+    &:hover {
+        cursor: pointer;
+        background-color: #4e4e4e;
+    }
+
+    &:active {
+        background-color: #6e6e6e;
+    }
+}

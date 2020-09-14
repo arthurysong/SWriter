@@ -1,8 +1,8 @@
 import React from 'react'
-import { oauth } from '../utils/googleDrive'
-import { oauth2 } from '../utils/medium';
+import { oauth } from '../../utils/googleDrive'
+import { oauth2 } from '../../utils/medium';
 import axios from 'axios'
-import { API_URL } from '../utils/URL';
+import { API_URL } from '../../utils/URL';
 
 const Login = () => {
     // console.log('process.env', process.env);

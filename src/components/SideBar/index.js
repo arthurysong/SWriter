@@ -3,11 +3,13 @@ import './SideBar.scss';
 import InsertDriveFileOutlinedIcon from '@material-ui/icons/InsertDriveFileOutlined';
 import FolderOutlinedIcon from '@material-ui/icons/FolderOutlined';
 import { useSelector, useDispatch } from 'react-redux';
-import { setEditorFileId, setFileText, setFileName, postNewNote } from '../actions';
+import { setEditorFileId, setFileText, setFileName, postNewNote } from '../../actions';
+import Notebook from '../Notebook';
 
 function SideBar() {
   // const files = useSelector(state => state.files);
   const editorFileId = useSelector(state => state.editorFileId);
+  const notebooks = useSelector(state => state.user.notebooks);
   // const entry = use
   const dispatch = useDispatch();
 
@@ -21,7 +23,7 @@ function SideBar() {
     dispatch(setEditorFileId(f[0]))
   }
 
-  // console.log(files);
+  console.log("notebooks", notebooks);
   return <div className="sideBar">
     <div className="sideBar__user">
       <div className="sideBar__email">arthursong14@gmail.com</div>
@@ -35,6 +37,8 @@ function SideBar() {
         <InsertDriveFileOutlinedIcon />&nbsp;
         <span className="sideBar__title">{f[1].name}</span>
       </div>)} */}
+      {/* {notebooks.map((nb, index) => <div key={index} onClick={expandNotebook} className="sideBar__listItem"><i className="sideBar__carrot fa fa-caret-right" />&nbsp;{nb.name}</div>)} */}
+      {notebooks.map((nb, index) => <Notebook key={index} notebook={nb}/>)}
     </div>
   </div>
 }
