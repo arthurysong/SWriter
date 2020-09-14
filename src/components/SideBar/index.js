@@ -38,7 +38,7 @@ function SideBar() {
         <span className="sideBar__title">{f[1].name}</span>
       </div>)} */}
       {/* {notebooks.map((nb, index) => <div key={index} onClick={expandNotebook} className="sideBar__listItem"><i className="sideBar__carrot fa fa-caret-right" />&nbsp;{nb.name}</div>)} */}
-      {notebooks.map((nb, index) => <Notebook key={index} notebook={nb}/>)}
+      {notebooks.map((nb, index) => <Notebook key={index} notebook={nb} notebookIndex={index} />)}
     </div>
   </div>
 }

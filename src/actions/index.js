@@ -196,3 +196,6 @@ export const getUser = (queryObject, history, setLoading) => dispatch => {
             });
     }
 }
+
+export const setActiveNotebook = index => ({ type: 'SET_ACTIVE_NOTEBOOK', index })
+export const setNotePosition = (notebookIndex, noteIndex) => ({ type: 'SET_NOTE_POSITION', notebookIndex, noteIndex })

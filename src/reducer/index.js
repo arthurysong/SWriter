@@ -2,9 +2,17 @@ import { createReducer } from '@reduxjs/toolkit'
 
 const initialState = {
     // files: {},
-    editorFileId: undefined,
+    // editorFileId: undefined,
+    // notebookIndex: undefined,
+    // noteIndex: undefined,
+    notePosition: [], // This is to find the note in the user array... 
+    // index 0 => index of notebook in user.notebook
+    // index 1 => index of note in user.notebook.notes
+    
+    activeNotebook: undefined, // This is the last selected notebook...
+    // So that we can select a notebook and then create a new file under the last selected notebook.
+
     user: {},
-    // notebooks: []
 }
 
 export default createReducer(initialState, {
@@ -15,15 +23,10 @@ export default createReducer(initialState, {
     SET_FILE_TEXT: (state, action) => { state.files[action.id].text = action.text },
     SET_EDITOR_FILE_ID: (state, action) => { state.editorFileId = action.id },
     DELETE_FILE: (state, action) => { delete state.files[action.id] },
-    // SET_DUMMY_FILE_OFFICIAL_ID: (state, action) => { 
-    //     state.files[action.id] = state.files[action.dummyId];
-    //     delete state.files[action.dummyId];
-    // }
-    // NEW_DUMMY_FILE: (state, action) => { state.files[action.]}
-    // SET_USER_INFO: (state, action) => { 
-    //     state.user.name = action.name;
-    //     state.user.username = action.username;
-    //     state.notebooks = action.notebooks;
-    // }
-    SET_USER: (state, action) => { state.user = action.user }
+    SET_USER: (state, action) => { state.user = action.user },
+    SET_ACTIVE_NOTEBOOK: (state, action) => { state.activeNotebook = action.index },
+    SET_NOTE_POSITION: (state, action) => { 
+        state.notePosition[0] = action.notebookIndex;
+        state.notePosition[1] = action.noteIndex;
+    }
 })
