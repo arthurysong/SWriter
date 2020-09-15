@@ -1,18 +1,18 @@
 import React, { useState } from 'react'
 import './TopBar.scss';
-import { setFileName, saveFileName } from '../../actions'
+import { setNoteTitle, saveNote } from '../../actions'
 import FileOptions from '../FileOptions';
 
-const TopBar = ({ file, editorFileId, dispatch }) => {
+const TopBar = ({ note, notePosition, dispatch }) => {
     const [titleChanged, setTitleChanged] = useState(false);
 
     const titleChange = e => {
         setTitleChanged(true);
-        dispatch(setFileName(editorFileId, e.target.value))
+        dispatch(setNoteTitle(notePosition, e.target.value))
     }
 
     const titleBlur = () => {
-        if (titleChanged) dispatch(saveFileName(editorFileId, file?.name));
+        if (titleChanged) dispatch(saveNote(note, { title: note?.title}));
         setTitleChanged(false);
     }
 
@@ -20,7 +20,7 @@ const TopBar = ({ file, editorFileId, dispatch }) => {
         <div className="topBar__titleLabel">Title</div>
         <input 
             className="topBar__titleInput" 
-            value={file?.name} 
+            value={note?.title} 
             placeholder="Title goes here" 
             onChange={titleChange}
             onBlur={titleBlur}/>

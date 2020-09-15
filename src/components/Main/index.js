@@ -9,6 +9,7 @@ const Main = () => {
     const dispatch = useDispatch();
     // const file = useSelector(state => state.files[state.editorFileId]);
     const note = useSelector(state => state.user.notebooks[state.notePosition[0]]?.notes[state.notePosition[1]]);
+    const notePosition = useSelector(state => state.notePosition);
     // const editorFileId = useSelector(state => state.editorFileId);
 
     // console.log("note", note);
@@ -18,7 +19,7 @@ const Main = () => {
 
 
     if (note) return <div className="main">
-        <TopBar note={note} dispatch={dispatch}/>
+        <TopBar note={note} notePosition={notePosition} dispatch={dispatch}/>
         <Editor note={note} dispatch={dispatch}/>
     </div>
 

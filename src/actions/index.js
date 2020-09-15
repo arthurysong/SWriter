@@ -6,6 +6,7 @@ import qs from 'qs';
 export const newFile = id => ({ type: 'NEW_FILE', id })
 export const setFileName = (id, name) => ({ type: 'SET_FILE_NAME', id, name })
 // export const setFileText = (id, text) => ({ type: 'SET_FILE_TEXT', id, text})
+export const setNoteTitle = (notePosition, title) => ({ type: 'SET_NOTE_TITLE', notePosition, title })
 export const setNoteContent = (notePosition, content) => ({ type: 'SET_NOTE_CONTENT', notePosition, content })
 // export const setEditorFileId = id => ({ type: 'SET_EDITOR_FILE_ID', id })
 
@@ -105,18 +106,18 @@ export const fetchValidFileIds = () => dispatch => {
 //         .catch(err => console.log(err));
 // }
 
-export const saveFileName = (id, name) => dispatch => {
-    axios.put(`https://www.googleapis.com/drive/v2/files/${id}`, {
-        "title": name
-    }, { 
-        headers: {
-            authorization: `Bearer ${localStorage.getItem('access_token')}`,
-            "Accept": "application/json",
-            "Content-Type": "application/json",
-    }})
-        .then(resp => console.log(resp))
-        .catch(err => console.log(err));
-}
+// export const saveFileName = (id, name) => dispatch => {
+//     axios.put(`https://www.googleapis.com/drive/v2/files/${id}`, {
+//         "title": name
+//     }, { 
+//         headers: {
+//             authorization: `Bearer ${localStorage.getItem('access_token')}`,
+//             "Accept": "application/json",
+//             "Content-Type": "application/json",
+//     }})
+//         .then(resp => console.log(resp))
+//         .catch(err => console.log(err));
+// }
 
 // export const postNewNote = id => dispatch => {
 //     const validIds = JSON.parse(localStorage.getItem('valid_ids'));
