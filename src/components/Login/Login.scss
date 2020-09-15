@@ -1,0 +1,52 @@
+.login {
+    height: 100%;
+    // text-align: center;
+
+
+    .login__background {
+        background-image: url('../../pictures/wallpaper.jpg');
+        height: 100%;
+        position: absolute;
+        width: 100%;
+        z-index: -1;
+        opacity: .5;
+        // background: rgba(0, 0, 0, 0.6);
+    }
+
+    .login__container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        // padding
+        margin: 0 auto;
+        background: #fff;
+        max-width: 512px;
+        box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.3);
+        padding: 62px 99px 48px;
+        text-align: center;
+        .login__title {
+            font-family: 'Merriweather', serif;
+        }
+
+        .login__description {
+            margin-top: 24px;
+        }
+
+        .login__button {
+            margin-top: 24px;
+            width: 100%;
+            background-color: #000;
+            color: #fff;
+            padding: 12px 0px;
+            border-radius: 6px;
+
+            &:hover {
+                cursor: pointer;
+                background-color: #222;
+
+            }
+        }
+    }
+
+}
