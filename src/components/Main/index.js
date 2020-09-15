@@ -17,7 +17,7 @@ const Main = () => {
     useEffect(() => {
         // if (localStorage.getItem("last_saved_id", editorFileId)) dispatch(setEditorFileId(localStorage.getItem("last_saved_id"))) 
         if (localStorage.getItem("last_saved_position")) {
-            const [notebookPosition, notePosition] = localStorage.getItem("last_saved_position").split(',');
+            const [notebookPosition, notePosition] = localStorage.getItem("last_saved_position").split(',').map(n => parseInt(n));
             // console.log(localStorage.getItem("last_saved_position").split(',')[0])
             dispatch(setNotePosition(notebookPosition, notePosition))
             dispatch(setActiveNotebook(notebookPosition));
