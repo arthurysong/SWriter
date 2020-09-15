@@ -11,7 +11,7 @@ const Main = () => {
     const note = useSelector(state => state.user.notebooks[state.notePosition[0]]?.notes[state.notePosition[1]]);
     // const editorFileId = useSelector(state => state.editorFileId);
 
-    console.log("note", note);
+    // console.log("note", note);
     useEffect(() => {
         // if (localStorage.getItem("last_saved_id", editorFileId)) dispatch(setEditorFileId(localStorage.getItem("last_saved_id"))) 
     }, []);

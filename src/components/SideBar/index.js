@@ -3,25 +3,17 @@ import './SideBar.scss';
 import InsertDriveFileOutlinedIcon from '@material-ui/icons/InsertDriveFileOutlined';
 import FolderOutlinedIcon from '@material-ui/icons/FolderOutlined';
 import { useSelector, useDispatch } from 'react-redux';
-import { setEditorFileId, setFileText, setFileName, postNewNote } from '../../actions';
+// import { postNewNote } from '../../actions';
 import Notebook from '../Notebook';
 
 function SideBar() {
   // const files = useSelector(state => state.files);
-  const editorFileId = useSelector(state => state.editorFileId);
+  // const editorFileId = useSelector(state => state.editorFileId);
   const notebooks = useSelector(state => state.user.notebooks);
   // const entry = use
   const dispatch = useDispatch();
 
-  const clickHandler = f => {
-    if (localStorage.getItem("saved_content") && editorFileId) {
-      dispatch(setFileText(editorFileId, localStorage.getItem("saved_content")))
-      localStorage.removeItem("saved_content")
-    }
 
-
-    dispatch(setEditorFileId(f[0]))
-  }
 
   console.log("notebooks", notebooks);
   return <div className="sideBar">
@@ -29,7 +21,8 @@ function SideBar() {
       <div className="sideBar__email">arthursong14@gmail.com</div>
       <i className="sideBar__carrot fa fa-caret-down" />
     </div>
-    <div className="sideBar__button" onClick={() => { dispatch(postNewNote()) }}>New Note</div>
+    {/* <div className="sideBar__button" onClick={() => { dispatch(postNewNote()) }}>New Note</div> */}
+    <div className="sideBar__button">New Note</div>
     <div className="sideBar__notes">
     {/* {Object.keys(files).length > 0 && Object.entries(files).map((f, index) => 
     // Here onClick should save the current content... 

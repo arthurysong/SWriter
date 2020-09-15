@@ -5,8 +5,9 @@ import qs from 'qs';
 
 export const newFile = id => ({ type: 'NEW_FILE', id })
 export const setFileName = (id, name) => ({ type: 'SET_FILE_NAME', id, name })
-export const setFileText = (id, text) => ({ type: 'SET_FILE_TEXT', id, text})
-export const setEditorFileId = id => ({ type: 'SET_EDITOR_FILE_ID', id })
+// export const setFileText = (id, text) => ({ type: 'SET_FILE_TEXT', id, text})
+export const setNoteContent = (notePosition, content) => ({ type: 'SET_NOTE_CONTENT', notePosition, content })
+// export const setEditorFileId = id => ({ type: 'SET_EDITOR_FILE_ID', id })
 
 export const fetchValidFileIds = () => dispatch => {
     axios.get('https://www.googleapis.com/drive/v3/files/generateIds', {
@@ -117,47 +118,47 @@ export const saveFileName = (id, name) => dispatch => {
         .catch(err => console.log(err));
 }
 
-export const postNewNote = id => dispatch => {
-    const validIds = JSON.parse(localStorage.getItem('valid_ids'));
-    const id = validIds.pop();
-    if (validIds.length) {
-        localStorage.setItem('valid_ids', JSON.stringify(validIds));
-    } else {
-        dispatch(fetchValidFileIds());
-    }
-    // console.log(validIds);
-    dispatch(newFile(id));
-    dispatch(setEditorFileId(id));
-    // console.log(id);
-    axios.post('https://www.googleapis.com/drive/v3/files', {
-        parents: [localStorage.getItem('swriter_id')],
-        "id": id
-    }, {
-        headers: { 
-            authorization: `Bearer ${localStorage.getItem('access_token')}`,
-            "Accept": "application/json",
-            "Content-Type": "application/json", }
-    })
-        .then(resp => { console.log('note successfully created')})
-        .catch(err => console.log(err.response.data));
-}
+// export const postNewNote = id => dispatch => {
+//     const validIds = JSON.parse(localStorage.getItem('valid_ids'));
+//     const id = validIds.pop();
+//     if (validIds.length) {
+//         localStorage.setItem('valid_ids', JSON.stringify(validIds));
+//     } else {
+//         dispatch(fetchValidFileIds());
+//     }
+//     // console.log(validIds);
+//     dispatch(newFile(id));
+//     dispatch(setEditorFileId(id));
+//     // console.log(id);
+//     axios.post('https://www.googleapis.com/drive/v3/files', {
+//         parents: [localStorage.getItem('swriter_id')],
+//         "id": id
+//     }, {
+//         headers: { 
+//             authorization: `Bearer ${localStorage.getItem('access_token')}`,
+//             "Accept": "application/json",
+//             "Content-Type": "application/json", }
+//     })
+//         .then(resp => { console.log('note successfully created')})
+//         .catch(err => console.log(err.response.data));
+// }
 
-export const deleteFile = id => dispatch => {
-    dispatch({ type: 'DELETE_FILE', id })
-    axios.delete(`https://www.googleapis.com/drive/v2/files/${id}`, {
-        headers: { authorization: `Bearer ${localStorage.getItem('access_token')}` }
-    })
-        .then(resp => { 
-            if (resp.status === 204) {
-                console.log('successfully deleted') 
-                // i need to remove editorFileId, and also remove last_saved_id from localStorage
-                localStorage.removeItem('last_saved_id');
-                dispatch(setEditorFileId(undefined))
+// export const deleteFile = id => dispatch => {
+//     dispatch({ type: 'DELETE_FILE', id })
+//     axios.delete(`https://www.googleapis.com/drive/v2/files/${id}`, {
+//         headers: { authorization: `Bearer ${localStorage.getItem('access_token')}` }
+//     })
+//         .then(resp => { 
+//             if (resp.status === 204) {
+//                 console.log('successfully deleted') 
+//                 // i need to remove editorFileId, and also remove last_saved_id from localStorage
+//                 localStorage.removeItem('last_saved_id');
+//                 dispatch(setEditorFileId(undefined))
                 
-            }
-        })
-        .catch(err => console.log(err.response.data));
-}
+//             }
+//         })
+//         .catch(err => console.log(err.response.data));
+// }
 
 export const setUser = user => ({ type: 'SET_USER', user })
 
@@ -201,10 +202,9 @@ export const setActiveNotebook = index => ({ type: 'SET_ACTIVE_NOTEBOOK', index 
 export const setNotePosition = (notebookIndex, noteIndex) => ({ type: 'SET_NOTE_POSITION', notebookIndex, noteIndex })
 
 export const saveNote = (note, body) => dispatch => {
-    console.log("note", note);
-    console.log("in saveNote", body);
+    // console.log("note", note);
+    // console.log("in saveNote", body);
     axios.put(`${API_URL}/notes/${note._id}`, body)
         .then(resp => console.log(resp))
         .catch(err => console.log(err));
-
 }

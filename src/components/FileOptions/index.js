@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react'
 import './FileOptions.scss';
 import { useSelector, useDispatch } from 'react-redux';
-import { deleteFile } from '../../actions';
+// import { deleteFile } from '../../actions';
 
 const FileOptions = () => {
     const [menuState, setMenuState] = useState(false);
@@ -32,7 +32,7 @@ const FileOptions = () => {
         </div>
         <div className={`fileOptions__dropdown ${menuState ? '--active' : ''}`} >
             <div className="fileOptions__dropdownItem">Export</div>
-            <div className="fileOptions__dropdownItem" onClick={() => dispatch(deleteFile(editorFileId))}>Delete</div>
+            {/* <div className="fileOptions__dropdownItem" onClick={() => dispatch(deleteFile(editorFileId))}>Delete</div> */}
             <div className="fileOptions__dropdownItem">Print</div>
         </div>
     </div>
