@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react'
 import './Main.scss';
 import { useSelector, useDispatch } from 'react-redux';
-import { setEditorFileId } from '../../actions';
+// import { setEditorFileId } from '../../actions';
+import { setActiveNotebook, setNotePosition } from '../../actions';
 import TopBar from '../TopBar';
 import Editor from '../Editor';
 
@@ -15,12 +16,19 @@ const Main = () => {
     // console.log("note", note);
     useEffect(() => {
         // if (localStorage.getItem("last_saved_id", editorFileId)) dispatch(setEditorFileId(localStorage.getItem("last_saved_id"))) 
+        if (localStorage.getItem("last_saved_position")) {
+            const [notebookPosition, notePosition] = localStorage.getItem("last_saved_position").split(',');
+            // console.log(localStorage.getItem("last_saved_position").split(',')[0])
+            dispatch(setNotePosition(notebookPosition, notePosition))
+            dispatch(setActiveNotebook(notebookPosition));
+        }
+        
     }, []);
 
 
     if (note) return <div className="main">
         <TopBar note={note} notePosition={notePosition} dispatch={dispatch}/>
-        <Editor note={note} dispatch={dispatch}/>
+        <Editor note={note} notePosition={notePosition} dispatch={dispatch}/>
     </div>
 
     return <div className="main">

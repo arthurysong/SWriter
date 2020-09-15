@@ -1,13 +1,14 @@
 import React from 'react'
 import MarkdownEditor from 'rich-markdown-editor';
 import { debounce } from 'lodash'
-import { saveFileContent, saveNote } from '../../actions'
+import { saveNote } from '../../actions'
 import './Editor.scss';
 
-const Editor = ({ note, dispatch }) => {
+const Editor = ({ note, notePosition, dispatch }) => {
     const changeHandler = debounce(value => {
         localStorage.setItem("saved_content", value());
-        localStorage.setItem("last_saved_id", note._id);
+        // localStorage.setItem("last_saved_id", note._id);
+        localStorage.setItem("last_saved_position", notePosition );
         // dispatch(saveFileContent(editorFileId, value()))
         dispatch(saveNote(note, { content: value() }));
     }, 250)

@@ -22,6 +22,7 @@ const TopBar = ({ note, notePosition, dispatch }) => {
             className="topBar__titleInput" 
             value={note?.title} 
             placeholder="Title goes here" 
+            onFocus={e => e.target.select()}
             onChange={titleChange}
             onBlur={titleBlur}/>
 
