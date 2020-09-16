@@ -32,6 +32,10 @@
         }
     }
 
-    
+    .topBar__buttons {
+        float: right;
+        display: flex;
+        align-items: center;
+    }
     
 }

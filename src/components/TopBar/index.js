@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import './TopBar.scss';
 import { setNoteTitle, saveNote } from '../../actions'
 import FileOptions from '../FileOptions';
+import PublishButton from '../PublishButton';
 
 const TopBar = ({ note, notePosition, dispatch }) => {
     const [titleChanged, setTitleChanged] = useState(false);
@@ -26,7 +27,10 @@ const TopBar = ({ note, notePosition, dispatch }) => {
             onChange={titleChange}
             onBlur={titleBlur}/>
 
-        <FileOptions />
+        <div className="topBar__buttons">
+            <PublishButton note={note}/>
+            <FileOptions />
+        </div>
     </div>
 }
 
