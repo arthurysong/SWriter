@@ -1,3 +1,5 @@
+import { CLIENT_URL } from '../utils/URL';
+
 export const oauth2 = () => {
     var oauth2Endpoint = 'https://medium.com/m/oauth/authorize';
   
@@ -11,7 +13,7 @@ export const oauth2 = () => {
     var params = {'client_id': process.env.REACT_APP_MEDIUM_ID,
                     // 'redirect_uri': `${process.env.NODE_ENV === 'development' ? 'https://127.0.0.1:3000/callback' : 'https://mwriter.herokuapp.com'}`,
                     // 'redirect_uri': 'https://mwriter.herokuapp.com/callback',
-                    'redirect_uri': 'http://127.0.0.1:3000/client',
+                    'redirect_uri': `${CLIENT_URL}/client`,
                     'response_type': 'code',
                     'scope': 'basicProfile,publishPost',
                     'state': process.env.REACT_APP_MEDIUM_STATE,
