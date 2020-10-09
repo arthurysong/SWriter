@@ -28,13 +28,28 @@
         }
     }
 
+    .sideBar__gitHubConnect {
+        // background-color: #3aa;
+        border: 1px solid #3aa;
+        border-radius: 14px;
+        padding: 8px;
+        margin: 24px 18px 0px;
+        text-align: center;
+        color: #3aa;
+
+        &:hover {
+            cursor: pointer;
+            background-color: rgba(34, 112, 112, 0.4);
+        }
+    }
+
     .sideBar__button {
         background-color: #3aa82d;
         border-radius: 14px;
         padding: 8px;
         text-align: center;
         // margin-top: 24px;
-        margin: 24px 18px 0px;
+        margin: 6px 18px 0px;
         &:hover {
             cursor: pointer;
             background-color: #308e26;

@@ -26,6 +26,7 @@ const Main = () => {
     }, []);
 
 
+    // console.log("note", note);
     if (note) return <div className="main">
         <TopBar note={note} notePosition={notePosition} dispatch={dispatch}/>
         <Editor note={note} notePosition={notePosition} dispatch={dispatch}/>

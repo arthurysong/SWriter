@@ -28,7 +28,7 @@ const TopBar = ({ note, notePosition, dispatch }) => {
             onBlur={titleBlur}/>
 
         <div className="topBar__buttons">
-            <PublishButton note={note}/>
+            <PublishButton note={note} notePosition={notePosition}/>
             <FileOptions />
         </div>
     </div>

@@ -7,7 +7,7 @@ export const setNoteContent = (notePosition, content) => ({ type: 'SET_NOTE_CONT
 
 export const fetchValidFileIds = () => dispatch => {
     axios.get('https://www.googleapis.com/drive/v3/files/generateIds', {
-        headers:  { authorization: `Bearer ${localStorage.getItem('access_token')}` }
+        headers:  { authorization: `Bearer ${localStorage.getItem('medium_access_token')}` }
     })
         .then(resp => {
             // console.log(resp.data);
@@ -62,15 +62,15 @@ export const setUser = user => ({ type: 'SET_USER', user })
 export const getUser = (queryObject, history, setLoading) => dispatch => {
     // console.log(queryObject);
     // console.log(localStorage);
-    if (localStorage.getItem('access_token') && localStorage.getItem('access_token') !== "undefined" && localStorage.getItem('refresh_token') && localStorage.getItem('refresh_token') !== "undefined") {
+    if (localStorage.getItem('medium_access_token') && localStorage.getItem('medium_access_token') !== "undefined" && localStorage.getItem('medium_refresh_token') && localStorage.getItem('medium_refresh_token') !== "undefined") {
         return axios.post(`${API_URL}/users/medium`, {
-            access_token: localStorage.getItem('access_token'),
-            refresh_token: localStorage.getItem('refresh_token'),
+            access_token: localStorage.getItem('medium_access_token'),
+            refresh_token: localStorage.getItem('medium_refresh_token'),
         })
             .then(resp => {
                 // console.log(resp.data)
                 const { access_token, user } = resp.data;
-                localStorage.setItem('access_token', access_token);
+                localStorage.setItem('medium_access_token', access_token);
                 dispatch(setUser(user));
                 setTimeout(() => setLoading(false), 1000);
             })
@@ -83,8 +83,8 @@ export const getUser = (queryObject, history, setLoading) => dispatch => {
             .then(resp => {
                 // console.log(resp.data)
                 const { access_token, refresh_token, user } = resp.data;
-                localStorage.setItem('access_token', access_token);
-                localStorage.setItem('refresh_token', refresh_token);
+                localStorage.setItem('medium_access_token', access_token);
+                localStorage.setItem('medium_refresh_token', refresh_token);
                 dispatch(setUser(user));
                 setTimeout(() => setLoading(false), 1000);
             })
@@ -95,6 +95,8 @@ export const getUser = (queryObject, history, setLoading) => dispatch => {
     }
 }
 
+// export const getUser
+
 export const setActiveNotebook = index => ({ type: 'SET_ACTIVE_NOTEBOOK', index })
 export const setNotePosition = (notebookIndex, noteIndex) => ({ type: 'SET_NOTE_POSITION', notebookIndex, noteIndex })
 
@@ -103,5 +105,19 @@ export const saveNote = (note, body) => dispatch => {
     // console.log("in saveNote", body);
     axios.put(`${API_URL}/notes/${note._id}`, body)
         .then(resp => console.log(resp))
+        .catch(err => console.log(err));
+}
+
+export const publishPost = (note, notePosition) => dispatch => {
+    console.log("Publishing...");
+    // console.log(note.content);
+    axios.post(`${API_URL}/notes/${note._id}/publish`, {
+        access_token: localStorage.getItem('medium_access_token'),
+        refresh_token: localStorage.getItem('medium_refresh_token'),
+    })
+        .then(resp => {
+            console.log(resp);
+            dispatch({ type: 'UPDATE_NOTE_PUBLISHED', notePosition })
+        })
         .catch(err => console.log(err));
 }

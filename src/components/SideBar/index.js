@@ -4,6 +4,7 @@ import InsertDriveFileOutlinedIcon from '@material-ui/icons/InsertDriveFileOutli
 import FolderOutlinedIcon from '@material-ui/icons/FolderOutlined';
 import { useSelector, useDispatch } from 'react-redux';
 // import { postNewNote } from '../../actions';
+import { githubOauth } from '../../utils/github';
 import Notebook from '../Notebook';
 
 function SideBar() {
@@ -14,14 +15,14 @@ function SideBar() {
   const dispatch = useDispatch();
 
 
-
-  console.log("notebooks", notebooks);
+  // console.log("notebooks", notebooks);
   return <div className="sideBar">
     <div className="sideBar__user">
       <div className="sideBar__email">arthursong14@gmail.com</div>
       <i className="sideBar__carrot fa fa-caret-down" />
     </div>
     {/* <div className="sideBar__button" onClick={() => { dispatch(postNewNote()) }}>New Note</div> */}
+    {/* <div className="sideBar__gitHubConnect" onClick={githubOauth}>Connect to GitHub</div> */}
     <div className="sideBar__button">New Note</div>
     <div className="sideBar__notes">
     {/* {Object.keys(files).length > 0 && Object.entries(files).map((f, index) => 
