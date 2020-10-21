@@ -11,6 +11,7 @@ const initialState = {
     
     activeNotebook: undefined, // This is the last selected notebook...
     // So that we can select a notebook and then create a new file under the last selected notebook.
+    // It's the index in the users.notebooks array.
 
     user: {},
 }
@@ -31,5 +32,6 @@ export default createReducer(initialState, {
     SET_NOTE_POSITION: (state, action) => { 
         state.notePosition[0] = action.notebookIndex;
         state.notePosition[1] = action.noteIndex;
-    }
+    },
+    ADD_NOTE: (state, action) => { state.user.notebooks[action.activeNotebook].notes.push(action.note) }
 })

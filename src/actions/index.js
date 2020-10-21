@@ -108,6 +108,16 @@ export const saveNote = (note, body) => dispatch => {
         .catch(err => console.log(err));
 }
 
+export const newNote = (notebook, owner, activeNotebook) => dispatch => {
+    axios.post(`${API_URL}/notes`, { notebook, owner })
+        .then(resp => {
+            console.log(resp)
+            // add the note book to notebooks
+            dispatch({ type: 'ADD_NOTE', note: resp.data, activeNotebook })
+        })
+        .catch(err => console.log(err));
+}
+
 export const publishPost = (note, notePosition) => dispatch => {
     console.log("Publishing...");
     // console.log(note.content);

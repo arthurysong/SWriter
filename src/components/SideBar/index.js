@@ -1,29 +1,39 @@
 import React from 'react'
 import './SideBar.scss';
-import InsertDriveFileOutlinedIcon from '@material-ui/icons/InsertDriveFileOutlined';
-import FolderOutlinedIcon from '@material-ui/icons/FolderOutlined';
 import { useSelector, useDispatch } from 'react-redux';
-// import { postNewNote } from '../../actions';
-import { githubOauth } from '../../utils/github';
+import Dropdown from 'react-dropdown';
 import Notebook from '../Notebook';
+import { newNote } from "../../actions"
 
 function SideBar() {
-  // const files = useSelector(state => state.files);
-  // const editorFileId = useSelector(state => state.editorFileId);
   const notebooks = useSelector(state => state.user.notebooks);
-  // const entry = use
+  const activeNotebook = useSelector(state => state.activeNotebook);
+  const activeNotebookId = useSelector(state => state.user.notebooks[state.activeNotebook]);
+  const { name, _id } = useSelector(state => state.user);
   const dispatch = useDispatch();
 
+  const onSelect = () => {
+    console.log("hi");
+  }
 
+  // TODO: Fix this...
+  const options = [{ value: 'Arthur Song', className: 'dropdown__option' }, 
+    { value: 'Settings', className: 'dropdown__option' }, { value: 'Help & Learn', className: 'dropdown__option' }, { value: "What's new in MWriter", className: 'dropdown__option' }, 
+    { value: "Sign out Arthur Song", className: 'dropdown__option' }]
   // console.log("notebooks", notebooks);
   return <div className="sideBar">
-    <div className="sideBar__user">
-      <div className="sideBar__email">arthursong14@gmail.com</div>
+    {/* <div className="sideBar__user">
+      <div className="sideBar__email">{name}</div>
       <i className="sideBar__carrot fa fa-caret-down" />
-    </div>
+    </div> */}
+    <Dropdown className="dropdown" placeholder={<div className="sideBar__user">
+      <div className="sideBar__email">{name}</div>
+      <i className="sideBar__carrot fa fa-caret-down" />
+    </div>} onChange={onSelect} options={options} menuClassName="dropdown__menu" />
+
     {/* <div className="sideBar__button" onClick={() => { dispatch(postNewNote()) }}>New Note</div> */}
     {/* <div className="sideBar__gitHubConnect" onClick={githubOauth}>Connect to GitHub</div> */}
-    <div className="sideBar__button">New Note</div>
+    <div onClick={() => dispatch(newNote(activeNotebookId, _id, activeNotebook))} className="sideBar__button">New Note</div>
     <div className="sideBar__notes">
     {/* {Object.keys(files).length > 0 && Object.entries(files).map((f, index) => 
     // Here onClick should save the current content... 
