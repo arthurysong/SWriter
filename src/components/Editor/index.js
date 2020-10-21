@@ -13,7 +13,6 @@ const Editor = ({ note, notePosition, dispatch }) => {
         dispatch(saveNote(note, { content: value() }));
     }, 250)
     
-    console.log(note)
     return <div className="editor"> {/* I need this outer div for styling reasons. */}
         <MarkdownEditor 
         className="editor__content" 
