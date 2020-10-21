@@ -118,6 +118,15 @@ export const newNote = (notebook, owner, activeNotebook) => dispatch => {
         .catch(err => console.log(err));
 }
 
+export const deleteNote = note => dispatch => {
+    axios.delete(`${API_URL}/notes/${note}`)
+        .then(resp => {
+            console.log(resp);
+            dispatch({ type: 'DELETE_NOTE' })
+        })
+        .catch(err => console.log(err));
+}
+
 export const publishPost = (note, notePosition) => dispatch => {
     console.log("Publishing...");
     // console.log(note.content);

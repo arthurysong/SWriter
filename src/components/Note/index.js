@@ -8,7 +8,8 @@ const Note = ({ note, notebookIndex, noteIndex }) => {
     const notePosition = useSelector(state => state.notePosition);
 
     const clickHandler = () => {
-        if (localStorage.getItem("saved_content") && notePosition.length) {
+        // Need note also because when note gets deleted we will have wrong notePosition
+        if (localStorage.getItem("saved_content") && notePosition.length && note ) {
             dispatch(setNoteContent(notePosition, localStorage.getItem("saved_content")));
             localStorage.removeItem("saved_content")
         }

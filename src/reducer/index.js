@@ -36,5 +36,6 @@ export default createReducer(initialState, {
     ADD_NOTE: (state, action) => { 
         state.user.notebooks[action.activeNotebook].notes.push(action.note)
         state.notePosition = [action.activeNotebook, state.user.notebooks[action.activeNotebook].notes.length - 1]
-    }
+    },
+    DELETE_NOTE: (state) => { delete state.user.notebooks[state.notePosition[0]].notes[state.notePosition[1]] }
 })
