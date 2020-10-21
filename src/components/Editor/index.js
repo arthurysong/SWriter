@@ -9,7 +9,6 @@ const Editor = ({ note, notePosition, dispatch }) => {
         localStorage.setItem("saved_content", value());
         // localStorage.setItem("last_saved_id", note._id);
         localStorage.setItem("last_saved_position", notePosition );
-        // dispatch(saveFileContent(editorFileId, value()))
         dispatch(saveNote(note, { content: value() }));
     }, 250)
     
@@ -17,8 +16,7 @@ const Editor = ({ note, notePosition, dispatch }) => {
         <MarkdownEditor 
         className="editor__content" 
         placeholder="Write down something interesting..."
-        // id={note.id}
-        key={note.id} 
+        key={note._id} 
         // dark={true}
         autoFocus 
         defaultValue={note?.content} 
