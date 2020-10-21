@@ -33,5 +33,8 @@ export default createReducer(initialState, {
         state.notePosition[0] = action.notebookIndex;
         state.notePosition[1] = action.noteIndex;
     },
-    ADD_NOTE: (state, action) => { state.user.notebooks[action.activeNotebook].notes.push(action.note) }
+    ADD_NOTE: (state, action) => { 
+        state.user.notebooks[action.activeNotebook].notes.push(action.note)
+        state.notePosition = [action.activeNotebook, state.user.notebooks[action.activeNotebook].notes.length - 1]
+    }
 })

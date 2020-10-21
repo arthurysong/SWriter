@@ -13,11 +13,14 @@ const Editor = ({ note, notePosition, dispatch }) => {
         dispatch(saveNote(note, { content: value() }));
     }, 250)
     
-    // console.log(note?.content)
+    console.log(note)
     return <div className="editor"> {/* I need this outer div for styling reasons. */}
         <MarkdownEditor 
         className="editor__content" 
+        placeholder="Write down something interesting..."
+        // id={note.id}
         key={note.id} 
+        // dark={true}
         autoFocus 
         defaultValue={note?.content} 
         value={note?.content} 
