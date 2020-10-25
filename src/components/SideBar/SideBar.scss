@@ -3,10 +3,8 @@
     width: 225px;
     background-color: #2e2e2e;
     color: white;
-    // padding: 0 24px;
 
     .sideBar__user {
-        // margin-top: 24px;
         margin: 24px 12px;
         opacity: .5;
         display: flex;
@@ -27,118 +25,6 @@
             cursor: pointer;
         }
     }
-
-
-// ::: Modal Styling :::
-// :::::::::::::::::::::
-
-    .modal__header {
-        padding: 6px 20px;
-        text-transform: uppercase;
-        font-weight: 650;
-        color: #757575;
-        font-size: 13px;
-    }
-
-    .modal__acount {
-        padding: 6px 20px;
-        display: flex;
-        align-items: center;
-
-        .modal__checkmark {
-            color: #026fac;
-            margin-right: 6px;
-        }
-
-        .modal__accountName {
-            display: inline-block;
-            font-size: 16px;
-        }
-    }
-
-    .modal__option {
-        padding: 6px 20px;
-        font-size: 14px;
-
-        &:hover {
-            cursor: pointer;
-            background-color: #f2f2f2;
-        }
-
-        &--disabled {
-            color: #a6a6a6;
-
-            &:hover {
-                cursor: auto;
-                background-color: white;
-            }
-        }
-
-        &--version {
-            font-weight: 500;
-        }
-    }
-
-
-    .modal__separator {
-        border-top: 1px solid #f2f2f2;
-        display: block;
-        height: 1px;
-        margin: 8px 0;
-        padding: 0;
-    }
-
-    // .dropdown {
-    //     position: relative;
-    //     .dropdown__menu {
-    //         position: absolute;
-    //         // left: 0px;
-    //         // top: -4;
-    //         background-color: white;
-    //         width: 300px;
-    //         font-size: 14px;
-    //         color: rgba(0,0,0, 0.7);
-    //         box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.2);
-    //         z-index: 400;
-    //         // display: block;
-    //         animation: fadeInAnimation ease 0.5s;
-    //         animation-iteration-count: 1;
-    //         animation-fill-mode: forwards;
-
-    //         margin: 10px 0;
-    //         padding: 12px 0;
-            
-    //         // left: 5px;
-    //         // top: -5px;
-
-    //         .dropdown__option {
-    //             padding: 6px 20px;
-    //             // width: 100%;
-
-    //             &:hover {
-    //                 background-color: #eee;
-    //                 cursor: pointer;
-    //             }
-    //         }
-    
-    //     }
-    // }
-
-    
-    // .sideBar__gitHubConnect {
-    //     // background-color: #3aa;
-    //     border: 1px solid #3aa;
-    //     border-radius: 14px;
-    //     padding: 8px;
-    //     margin: 24px 18px 0px;
-    //     text-align: center;
-    //     color: #3aa;
-
-    //     &:hover {
-    //         cursor: pointer;
-    //         background-color: rgba(34, 112, 112, 0.4);
-    //     }
-    // }
 
     .sideBar__button {
         background-color: #3aa82d;
