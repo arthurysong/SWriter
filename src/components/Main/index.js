@@ -11,6 +11,7 @@ const Main = () => {
     // const file = useSelector(state => state.files[state.editorFileId]);
     const note = useSelector(state => state.user.notebooks[state.notePosition[0]]?.notes[state.notePosition[1]]);
     const notePosition = useSelector(state => state.notePosition);
+    // const user = useSelector(state => state.user);
     // const editorFileId = useSelector(state => state.editorFileId);
 
     // console.log("note", note);
@@ -19,7 +20,9 @@ const Main = () => {
         if (localStorage.getItem("last_saved_position")) {
             const [notebookPosition, notePosition] = localStorage.getItem("last_saved_position").split(',').map(n => parseInt(n));
             // console.log(localStorage.getItem("last_saved_position").split(',')[0])
-            dispatch(setNotePosition(notebookPosition, notePosition))
+            if (note) dispatch(setNotePosition(notebookPosition, notePosition)) // Should only set notebook position if there is a note there.
+            // If note was deleted and also the last saved, need the if (note) condition
+            
             dispatch(setActiveNotebook(notebookPosition));
         }
         
