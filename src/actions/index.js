@@ -15,48 +15,6 @@ export const fetchValidFileIds = () => dispatch => {
         });
 }
 
-// export const postNewNote = id => dispatch => {
-//     const validIds = JSON.parse(localStorage.getItem('valid_ids'));
-//     const id = validIds.pop();
-//     if (validIds.length) {
-//         localStorage.setItem('valid_ids', JSON.stringify(validIds));
-//     } else {
-//         dispatch(fetchValidFileIds());
-//     }
-//     // console.log(validIds);
-//     dispatch(newFile(id));
-//     dispatch(setEditorFileId(id));
-//     // console.log(id);
-//     axios.post('https://www.googleapis.com/drive/v3/files', {
-//         parents: [localStorage.getItem('swriter_id')],
-//         "id": id
-//     }, {
-//         headers: { 
-//             authorization: `Bearer ${localStorage.getItem('access_token')}`,
-//             "Accept": "application/json",
-//             "Content-Type": "application/json", }
-//     })
-//         .then(resp => { console.log('note successfully created')})
-//         .catch(err => console.log(err.response.data));
-// }
-
-// export const deleteFile = id => dispatch => {
-//     dispatch({ type: 'DELETE_FILE', id })
-//     axios.delete(`https://www.googleapis.com/drive/v2/files/${id}`, {
-//         headers: { authorization: `Bearer ${localStorage.getItem('access_token')}` }
-//     })
-//         .then(resp => { 
-//             if (resp.status === 204) {
-//                 console.log('successfully deleted') 
-//                 // i need to remove editorFileId, and also remove last_saved_id from localStorage
-//                 localStorage.removeItem('last_saved_id');
-//                 dispatch(setEditorFileId(undefined))
-                
-//             }
-//         })
-//         .catch(err => console.log(err.response.data));
-// }
-
 export const setUser = user => ({ type: 'SET_USER', user })
 
 export const getUser = (queryObject, history, setLoading) => dispatch => {
@@ -95,7 +53,14 @@ export const getUser = (queryObject, history, setLoading) => dispatch => {
     }
 }
 
-// export const getUser
+export const logout = (history) => dispatch => {
+    // Should delete medium tokens from localStorage, should unset the user
+    // Should push to the login route
+    localStorage.removeItem('medium_access_token');
+    localStorage.removeItem('medium_refresh_token');
+    dispatch(setUser({}));
+    history.replace('/login');
+}
 
 export const setActiveNotebook = index => ({ type: 'SET_ACTIVE_NOTEBOOK', index })
 export const setNotePosition = (notebookIndex, noteIndex) => ({ type: 'SET_NOTE_POSITION', notebookIndex, noteIndex })

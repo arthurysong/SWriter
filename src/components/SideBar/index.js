@@ -1,8 +1,11 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+
 import Notebook from '../Notebook';
-import { newNote } from "../../actions"
+import { newNote, logout } from "../../actions"
 import UserOptionsModal from './UserOptionsModal';
+
 import './SideBar.scss';
 
 function SideBar() {
@@ -10,6 +13,7 @@ function SideBar() {
   const activeNotebook = useSelector(state => state.activeNotebook);
   const activeNotebookId = useSelector(state => state.user.notebooks[state.activeNotebook]);
   const { name, _id } = useSelector(state => state.user);
+  const history = useHistory();
   const dispatch = useDispatch();
 
   const [userOptions, setUserOptions] = useState(false); // Used to toggle the options when User is clicked
@@ -21,7 +25,7 @@ function SideBar() {
       <i className="sideBar__carrot fa fa-caret-down" />
     </div>
 
-    <UserOptionsModal show={userOptions} modalClosed={() => setUserOptions(false)} name={name} />
+    <UserOptionsModal show={userOptions} modalClosed={() => setUserOptions(false)} name={name} logoutHandler={() => dispatch(logout(history))} />
 
     <div onClick={() => dispatch(newNote(activeNotebookId, _id, activeNotebook))} className="sideBar__button">New Note</div>
     <div className="sideBar__notes">
