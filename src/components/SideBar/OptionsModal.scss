@@ -9,6 +9,11 @@
     box-sizing: border-box;
     transition: opacity 0.3s ease-out;
 
+    &--note {
+        right: 10px;
+        width: 150px;
+    }
+
     .modal__header {
         padding: 6px 20px;
         text-transform: uppercase;
@@ -53,6 +58,10 @@
 
         &--version {
             font-weight: 500;
+        }
+
+        &--delete {
+            color: rgb(235, 57, 57)
         }
     }
 

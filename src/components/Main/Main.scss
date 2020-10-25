@@ -1,7 +1,8 @@
 .main {
     height: 100vh;
     flex: 1;
-    overflow: auto;
+    // overflow: auto;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
     background-color: #e7e7e7;
