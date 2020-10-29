@@ -5,37 +5,54 @@
     position: relative;
     background-color: white;
 
-    .topBar__titleLabel {
-        line-height: 2em;
-        display: block;
-        font-family: 'SFMono-Regular',Consolas,'Liberation Mono',Menlo,Courier,monospace;
-        font-size: 13px;
-        color: #4E5C6E;
+    // .topBar__title {
+        // display: block;
+    .topBar__title {
+        display: inline-block;
+
+        .topBar__titleLabel {
+            line-height: 2em;
+            display: block;
+            font-family: 'SFMono-Regular',Consolas,'Liberation Mono',Menlo,Courier,monospace;
+            font-size: 13px;
+            color: #4E5C6E;
+        }
+    
+        .topBar__titleInput {
+            border: none;
+            font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,'Open Sans','Helvetica Neue',sans-serif;
+            font-weight: 400;
+            font-size: 18px;
+            border-radius: 5px;
+            padding: 4px 8px;
+            border: 1px solid #fff;
+    
+            &:hover {
+                border: 1px solid #e9e9e9;
+            }
+    
+            &:focus {
+                border: 1px solid #e7e7e7;
+                outline: none;
+            }
+        }
     }
 
-    .topBar__titleInput {
-        border: none;
-        font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,'Open Sans','Helvetica Neue',sans-serif;
-        font-weight: 400;
-        font-size: 18px;
-        border-radius: 5px;
-        padding: 4px 8px;
-        border: 1px solid #fff;
-
-        &:hover {
-            border: 1px solid #e9e9e9;
-        }
-
-        &:focus {
-            border: 1px solid #e7e7e7;
-            outline: none;
-        }
+    .topBar__edit {
+        display: inline-block;
+        text-decoration: underline;
+        margin-left: 24px;
+        font-size: 14px;
+        font-weight: 500;
+        color: rgba(0, 0, 0, .7);
     }
 
     .topBar__buttons {
         float: right;
         display: flex;
         align-items: center;
+        position: relative;
+        top: 20px;
     }
     
 }
