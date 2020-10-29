@@ -41,10 +41,20 @@
     .topBar__edit {
         display: inline-block;
         text-decoration: underline;
-        margin-left: 24px;
+        margin-left: 12px;
         font-size: 14px;
         font-weight: 500;
         color: rgba(0, 0, 0, .7);
+    }
+
+    .topBar__saving {
+        margin-left: 8px;
+        display: inline-block;
+
+        .saving__icon {
+            vertical-align: bottom;
+            width: 30px;
+        }
     }
 
     .topBar__buttons {

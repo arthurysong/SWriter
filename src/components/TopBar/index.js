@@ -3,9 +3,13 @@ import './TopBar.scss';
 import { setNoteTitle, saveNote } from '../../actions'
 import FileOptions from '../FileOptions';
 import PublishButton from '../PublishButton';
+import { useSelector } from 'react-redux';
+import wedgesSpinner from '../../assets/images/wedges-spinner.gif';
+import checkMark from '../../assets/images/check-mark.png';
 
 const TopBar = ({ note, notePosition, dispatch }) => {
     const [titleChanged, setTitleChanged] = useState(false);
+    const saveStatus = useSelector(state => state.saveStatus);
 
     const titleChange = e => {
         setTitleChanged(true);
@@ -38,8 +42,14 @@ const TopBar = ({ note, notePosition, dispatch }) => {
 
         <div className="topBar__edit">
             {renderDate()}
-            {/* {renderDate()} */}
-            {/* {Date.parse(note.createdAt)} */}
+        </div>
+
+        <div className="topBar__saving">
+            {saveStatus === "Saving" ? <img 
+                className="saving__icon" src={wedgesSpinner} alt="saving icon"
+            /> : saveStatus === "Saved" ? <img
+                className="saving__icon" src={checkMark} alt="saved icon" 
+            /> : null}
         </div>
 
         <div className="topBar__buttons">

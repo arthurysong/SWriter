@@ -68,8 +68,24 @@ export const setNotePosition = (notebookIndex, noteIndex) => ({ type: 'SET_NOTE_
 export const saveNote = (note, body) => dispatch => {
     // console.log("note", note);
     // console.log("in saveNote", body);
+    dispatch(saveStatus("Saving"))
+    let timePassed = 0;
+    const minTimeInterval = setInterval(() => {
+        timePassed += 1000
+    }, 1000)
     axios.put(`${API_URL}/notes/${note._id}`, body)
-        .then(resp => console.log(resp))
+        .then(resp => {
+            console.log(resp);
+            console.log(3 - timePassed);
+            setTimeout(() => {
+                dispatch(saveStatus("Saved"))
+                setTimeout(() => dispatch(saveStatus(null)), 5000);
+            // }, 3 - timePassed < 0 ? 0 : 3 - timePassed)
+            }, 3000 - timePassed < 0 ? 0 : 3000 - timePassed)
+            clearInterval(minTimeInterval);
+            // dispatch(saveStatus("Saved"));
+            // setTimeout(() => dispatch(saveStatus(undefined)), 5000);
+        })
         .catch(err => console.log(err));
 }
 
@@ -105,3 +121,6 @@ export const publishPost = (note, notePosition) => dispatch => {
         })
         .catch(err => console.log(err));
 }
+
+// saveStatus Actions
+export const saveStatus = status => ({ type: 'SET_SAVE_STATUS', status })

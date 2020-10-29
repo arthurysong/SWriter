@@ -1,10 +1,6 @@
 import { createReducer } from '@reduxjs/toolkit'
 
 const initialState = {
-    // files: {},
-    // editorFileId: undefined,
-    // notebookIndex: undefined,
-    // noteIndex: undefined,
     notePosition: [], // This is to find the note in the user array... 
     // index 0 => index of notebook in user.notebook
     // index 1 => index of note in user.notebook.notes
@@ -13,7 +9,8 @@ const initialState = {
     // So that we can select a notebook and then create a new file under the last selected notebook.
     // It's the index in the users.notebooks array.
 
-    user: {},
+    user: {}, // Notebooks and notes are contained in here...
+    saveStatus: undefined,
 }
 
 export default createReducer(initialState, {
@@ -31,5 +28,6 @@ export default createReducer(initialState, {
         state.user.notebooks[action.activeNotebook].notes.push(action.note)
         state.notePosition = [action.activeNotebook, state.user.notebooks[action.activeNotebook].notes.length - 1]
     },
-    DELETE_NOTE: (state) => { delete state.user.notebooks[state.notePosition[0]].notes[state.notePosition[1]] }
+    DELETE_NOTE: (state) => { delete state.user.notebooks[state.notePosition[0]].notes[state.notePosition[1]] },
+    SET_SAVE_STATUS: (state, action) => { state.saveStatus = action.status },
 })
