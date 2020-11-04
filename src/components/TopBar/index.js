@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import moment from 'moment';
 import './TopBar.scss';
 import { setNoteTitle, saveNote } from '../../actions'
 import FileOptions from '../FileOptions';
@@ -9,6 +10,7 @@ import checkMark from '../../assets/images/check-mark.png';
 
 const TopBar = ({ note, notePosition, dispatch }) => {
     const [titleChanged, setTitleChanged] = useState(false);
+    const [dateString, setDateString] = useState('');
     const saveStatus = useSelector(state => state.saveStatus);
 
     const titleChange = e => {
@@ -21,12 +23,21 @@ const TopBar = ({ note, notePosition, dispatch }) => {
         setTitleChanged(false);
     }
 
-    const renderDate = () => {
+    useEffect(() => {
         const d = new Date(note.updatedAt);
         const months = [ "January", "February", "March", "April", "May", "June", 
         "July", "August", "September", "October", "November", "December" ];
-        return `Last edit was ${months[d.getMonth()]} ${d.getDate()} ${d.getHours()}:${d.getMinutes()}`;
-    }
+        const hours = d.getHours().toString().length == 1 ? `0${d.getHours()}` : d.getHours();
+        const minutes = d.getMinutes().toString().length == 1 ? `0${d.getMinutes()}` : d.getMinutes();
+        setDateString(`Last edit was ${months[d.getMonth()]} ${d.getDate()} ${hours}:${minutes}`);
+    }, [note.updatedAt]);
+
+    // const renderDate = () => {
+    //     const d = new Date(note.updatedAt);
+    //     const months = [ "January", "February", "March", "April", "May", "June", 
+    //     "July", "August", "September", "October", "November", "December" ];
+    //     return `Last edit was ${months[d.getMonth()]} ${d.getDate()} ${d.getHours()}:${d.getMinutes()}`;
+    // }
 
     return <div className="topBar">
         <div className="topBar__title">
@@ -41,15 +52,16 @@ const TopBar = ({ note, notePosition, dispatch }) => {
         </div>
 
         <div className="topBar__edit">
-            {renderDate()}
+            {dateString}
         </div>
 
         <div className="topBar__saving">
             {saveStatus === "Saving" ? <img 
                 className="saving__icon" src={wedgesSpinner} alt="saving icon"
-            /> : saveStatus === "Saved" ? <img
-                className="saving__icon" src={checkMark} alt="saved icon" 
             /> : null}
+            {/* // /> : saveStatus === "Saved" ? <img
+            //     className="saving__icon" src={checkMark} alt="saved icon" 
+            // /> : null} */}
         </div>
 
         <div className="topBar__buttons">

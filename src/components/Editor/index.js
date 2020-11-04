@@ -8,20 +8,21 @@ const Editor = ({ note, notePosition, dispatch }) => {
     const changeHandler = debounce(value => {
         localStorage.setItem("saved_content", value());
         localStorage.setItem("last_saved_position", notePosition );
-        dispatch(saveNote(note, { content: value() }));
+        dispatch(saveNote(note, { content: value() }, notePosition ));
     }, 250)
     
     return <div className="editor"> {/* I need this outer div for styling reasons. */}
         <MarkdownEditor 
-        className="editor__content" 
-        placeholder="Write down something interesting..."
-        key={note._id} 
-        // dark={true}
-        autoFocus 
-        defaultValue={note?.content} 
-        value={note?.content} 
-        onChange={changeHandler}
-        onSave={() => console.log('test: saved')}/>
+            className="editor__content" 
+            placeholder="Write down something interesting..."
+            key={note._id} 
+            // Add a button that allows for dark mode?
+            // dark={true}
+            autoFocus 
+            defaultValue={note?.content} 
+            value={note?.content} 
+            onChange={changeHandler}
+            onSave={() => console.log('test: saved')}/>
     </div>
 }
 

@@ -4,6 +4,7 @@ import { API_URL } from '../utils/URL';
 export const setFileName = (id, name) => ({ type: 'SET_FILE_NAME', id, name })
 export const setNoteTitle = (notePosition, title) => ({ type: 'SET_NOTE_TITLE', notePosition, title })
 export const setNoteContent = (notePosition, content) => ({ type: 'SET_NOTE_CONTENT', notePosition, content })
+export const setNoteUpdatedAt = (notePosition, date) => ({ type: 'SET_NOTE_UPDATED_AT', notePosition, date });
 
 export const fetchValidFileIds = () => dispatch => {
     axios.get('https://www.googleapis.com/drive/v3/files/generateIds', {
@@ -65,9 +66,8 @@ export const logout = (history) => dispatch => {
 export const setActiveNotebook = index => ({ type: 'SET_ACTIVE_NOTEBOOK', index })
 export const setNotePosition = (notebookIndex, noteIndex) => ({ type: 'SET_NOTE_POSITION', notebookIndex, noteIndex })
 
-export const saveNote = (note, body) => dispatch => {
-    // console.log("note", note);
-    // console.log("in saveNote", body);
+export const saveNote = (note, body, notePosition) => dispatch => {
+    // I need the notePosition in order to update the updatedAt...
     dispatch(saveStatus("Saving"))
     let timePassed = 0;
     const minTimeInterval = setInterval(() => {
@@ -75,16 +75,15 @@ export const saveNote = (note, body) => dispatch => {
     }, 1000)
     axios.put(`${API_URL}/notes/${note._id}`, body)
         .then(resp => {
-            console.log(resp);
-            console.log(3 - timePassed);
+            console.log('response', resp);
+            // console.log('notePosition', notePosition);
+            // saveStatus is "Saving" for AT LEAST 3 seconds
             setTimeout(() => {
-                dispatch(saveStatus("Saved"))
-                setTimeout(() => dispatch(saveStatus(null)), 5000);
-            // }, 3 - timePassed < 0 ? 0 : 3 - timePassed)
+                dispatch(saveStatus(null))
             }, 3000 - timePassed < 0 ? 0 : 3000 - timePassed)
-            clearInterval(minTimeInterval);
-            // dispatch(saveStatus("Saved"));
-            // setTimeout(() => dispatch(saveStatus(undefined)), 5000);
+            clearInterval(minTimeInterval); // clear counter
+            dispatch(setNoteUpdatedAt(notePosition, resp.data.note.updatedAt)); // Update the note's updatedAt so the TopBar can update the last saved...
+
         })
         .catch(err => console.log(err));
 }

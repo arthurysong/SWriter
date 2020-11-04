@@ -17,6 +17,7 @@ export default createReducer(initialState, {
     SET_NOTE_TITLE: (state, action) => { state.user.notebooks[action.notePosition[0]].notes[action.notePosition[1]].title = action.title },
     UPDATE_NOTE_PUBLISHED: (state, action) => { state.user.notebooks[action.notePosition[0]].notes[action.notePosition[1]].published = true },
     SET_NOTE_CONTENT: (state, action) => { state.user.notebooks[action.notePosition[0]].notes[action.notePosition[1]].content = action.content },
+    SET_NOTE_UPDATED_AT: (state, action) => { state.user.notebooks[action.notePosition[0]].notes[action.notePosition[1]].updatedAt = action.date },
     DELETE_FILE: (state, action) => { delete state.files[action.id] },
     SET_USER: (state, action) => { state.user = action.user },
     SET_ACTIVE_NOTEBOOK: (state, action) => { state.activeNotebook = action.index },
