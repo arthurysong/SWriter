@@ -79,11 +79,11 @@ export const saveNote = (note, body, notePosition) => dispatch => {
             // console.log('notePosition', notePosition);
             // saveStatus is "Saving" for AT LEAST 3 seconds
             setTimeout(() => {
-                dispatch(saveStatus(null))
-            }, 3000 - timePassed < 0 ? 0 : 3000 - timePassed)
+                dispatch(saveStatus("Saved")); // Need "Saved" so that Loading Icon can fade out.
+                dispatch(setNoteUpdatedAt(notePosition, resp.data.note.updatedAt)); // Update the note's updatedAt so the TopBar can update the last saved...
+                setTimeout(() => dispatch(saveStatus(null)), 3000);
+            }, 2000 - timePassed < 0 ? 0 : 2000 - timePassed)
             clearInterval(minTimeInterval); // clear counter
-            dispatch(setNoteUpdatedAt(notePosition, resp.data.note.updatedAt)); // Update the note's updatedAt so the TopBar can update the last saved...
-
         })
         .catch(err => console.log(err));
 }

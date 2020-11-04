@@ -24,6 +24,7 @@ const TopBar = ({ note, notePosition, dispatch }) => {
     }
 
     useEffect(() => {
+        // updates the dateString everytime the editor saves the note content
         const d = new Date(note.updatedAt);
         const months = [ "January", "February", "March", "April", "May", "June", 
         "July", "August", "September", "October", "November", "December" ];
@@ -31,13 +32,6 @@ const TopBar = ({ note, notePosition, dispatch }) => {
         const minutes = d.getMinutes().toString().length == 1 ? `0${d.getMinutes()}` : d.getMinutes();
         setDateString(`Last edit was ${months[d.getMonth()]} ${d.getDate()} ${hours}:${minutes}`);
     }, [note.updatedAt]);
-
-    // const renderDate = () => {
-    //     const d = new Date(note.updatedAt);
-    //     const months = [ "January", "February", "March", "April", "May", "June", 
-    //     "July", "August", "September", "October", "November", "December" ];
-    //     return `Last edit was ${months[d.getMonth()]} ${d.getDate()} ${d.getHours()}:${d.getMinutes()}`;
-    // }
 
     return <div className="topBar">
         <div className="topBar__title">
@@ -56,9 +50,15 @@ const TopBar = ({ note, notePosition, dispatch }) => {
         </div>
 
         <div className="topBar__saving">
-            {saveStatus === "Saving" ? <img 
-                className="saving__icon" src={wedgesSpinner} alt="saving icon"
-            /> : null}
+            <img 
+                className={`saving__icon 
+                    ${saveStatus === "Saving" ? 'saving__icon--in' : null }
+                    ${saveStatus === "Saved" ? 'saving__icon--out': null }`} 
+                src={wedgesSpinner} 
+                alt="saving icon" />
+            {/* {saveStatus === "Saving" || saveStatus === "Saved" ? <img 
+                className={`saving__icon ${saveStatus === "Saved" ? 'saving__icon--out' : '' }`} src={wedgesSpinner} alt="saving icon"
+            /> : null} */}
             {/* // /> : saveStatus === "Saved" ? <img
             //     className="saving__icon" src={checkMark} alt="saved icon" 
             // /> : null} */}

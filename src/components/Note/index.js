@@ -11,9 +11,9 @@ const Note = ({ note, notebookIndex, noteIndex }) => {
         // Need note also because when note gets deleted we will have wrong notePosition
         if (localStorage.getItem("saved_content") && notePosition.length && note ) {
             console.log('notePosition', notePosition);
-            // console.log()
             dispatch(setNoteContent(notePosition, localStorage.getItem("saved_content")));
             localStorage.removeItem("saved_content")
+            // TODO: Clicking a different note should immediately set saveStatus to null, or else saving icon will appear in topbar.
         }
         dispatch(setNotePosition(notebookIndex, noteIndex))
     }
