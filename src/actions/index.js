@@ -1,56 +1,48 @@
 import axios from 'axios';
 import { API_URL } from '../utils/URL';
 
-export const setFileName = (id, name) => ({ type: 'SET_FILE_NAME', id, name })
 export const setNoteTitle = (notePosition, title) => ({ type: 'SET_NOTE_TITLE', notePosition, title })
 export const setNoteContent = (notePosition, content) => ({ type: 'SET_NOTE_CONTENT', notePosition, content })
 export const setNoteUpdatedAt = (notePosition, date) => ({ type: 'SET_NOTE_UPDATED_AT', notePosition, date });
+export const setUser = user => ({ type: 'SET_USER', user });
 
-export const fetchValidFileIds = () => dispatch => {
-    axios.get('https://www.googleapis.com/drive/v3/files/generateIds', {
-        headers:  { authorization: `Bearer ${localStorage.getItem('medium_access_token')}` }
-    })
-        .then(resp => {
-            // console.log(resp.data);
-            localStorage.setItem('valid_ids', JSON.stringify(resp.data.ids))
-        });
-}
+export const setAuthTokens = (accessToken, refreshToken) => ({ type: 'SET_AUTH_TOKENS', accessToken, refreshToken })
 
-export const setUser = user => ({ type: 'SET_USER', user })
+export const getUser = (queryObject, history, setLoading) => async (dispatch, getState) => {
+    const { accessToken, refreshToken } = getState().auth;
 
-export const getUser = (queryObject, history, setLoading) => dispatch => {
-    // console.log(queryObject);
-    // console.log(localStorage);
-    if (localStorage.getItem('medium_access_token') && localStorage.getItem('medium_access_token') !== "undefined" && localStorage.getItem('medium_refresh_token') && localStorage.getItem('medium_refresh_token') !== "undefined") {
-        return axios.post(`${API_URL}/users/medium`, {
-            access_token: localStorage.getItem('medium_access_token'),
-            refresh_token: localStorage.getItem('medium_refresh_token'),
+    // If accessToken and refreshToken are available use tokens to fetch user information
+    if (accessToken !== undefined && refreshToken !== undefined) {
+        console.log("or am i here??");
+        const resp = await axios.post(`${API_URL}/users/medium`, {
+            access_token: accessToken,
+            refresh_token: refreshToken,
         })
-            .then(resp => {
-                // console.log(resp.data)
-                const { access_token, user } = resp.data;
-                localStorage.setItem('medium_access_token', access_token);
-                dispatch(setUser(user));
-                setTimeout(() => setLoading(false), 1000);
-            })
-            .catch(err => console.log(err));
 
+        // The response will contain the same access token OR it might send a new one because the old one expired
+        // Reset the access_token
+        const { access_token, user } = resp.data;
+        dispatch(setAuthTokens(access_token));
+
+        dispatch(setUser(user));
+        setTimeout(() => setLoading(false), 1000);
     } else {
-        return axios.post(`${API_URL}/users/medium-oauth`, {
-            queryObject
-        })
-            .then(resp => {
-                // console.log(resp.data)
-                const { access_token, refresh_token, user } = resp.data;
-                localStorage.setItem('medium_access_token', access_token);
-                localStorage.setItem('medium_refresh_token', refresh_token);
-                dispatch(setUser(user));
-                setTimeout(() => setLoading(false), 1000);
+        try {
+            // Use query parameters from Medium redirect to fetch user information and tokens
+            const resp = await axios.post(`${API_URL}/users/medium-oauth`, {
+                queryObject
             })
-            .catch(err => {
-                // console.log("error", err)
-                history.replace('/login');
-            });
+
+            const { access_token, refresh_token, user } = resp.data;
+
+            // Here set auth.accessToken and auth.refreshToken
+            dispatch(setAuthTokens(access_token, refresh_token));
+            dispatch(setUser(user));
+
+            setTimeout(() => setLoading(false), 1000);
+        } catch (err) {
+            history.replace('/login');
+        }
     }
 }
 
@@ -66,22 +58,28 @@ export const logout = (history) => dispatch => {
 export const setActiveNotebook = index => ({ type: 'SET_ACTIVE_NOTEBOOK', index })
 export const setNotePosition = (notebookIndex, noteIndex) => ({ type: 'SET_NOTE_POSITION', notebookIndex, noteIndex })
 
-export const saveNote = (note, body, notePosition) => dispatch => {
-    // I need the notePosition in order to update the updatedAt...
-    dispatch(saveStatus("Saving"))
+export const saveNote = (note, body ) => (dispatch, getState) => {
+    const { notePosition } = getState();
+    dispatch(incSavingNumber()); // add one to current number of saving 
+
+    // an interval that we use to make sure saveStatus stays >= 1 for more than 3 seconds
+    // So that the saving icon stays displayed for at least x seconds.
     let timePassed = 0;
     const minTimeInterval = setInterval(() => {
-        timePassed += 1000
-    }, 1000)
+        timePassed += 100
+    }, 100)
+
     axios.put(`${API_URL}/notes/${note._id}`, body)
         .then(resp => {
-            console.log('response', resp);
-            // console.log('notePosition', notePosition);
-            // saveStatus is "Saving" for AT LEAST 3 seconds
+
+            // Delay updating the saveStatus for at least x - however seconds has passed
             setTimeout(() => {
-                dispatch(saveStatus("Saved")); // Need "Saved" so that Loading Icon can fade out.
+                // Only incSavedNumber if savingNumber is greater than 0
+                // For case when user switches notes while saving is taking place
+                // The numbers will be reset to 0 and savedNumber shouldn't be incremented for the switched note
+                if (getState().savingNumber > 0) dispatch(incSavedNumber());
                 dispatch(setNoteUpdatedAt(notePosition, resp.data.note.updatedAt)); // Update the note's updatedAt so the TopBar can update the last saved...
-                setTimeout(() => dispatch(saveStatus(null)), 3000);
+                // setTimeout(() => dispatch(setSaveStatus(null)), 3000)
             }, 2000 - timePassed < 0 ? 0 : 2000 - timePassed)
             clearInterval(minTimeInterval); // clear counter
         })
@@ -122,4 +120,6 @@ export const publishPost = (note, notePosition) => dispatch => {
 }
 
 // saveStatus Actions
-export const saveStatus = status => ({ type: 'SET_SAVE_STATUS', status })
+export const incSavingNumber = () => ({ type: 'INC_SAVING_NUMBER' });
+export const incSavedNumber = () => ({ type: 'INC_SAVED_NUMBER' });
+export const resetSaving = () => ({ type: 'RESET_SAVING' }) // When we switch documents we should reset the saving numbers to 0.

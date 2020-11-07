@@ -10,9 +10,7 @@ const Routes = () => {
     return <Switch>
         <Route exact path="/" render={props => <Redirect to={`/client#state=oauth&access_token=${localStorage.getItem('access_token')}`}/>} />
         <Route path="/login" component={Login} />
-        {/* <Route path="/client" render={props => <Client {...props} />} /> */}
-        <Route path="/client" render={props => <ClientLoader {...props}/>} />
-        {/* <Route path="/test" component={Test} /> */}
+        <Route path="/client" component={ClientLoader} />
         <Route exact path='*' component={Invalid} />
     </Switch>
 }

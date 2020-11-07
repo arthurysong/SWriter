@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react'
-import moment from 'moment';
 import './TopBar.scss';
 import { setNoteTitle, saveNote } from '../../actions'
 import FileOptions from '../FileOptions';
 import PublishButton from '../PublishButton';
 import { useSelector } from 'react-redux';
 import wedgesSpinner from '../../assets/images/wedges-spinner.gif';
-import checkMark from '../../assets/images/check-mark.png';
 
 const TopBar = ({ note, notePosition, dispatch }) => {
     const [titleChanged, setTitleChanged] = useState(false);
     const [dateString, setDateString] = useState('');
-    const saveStatus = useSelector(state => state.saveStatus);
+    const { savingNumber, savedNumber } = useSelector(state => state);
+    // if current number of saving is greater than current number
+    const savingStatus = useSelector(state => state.savingNumber > state.savedNumber);
 
     const titleChange = e => {
         setTitleChanged(true);
@@ -34,6 +34,9 @@ const TopBar = ({ note, notePosition, dispatch }) => {
     }, [note.updatedAt]);
 
     return <div className="topBar">
+        {console.log("savingStatus", savingStatus)}
+        {console.log("savingNumber", savingNumber)}
+        {console.log("savedNumber", savedNumber)}
         <div className="topBar__title">
             <div className="topBar__titleLabel">Title</div>
             <input 
@@ -52,16 +55,9 @@ const TopBar = ({ note, notePosition, dispatch }) => {
         <div className="topBar__saving">
             <img 
                 className={`saving__icon 
-                    ${saveStatus === "Saving" ? 'saving__icon--in' : null }
-                    ${saveStatus === "Saved" ? 'saving__icon--out': null }`} 
+                    ${savingStatus ? 'saving__icon--in' : 'saving__icon--out' }`}
                 src={wedgesSpinner} 
                 alt="saving icon" />
-            {/* {saveStatus === "Saving" || saveStatus === "Saved" ? <img 
-                className={`saving__icon ${saveStatus === "Saved" ? 'saving__icon--out' : '' }`} src={wedgesSpinner} alt="saving icon"
-            /> : null} */}
-            {/* // /> : saveStatus === "Saved" ? <img
-            //     className="saving__icon" src={checkMark} alt="saved icon" 
-            // /> : null} */}
         </div>
 
         <div className="topBar__buttons">

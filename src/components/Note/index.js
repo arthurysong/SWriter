@@ -1,5 +1,5 @@
 import React from 'react'
-import { setNotePosition, setNoteContent } from '../../actions';
+import { setNotePosition, setNoteContent, resetSaving } from '../../actions';
 import './Note.scss';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -13,7 +13,7 @@ const Note = ({ note, notebookIndex, noteIndex }) => {
             console.log('notePosition', notePosition);
             dispatch(setNoteContent(notePosition, localStorage.getItem("saved_content")));
             localStorage.removeItem("saved_content")
-            // TODO: Clicking a different note should immediately set saveStatus to null, or else saving icon will appear in topbar.
+            dispatch(resetSaving());
         }
         dispatch(setNotePosition(notebookIndex, noteIndex))
     }

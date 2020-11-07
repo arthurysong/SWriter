@@ -12,23 +12,9 @@ const ClientLoader = ({ history }) => {
 
     useEffect(() => {
         const queryObject = qs.parse(history.location.search.substring(1));
-        // console.log(queryObject);
-        // if (queryObject.state === process.env.REACT_APP_GITHUB_STATE) {
-        //     console.log("Connect the github account in API");
-        //     // dispatch(connectGitHub())
-        //     setTimeout(() => {
-        //         console.log("User in Express is connected to GitHub");
-        //         dispatch(getUser(queryObject, history, setLoading))
-        //     }, 400)
-
-        // } else if (queryObject.state === process.env.REACT_APP_MEDIUM_STATE) {
-        //     // console.log(history.location.search.substring(1));
-        //     dispatch(getUser(queryObject, history, setLoading));
-        // }
         dispatch(getUser(queryObject, history, setLoading));
     }, [])
 
-    // console.log(history.location)
     if (loading) {
         return <div className="clientLoader">
             <div className="clientLoader__box">

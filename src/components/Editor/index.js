@@ -8,8 +8,8 @@ const Editor = ({ note, notePosition, dispatch }) => {
     const changeHandler = debounce(value => {
         localStorage.setItem("saved_content", value());
         localStorage.setItem("last_saved_position", notePosition );
-        dispatch(saveNote(note, { content: value() }, notePosition ));
-    }, 250)
+        dispatch(saveNote(note, { content: value() } ));
+    }, 500)
     
     return <div className="editor"> {/* I need this outer div for styling reasons. */}
         <MarkdownEditor 
