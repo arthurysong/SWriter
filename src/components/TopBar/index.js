@@ -61,7 +61,7 @@ const TopBar = ({ note, notePosition, dispatch }) => {
         </div>
 
         <div className="topBar__buttons">
-            <PublishButton note={note} notePosition={notePosition}/>
+            <PublishButton note={note}/>
             <FileOptions />
         </div>
     </div>

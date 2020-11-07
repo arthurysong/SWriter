@@ -6,14 +6,15 @@ export const setNoteContent = (notePosition, content) => ({ type: 'SET_NOTE_CONT
 export const setNoteUpdatedAt = (notePosition, date) => ({ type: 'SET_NOTE_UPDATED_AT', notePosition, date });
 export const setUser = user => ({ type: 'SET_USER', user });
 
-export const setAuthTokens = (accessToken, refreshToken) => ({ type: 'SET_AUTH_TOKENS', accessToken, refreshToken })
+export const setAuthTokens = (accessToken, refreshToken) => ({ type: 'SET_AUTH_TOKENS', accessToken, refreshToken });
+export const removeAuthTokens = () => ({ type: 'REMOVE_AUTH_TOKENS' })
 
 export const getUser = (queryObject, history, setLoading) => async (dispatch, getState) => {
     const { accessToken, refreshToken } = getState().auth;
 
     // If accessToken and refreshToken are available use tokens to fetch user information
     if (accessToken !== undefined && refreshToken !== undefined) {
-        console.log("or am i here??");
+        console.log("i should be here");
         const resp = await axios.post(`${API_URL}/users/medium`, {
             access_token: accessToken,
             refresh_token: refreshToken,
@@ -22,10 +23,12 @@ export const getUser = (queryObject, history, setLoading) => async (dispatch, ge
         // The response will contain the same access token OR it might send a new one because the old one expired
         // Reset the access_token
         const { access_token, user } = resp.data;
-        dispatch(setAuthTokens(access_token));
+        dispatch(setAuthTokens(access_token, refreshToken));
 
         dispatch(setUser(user));
         setTimeout(() => setLoading(false), 1000);
+
+    // Else if tokens are not available use query parameters from redirect to fetch User and login
     } else {
         try {
             // Use query parameters from Medium redirect to fetch user information and tokens
@@ -46,11 +49,8 @@ export const getUser = (queryObject, history, setLoading) => async (dispatch, ge
     }
 }
 
-export const logout = (history) => dispatch => {
-    // Should delete medium tokens from localStorage, should unset the user
-    // Should push to the login route
-    localStorage.removeItem('medium_access_token');
-    localStorage.removeItem('medium_refresh_token');
+export const logout = history => dispatch => {
+    dispatch(removeAuthTokens());
     dispatch(setUser({}));
     history.replace('/login');
 }
@@ -58,7 +58,7 @@ export const logout = (history) => dispatch => {
 export const setActiveNotebook = index => ({ type: 'SET_ACTIVE_NOTEBOOK', index })
 export const setNotePosition = (notebookIndex, noteIndex) => ({ type: 'SET_NOTE_POSITION', notebookIndex, noteIndex })
 
-export const saveNote = (note, body ) => (dispatch, getState) => {
+export const saveNote = (note, body ) => async (dispatch, getState) => {
     const { notePosition } = getState();
     dispatch(incSavingNumber()); // add one to current number of saving 
 
@@ -69,54 +69,39 @@ export const saveNote = (note, body ) => (dispatch, getState) => {
         timePassed += 100
     }, 100)
 
-    axios.put(`${API_URL}/notes/${note._id}`, body)
-        .then(resp => {
+    const resp = await axios.put(`${API_URL}/notes/${note._id}`, body);
 
-            // Delay updating the saveStatus for at least x - however seconds has passed
-            setTimeout(() => {
-                // Only incSavedNumber if savingNumber is greater than 0
-                // For case when user switches notes while saving is taking place
-                // The numbers will be reset to 0 and savedNumber shouldn't be incremented for the switched note
-                if (getState().savingNumber > 0) dispatch(incSavedNumber());
-                dispatch(setNoteUpdatedAt(notePosition, resp.data.note.updatedAt)); // Update the note's updatedAt so the TopBar can update the last saved...
-                // setTimeout(() => dispatch(setSaveStatus(null)), 3000)
-            }, 2000 - timePassed < 0 ? 0 : 2000 - timePassed)
-            clearInterval(minTimeInterval); // clear counter
-        })
-        .catch(err => console.log(err));
+    // Delay updating the saveStatus for at least x - however seconds has passed
+    setTimeout(() => {
+        // Only incSavedNumber if savingNumber is greater than 0
+        // For case when user switches notes while saving is taking place
+        // The numbers will be reset to 0 and savedNumber shouldn't be incremented for the switched note
+        if (getState().savingNumber > 0) dispatch(incSavedNumber());
+        dispatch(setNoteUpdatedAt(notePosition, resp.data.note.updatedAt)); // Update the note's updatedAt so the TopBar can update the last saved...
+    }, 2000 - timePassed < 0 ? 0 : 2000 - timePassed)
 }
 
-export const newNote = (notebook, owner, activeNotebook) => dispatch => {
-    axios.post(`${API_URL}/notes`, { notebook, owner })
-        .then(resp => {
-            console.log(resp)
-            // add the note book to notebooks
-            dispatch({ type: 'ADD_NOTE', note: resp.data, activeNotebook })
-        })
-        .catch(err => console.log(err));
+export const newNote = (notebook, owner, activeNotebook) => async dispatch => {
+    const resp = await axios.post(`${API_URL}/notes`, { notebook, owner });
+    dispatch({ type: 'ADD_NOTE', note: resp.data, activeNotebook });
 }
 
-export const deleteNote = note => dispatch => {
-    axios.delete(`${API_URL}/notes/${note}`)
-        .then(resp => {
-            console.log(resp);
-            dispatch({ type: 'DELETE_NOTE' })
-        })
-        .catch(err => console.log(err));
+export const deleteNote = note => async dispatch => {
+    await axios.delete(`${API_URL}/notes/${note}`);
+    dispatch({ type: 'DELETE_NOTE' });
 }
 
-export const publishPost = (note, notePosition) => dispatch => {
-    console.log("Publishing...");
-    // console.log(note.content);
-    axios.post(`${API_URL}/notes/${note._id}/publish`, {
-        access_token: localStorage.getItem('medium_access_token'),
-        refresh_token: localStorage.getItem('medium_refresh_token'),
+export const publishPost = note => async (dispatch, getState) => {
+    // TODO: Test publishing
+    // TODO: Create Readme for how formatting works..
+    const { auth, notePosition } = getState().auth;
+
+    await axios.post(`${API_URL}/notes/${note._id}/publish`, {
+        access_token: auth.accessToken,
+        refresh_token: auth.refreshToken,
     })
-        .then(resp => {
-            console.log(resp);
-            dispatch({ type: 'UPDATE_NOTE_PUBLISHED', notePosition })
-        })
-        .catch(err => console.log(err));
+
+    dispatch({ type: 'UPDATE_NOTE_PUBLISHED', notePosition });
 }
 
 // saveStatus Actions

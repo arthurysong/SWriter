@@ -25,6 +25,7 @@ const initialState = {
 export default createReducer(initialState, {
     // Actions for auth
     SET_AUTH_TOKENS: (state, action) => { state.auth = { accessToken: action.accessToken, refreshToken: action.refreshToken } },
+    REMOVE_AUTH_TOKENS: state => { state.auth = {} },
 
     // Actions for Note
     SET_NOTE_TITLE: (state, action) => { state.user.notebooks[action.notePosition[0]].notes[action.notePosition[1]].title = action.title },

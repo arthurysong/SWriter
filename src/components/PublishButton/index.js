@@ -3,10 +3,10 @@ import './PublishButton.scss';
 import { publishPost, setNoteContent } from '../../actions';
 import { useDispatch } from 'react-redux';
 
-const PublishButton = ({ note, notePosition }) => {
+const PublishButton = ({ note }) => {
     const dispatch = useDispatch();
     const clickHandler = () => {
-        if (!note.published) dispatch(publishPost(note, notePosition))
+        if (!note.published) dispatch(publishPost(note))
     }
 
     return <div onClick={clickHandler} className={`publishButton ${note.published ? '--disabled' : '' }`}>
