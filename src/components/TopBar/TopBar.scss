@@ -56,13 +56,17 @@
             vertical-align: bottom;
             width: 30px;
 
+            transition: opacity 0.15s ease-in;
+
             &--in {
                 opacity: 1;
+
+                transition: opacity ease-out 0.10;
             }
             
-            &--out {
-                animation: fadeOut ease 1s;
-            }
+            // &--out {
+            //     animation: fadeOut ease 1s;
+            // }
         }
 
         @keyframes fadeOut {

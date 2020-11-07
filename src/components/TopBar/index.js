@@ -55,7 +55,7 @@ const TopBar = ({ note, notePosition, dispatch }) => {
         <div className="topBar__saving">
             <img 
                 className={`saving__icon 
-                    ${savingStatus ? 'saving__icon--in' : 'saving__icon--out' }`}
+                    ${savingStatus ? 'saving__icon--in' : '' }`}
                 src={wedgesSpinner} 
                 alt="saving icon" />
         </div>
