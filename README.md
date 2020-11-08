@@ -8,8 +8,8 @@ A journaling application that publishes directly to Medium. Organize your Medium
 
 The **title** of the MWriter note becomes the **name** of the file on Medium.
 
-<img src="pictures-for-readme/title1.png" style="text-align: center" width="500px" />
-<img src="pictures-for-readme/title2.png" style="text-align: center" width="500px" />
+<img src="pictures-for-readme/title1.png" align="center" width="500px" />
+<img src="pictures-for-readme/title2.png" align="center" width="500px" />
 
 <!-- ![title1](pictures-for-readme/title1.png)
 ![title2](pictures-for-readme/title2.png) -->
@@ -21,8 +21,8 @@ The next **header 2** of note becomes the **subtitle** of the post.
 
 _NOTE: If you want a subtitle you need to have a title. You must use the exact header type (H1 and H2) for title and subtitle._
 
-<img src="pictures-for-readme/titlesubtitle1.png" style="text-align: center" width="500px" />
-<img src="pictures-for-readme/titlesubtitle2.png" style="text-align: center" width="500px" />
+<img src="pictures-for-readme/titlesubtitle1.png" align="center" width="500px" />
+<img src="pictures-for-readme/titlesubtitle2.png" align="center" width="500px" />
 
 <!-- ![titlesubtitle1](pictures-for-readme/titlesubtitle1.png)
 ![titlesubtitle2](pictures-for-readme/titlesubtitle2.png) -->
@@ -31,8 +31,8 @@ _NOTE: If you want a subtitle you need to have a title. You must use the exact h
 
 Any other **Header 1** headers in the note become Header 1's in the post. Any other **Header 2 and Header 3** headers become Header 2's in the post.
 
-<img src="pictures-for-readme/headers1.png" style="text-align: center" width="500px" />
-<img src="pictures-for-readme/headers2.png" style="text-align: center" width="500px" />
+<img src="pictures-for-readme/headers1.png" align="center" width="500px" />
+<img src="pictures-for-readme/headers2.png" align="center" width="500px" />
 
 <!-- ![headers1](pictures-for-readme/headers1.png)
 ![headers2](pictures-for-readme/headers2.png) -->
@@ -41,8 +41,8 @@ Any other **Header 1** headers in the note become Header 1's in the post. Any ot
 
 Any **code snippets** will become a **gist** in the Medium article.
 
-<img src="pictures-for-readme/codesnippets1.png" style="text-align: center" width="500px" />
-<img src="pictures-for-readme/codesnippets2.png" style="text-align: center" width="500px" />
+<img src="pictures-for-readme/codesnippets1.png" align="center" width="500px" />
+<img src="pictures-for-readme/codesnippets2.png" align="center" width="500px" />
 
 <!-- ![codesnippets1](pictures-for-readme/codesnippets1.png)
 ![codesnippets2](pictures-for-readme/codesnippets2.png) -->
