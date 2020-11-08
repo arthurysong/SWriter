@@ -17,6 +17,15 @@ _NOTE: If you want a subtitle you need to have a title. You must use the exact h
 ![titlesubtitle1](pictures-for-readme/titlesubtitle1.png)
 ![titlesubtitle2](pictures-for-readme/titlesubtitle2.png)
 
+Any other **Header 1** headers in the note become Header 1's in the post. Any other **Header 2 and Header 3** headers become Header 2's in the post.
+
+![headers1](pictures-for-readme/headers1.png)
+![headers2](pictures-for-readme/headers2.png)
+
+Any **code snippets** will become a **gist** in the Medium article.
+
+![codesnippets1](pictures-for-readme/codesnippets1.png)
+![codesnippets2](pictures-for-readme/codesnippets2.png)
 
 ### TODO
 - TODO: Show publishing status when the publish button is hit--let users know publishing is taking place, make button unclickable.
