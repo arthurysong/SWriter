@@ -34,9 +34,6 @@ const TopBar = ({ note, notePosition, dispatch }) => {
     }, [note.updatedAt]);
 
     return <div className="topBar">
-        {console.log("savingStatus", savingStatus)}
-        {console.log("savingNumber", savingNumber)}
-        {console.log("savedNumber", savedNumber)}
         <div className="topBar__title">
             <div className="topBar__titleLabel">Title</div>
             <input 

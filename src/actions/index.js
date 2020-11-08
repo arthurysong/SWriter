@@ -94,7 +94,7 @@ export const deleteNote = note => async dispatch => {
 export const publishPost = note => async (dispatch, getState) => {
     // TODO: Test publishing
     // TODO: Create Readme for how formatting works..
-    const { auth, notePosition } = getState().auth;
+    const { auth, notePosition } = getState();
 
     await axios.post(`${API_URL}/notes/${note._id}/publish`, {
         access_token: auth.accessToken,
