@@ -8,10 +8,11 @@ A journaling application that publishes directly to Medium. Organize your Medium
 
 The **title** of the MWriter note becomes the **name** of the file on Medium.
 
-<img src="pictures-for-readme/title1.png" width="200px" />
+<img src="pictures-for-readme/title1.png" width="300px" />
+<img src="pictures-for-readme/title2.png" width="300px" />
 
-![title1](pictures-for-readme/title1.png)
-![title2](pictures-for-readme/title2.png)
+<!-- ![title1](pictures-for-readme/title1.png)
+![title2](pictures-for-readme/title2.png) -->
 
 ## Title and Subtitle
 
@@ -20,22 +21,31 @@ The next **header 2** of note becomes the **subtitle** of the post.
 
 _NOTE: If you want a subtitle you need to have a title. You must use the exact header type (H1 and H2) for title and subtitle._
 
-![titlesubtitle1](pictures-for-readme/titlesubtitle1.png)
-![titlesubtitle2](pictures-for-readme/titlesubtitle2.png)
+<img src="pictures-for-readme/titlesubtitle1.png" width="300px" />
+<img src="pictures-for-readme/titlesubtitle2.png" width="300px" />
+
+<!-- ![titlesubtitle1](pictures-for-readme/titlesubtitle1.png)
+![titlesubtitle2](pictures-for-readme/titlesubtitle2.png) -->
 
 ## Headers
 
 Any other **Header 1** headers in the note become Header 1's in the post. Any other **Header 2 and Header 3** headers become Header 2's in the post.
 
-![headers1](pictures-for-readme/headers1.png)
-![headers2](pictures-for-readme/headers2.png)
+<img src="pictures-for-readme/headers1.png" width="300px" />
+<img src="pictures-for-readme/headers2.png" width="300px" />
+
+<!-- ![headers1](pictures-for-readme/headers1.png)
+![headers2](pictures-for-readme/headers2.png) -->
 
 ## Code Snippets become Gists
 
 Any **code snippets** will become a **gist** in the Medium article.
 
-![codesnippets1](pictures-for-readme/codesnippets1.png)
-![codesnippets2](pictures-for-readme/codesnippets2.png)
+<img src="pictures-for-readme/codesnippets1.png" width="300px" />
+<img src="pictures-for-readme/codesnippets2.png" width="300px" />
+
+<!-- ![codesnippets1](pictures-for-readme/codesnippets1.png)
+![codesnippets2](pictures-for-readme/codesnippets2.png) -->
 
 ### TODO
 - TODO: Show publishing status when the publish button is hit--let users know publishing is taking place, make button unclickable.
