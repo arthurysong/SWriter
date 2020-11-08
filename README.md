@@ -4,10 +4,18 @@ A journaling application that publishes directly to Medium. Organize your Medium
 
 # What is the format that of note that gets published?
 
-The title => becomes the name of the file.
+The **title** of the MWriter note becomes the **name** of the file on Medium.
 
 ![title1](pictures-for-readme/title1.png)
 ![title2](pictures-for-readme/title2.png)
+
+The **first header 1** of note becomes the **title** of the post on Medium.
+The next **header 2** of note becomes the **subtitle** of the post.
+
+_NOTE: If you want a subtitle you need to have a title. You must use the exact header type (H1 and H2) for title and subtitle._
+
+![titlesubtitle1](pictures-for-readme/titlesubtitle1.png)
+![titlesubtitle2](pictures-for-readme/titlesubtitle2.png)
 
 
 ### TODO
