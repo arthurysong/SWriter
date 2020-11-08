@@ -8,6 +8,8 @@ A journaling application that publishes directly to Medium. Organize your Medium
 
 The **title** of the MWriter note becomes the **name** of the file on Medium.
 
+<img src="pictures-for-readme/title1.png" width="200px" />
+
 ![title1](pictures-for-readme/title1.png)
 ![title2](pictures-for-readme/title2.png)
 
