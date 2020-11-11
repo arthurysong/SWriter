@@ -1,86 +1,89 @@
-.modal {
-    position: absolute;
-    z-index: 500;
-    background-color: white;
-    width: 308px;
-    box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
-    color: black;
-    padding: 12px 0;
-    box-sizing: border-box;
-    transition: opacity 0.3s ease-out;
+.optionsModal {
 
-    &--note {
-        right: 10px;
-        width: 150px;
-    }
+    .modal {
+        position: absolute;
+        z-index: 500;
+        background-color: white;
+        width: 308px;
+        box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
+        color: black;
+        padding: 12px 0;
+        box-sizing: border-box;
+        transition: opacity 0.3s ease-out;
 
-    .modal__header {
-        padding: 6px 20px;
-        text-transform: uppercase;
-        font-weight: 650;
-        color: #757575;
-        font-size: 13px;
-    }
-
-    .modal__acount {
-        padding: 6px 20px;
-        display: flex;
-        align-items: center;
-
-        .modal__checkmark {
-            color: #026fac;
-            margin-right: 6px;
+        &--note {
+            right: 10px;
+            width: 150px;
         }
 
-        .modal__accountName {
-            display: inline-block;
-            font-size: 16px;
-        }
-    }
-
-    .modal__option {
-        padding: 6px 20px;
-        font-size: 14px;
-
-        &:hover {
-            cursor: pointer;
-            background-color: #f2f2f2;
+        .modal__header {
+            padding: 6px 20px;
+            text-transform: uppercase;
+            font-weight: 650;
+            color: #757575;
+            font-size: 13px;
         }
 
-        &--disabled {
-            color: #a6a6a6;
+        .modal__acount {
+            padding: 6px 20px;
+            display: flex;
+            align-items: center;
 
-            &:hover {
-                cursor: auto;
-                background-color: white;
+            .modal__checkmark {
+                color: #026fac;
+                margin-right: 6px;
+            }
+
+            .modal__accountName {
+                display: inline-block;
+                font-size: 16px;
             }
         }
 
-        &--version {
-            font-weight: 500;
+        .modal__option {
+            padding: 6px 20px;
+            font-size: 14px;
+
+            &:hover {
+                cursor: pointer;
+                background-color: #f2f2f2;
+            }
+
+            &--disabled {
+                color: #a6a6a6;
+
+                &:hover {
+                    cursor: auto;
+                    background-color: white;
+                }
+            }
+
+            &--version {
+                font-weight: 500;
+            }
+
+            &--delete {
+                color: rgb(235, 57, 57)
+            }
         }
 
-        &--delete {
-            color: rgb(235, 57, 57)
+
+        .modal__separator {
+            border-top: 1px solid #f2f2f2;
+            display: block;
+            height: 1px;
+            margin: 8px 0;
+            padding: 0;
         }
     }
 
-
-    .modal__separator {
-        border-top: 1px solid #f2f2f2;
-        display: block;
-        height: 1px;
-        margin: 8px 0;
-        padding: 0;
+    .backdrop {
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        z-index: 100;
+        left: 0;
+        top: 0;
+        // background-color: rgba(0,0,0,0.5);
     }
-}
-
-.backdrop {
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    z-index: 100;
-    left: 0;
-    top: 0;
-    // background-color: rgba(0,0,0,0.5);
 }

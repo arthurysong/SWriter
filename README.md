@@ -4,6 +4,8 @@ A journaling application that publishes directly to Medium. Organize your Medium
 
 # How to Format your MWriter Post for Medium
 
+_Notes can only be published to Medium once. If you want to edit your Medium article after it's been published, you can only do it on Medium. (Medium's Third party API doesn't allow for editing posts yet)._
+
 ## File Name
 
 The **title** of the MWriter note becomes the **name** of the file on Medium.
@@ -40,5 +42,4 @@ Any **code snippets** will become a **gist** in the Medium article.
 - TODO: Allow ordering of notes.. by updatedAt, by createdAt?
 - TODO: Keep track of last Saved note in the database in the user model not in localStorage.
 - TODO: Note Title should also create set loading icon when being saved
-- TODO: Need a readme for how to publish a Medium entry
 

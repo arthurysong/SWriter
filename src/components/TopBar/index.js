@@ -3,13 +3,16 @@ import './TopBar.scss';
 import { setNoteTitle, saveNote } from '../../actions'
 import FileOptions from '../FileOptions';
 import PublishButton from '../PublishButton';
+import PublishModal from '../PublishButton/PublishModal';
 import { useSelector } from 'react-redux';
 import wedgesSpinner from '../../assets/images/wedges-spinner.gif';
 
 const TopBar = ({ note, notePosition, dispatch }) => {
     const [titleChanged, setTitleChanged] = useState(false);
     const [dateString, setDateString] = useState('');
+    const [showPublishModal, setShowPublishModal] = useState(false);
     const { savingNumber, savedNumber } = useSelector(state => state);
+
     // if current number of saving is greater than current number
     const savingStatus = useSelector(state => state.savingNumber > state.savedNumber);
 
@@ -58,7 +61,8 @@ const TopBar = ({ note, notePosition, dispatch }) => {
         </div>
 
         <div className="topBar__buttons">
-            <PublishButton note={note}/>
+            <PublishButton note={note} setShowPublishModal={setShowPublishModal} />
+            <PublishModal show={showPublishModal} modalClosed={() => setShowPublishModal(false)} />
             <FileOptions />
         </div>
     </div>

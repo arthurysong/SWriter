@@ -1,0 +1,63 @@
+.publishModal {
+  // width: 100%;
+  // height: 100%;
+
+  .modal {
+    position: fixed;
+    background-color: white;
+    z-index: 500;
+    // margin: auto;
+    // transform: translate isn't working so using set numbers and margin to center
+    width: 500px;
+    height: 250px;
+    left: 50%;
+    top: 50%;
+    margin-left: -250px;
+    margin-top: -125px;
+    box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.4);
+    border-radius: 4px;
+    color: black;
+
+    .modal__closeButton {
+      position: absolute;
+      right: 0;
+      padding: 12px;
+      color: rgb(128, 128, 128);
+        // font-weight:00;
+
+      &:hover {
+        cursor: pointer;
+        color: rgb(102, 102, 102);
+      }
+    }
+
+    .modal__spinner {
+      display: block;
+      width: 100px;
+      margin: 32px auto 0px;
+    }
+
+    .modal__text {
+      text-align: center;
+      margin: 12px 55px 0px;
+      font-size: 14px;
+
+      .text__light {
+        margin-top: 10px;
+        opacity: .5;
+        font-size: .9em;
+      }
+    }
+  }
+
+  .backdrop {
+      width: 100%;
+      height: 100%;
+      position: fixed;
+      z-index: 100;
+      left: 0;
+      top: 0;
+      background-color: black;
+      opacity: .6;
+  }
+}
