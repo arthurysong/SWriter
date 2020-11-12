@@ -78,6 +78,7 @@ export const saveNote = (note, body ) => async (dispatch, getState) => {
         // The numbers will be reset to 0 and savedNumber shouldn't be incremented for the switched note
         if (getState().savingNumber > 0) dispatch(incSavedNumber());
         dispatch(setNoteUpdatedAt(notePosition, resp.data.note.updatedAt)); // Update the note's updatedAt so the TopBar can update the last saved...
+        clearInterval(minTimeInterval);
     }, 2000 - timePassed < 0 ? 0 : 2000 - timePassed)
 }
 

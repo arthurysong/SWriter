@@ -5,6 +5,7 @@ import thunk from 'redux-thunk';
  
 import rootReducer from './index';
  
+// auth state is persisted between refreshes
 const persistConfig = {
   key: 'root',
   storage,

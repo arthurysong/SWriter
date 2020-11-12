@@ -2,6 +2,7 @@ import { createReducer } from '@reduxjs/toolkit'
 
 const initialState = {
     // access_token and refresh_token for medium authentication
+    // this state is persisted between refreshes, so we can keep user logged in...
     auth: {},
 
     // This is to find the note in the user array... 
@@ -20,6 +21,13 @@ const initialState = {
     // Compare these two numbers to determine whether saving is in progress or has saved, because multiple saves take place sometimes.
     savingNumber: 0, 
     savedNumber: 0,
+
+    // Used to display proper information in publishing modal
+    // possible statuses
+    // 0 => starting
+    // 1 => in progress
+    // 2 => finished
+    publishingStatus: undefined,
 }
 
 export default createReducer(initialState, {
@@ -56,5 +64,8 @@ export default createReducer(initialState, {
     RESET_SAVING: state => { 
         state.savedNumber = 0;
         state.savingNumber = 0;
-    }
+    },
+
+    // publishStatus
+    SET_PUBLISHING_STATUS: (state, action) => { state.publishingStatus = action.status },
 })

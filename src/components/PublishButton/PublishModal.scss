@@ -31,6 +31,30 @@
       }
     }
 
+    .modal__container {
+      padding: 24px;
+
+      .modal__publishButton {
+        display: inline-block;
+        background-color: #358D35;
+        border-radius: 6px;
+        padding: 12px;
+        color: #fff;
+        margin-right: 10px;
+        font-size: 12px;
+    
+        &:hover {
+            cursor: pointer;
+            background-color: #2d792d;
+        }
+    
+        &:active {
+            cursor: pointer;
+            background-color: #276927;
+        }
+      }
+    }
+
     .modal__spinner {
       display: block;
       width: 100px;
