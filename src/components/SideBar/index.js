@@ -19,6 +19,8 @@ function SideBar() {
   const [userOptions, setUserOptions] = useState(false); // Used to toggle the options when User is clicked
 
   return <div className="sideBar">
+    {/* TODO: Maintain version number here ... */}
+    {/* 1.0.1 */}
 
     <div className="sideBar__user" onClick={() => setUserOptions(true)}>
       <div className="sideBar__email">{name}</div>
