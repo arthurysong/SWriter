@@ -41,7 +41,7 @@ function SideBar() {
       <div className="modal__separator" />
       <div className="modal__option" onClick={() => dispatch(logout(history))}>Sign out {name}</div>
       <div className="modal__separator" />
-      <div className="modal__option modal__option--disabled modal__option--version">MWriter Web v1.0.4</div>
+      <div className="modal__option modal__option--disabled modal__option--version">MWriter Web v1.0.1</div>
     </OptionsModal>
 
     <div onClick={() => dispatch(newNote(activeNotebookId, _id, activeNotebook))} className="sideBar__button">New Note</div>

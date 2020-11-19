@@ -14,7 +14,6 @@ export const getUser = (queryObject, history, setLoading) => async (dispatch, ge
 
     // If accessToken and refreshToken are available use tokens to fetch user information
     if (accessToken !== undefined && refreshToken !== undefined) {
-        console.log("i should be here");
         const resp = await axios.post(`${API_URL}/users/medium`, {
             access_token: accessToken,
             refresh_token: refreshToken,
@@ -29,7 +28,7 @@ export const getUser = (queryObject, history, setLoading) => async (dispatch, ge
         setTimeout(() => setLoading(false), 1000);
 
     // Else if tokens are not available use query parameters from redirect to fetch User and login
-    } else {
+    } else if (queryObject.state && queryObject.code) {
         try {
             // Use query parameters from Medium redirect to fetch user information and tokens
             const resp = await axios.post(`${API_URL}/users/medium-oauth`, {
@@ -46,6 +45,10 @@ export const getUser = (queryObject, history, setLoading) => async (dispatch, ge
         } catch (err) {
             history.replace('/login');
         }
+    
+    // if user tries to navigate to /client without tokens in storage, or without the query params just redirect to /login
+    } else {
+        history.replace('/login');
     }
 }
 
