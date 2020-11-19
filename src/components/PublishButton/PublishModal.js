@@ -113,7 +113,7 @@ const PublishModal = ({ note, show, modalClosed }) => {
                     Finished publishing
                   </div>
                   <div className="modal__yourLink">
-                    Your post has been successfully posted on Medium. <a href={note.mediumURL}>Click here</a> to see the post.
+                    Your post has been successfully posted on Medium. <a target="_blank" href={note.mediumURL}>Click here</a> to see the post.
                   </div>
                 </div>
                 {/* TODO: publishingStatus === 3 for error */}
