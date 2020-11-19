@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './Notebook.scss';
 import Note from '../Note';
 import { useDispatch, useSelector } from 'react-redux';
-import { setActiveNotebook } from '../../actions/index';
+import { setActiveNotebook } from '../../redux/actions/index';
 
 
 const Notebook = ({ notebook, notebookIndex }) => {

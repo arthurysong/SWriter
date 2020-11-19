@@ -1,5 +1,5 @@
 import { getUser } from './index';
-import { API_URL } from '../utils/URL';
+import { API_URL } from '../../utils/URL';
 import thunk from 'redux-thunk';
 import configureMockStore from "redux-mock-store";
 // import nock from 'nock';

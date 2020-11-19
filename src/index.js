@@ -6,7 +6,7 @@ import { Provider } from 'react-redux';
 // redux-persist is used to persist the authentication token and refresh token between refresh
 // See ./reducer/configureStore.js and redux-persist documentation
 import { PersistGate } from'redux-persist/integration/react';
-import configureStore from './reducer/configureStore';
+import configureStore from './redux/reducer/configureStore';
 
 const { store, persistor } = configureStore();
 window.store = store

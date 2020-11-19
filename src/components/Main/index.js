@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import './Main.scss';
 import { useSelector, useDispatch } from 'react-redux';
 // import { setEditorFileId } from '../../actions';
-import { setActiveNotebook, setNotePosition } from '../../actions';
+import { setActiveNotebook, setNotePosition } from '../../redux/actions';
 import TopBar from '../TopBar';
 import Editor from '../Editor';
 

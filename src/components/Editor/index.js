@@ -1,7 +1,7 @@
 import React from 'react'
 import MarkdownEditor from 'rich-markdown-editor';
 import { debounce } from 'lodash'
-import { saveNote } from '../../actions'
+import { saveNote } from '../../redux/actions'
 import './Editor.scss';
 
 const Editor = ({ note, notePosition, dispatch }) => {

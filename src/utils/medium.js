@@ -17,7 +17,7 @@ export const oauth2 = () => {
                     // 'redirect_uri': 'https://mwriter.herokuapp.com/client',
                     'redirect_uri': `${CLIENT_URL}/client`,
                     'response_type': 'code',
-                    'scope': 'basicProfile,publishPost',
+                    'scope': 'basicProfile,publishPost,listPublications',
                     'state': process.env.REACT_APP_MEDIUM_STATE,
                   };
   

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import './PublishButton.scss';
-import { publishPost, setNoteContent } from '../../actions';
+import { publishPost, setNoteContent } from '../../redux/actions';
 import PublishModal from './PublishModal';
 import { useDispatch } from 'react-redux';
 

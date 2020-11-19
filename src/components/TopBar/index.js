@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import './TopBar.scss';
-import { setNoteTitle, saveNote } from '../../actions'
+import { setNoteTitle, saveNote } from '../../redux/actions'
 import FileOptions from '../FileOptions';
 import PublishButton from '../PublishButton';
 import PublishModal from '../PublishButton/PublishModal';
@@ -62,7 +62,7 @@ const TopBar = ({ note, notePosition, dispatch }) => {
 
         <div className="topBar__buttons">
             <PublishButton note={note} setShowPublishModal={setShowPublishModal} />
-            <PublishModal show={showPublishModal} modalClosed={() => setShowPublishModal(false)} />
+            <PublishModal note={note} show={showPublishModal} modalClosed={() => setShowPublishModal(false)} />
             <FileOptions />
         </div>
     </div>

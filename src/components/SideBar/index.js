@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 import Notebook from '../Notebook';
-import { newNote, logout } from "../../actions"
+import { newNote, logout } from "../../redux/actions"
 import OptionsModal from './OptionsModal';
 
 import './SideBar.scss';

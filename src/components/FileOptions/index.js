@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react'
 import './FileOptions.scss';
 import { useSelector, useDispatch } from 'react-redux';
-import { deleteNote } from '../../actions';
+import { deleteNote } from '../../redux/actions';
 import OptionsModal from '../SideBar/OptionsModal';
 
 const FileOptions = () => {

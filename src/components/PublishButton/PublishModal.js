@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import './PublishModal.scss';
-// import ClimbingBoxLoader from 'react-spinners/ClimbingBoxLoader';
 import rainySpinner from '../../assets/images/rainy2.gif';
 import { useSelector, useDispatch } from 'react-redux';
-import { setPublishingStatus } from '../../actions/publishingStatus';
+import { setPublishingStatus } from '../../redux/actions/publishingStatus';
+import { publishPost } from '../../redux/actions';
 import Select from 'react-select';
 import { WithContext as ReactTags } from 'react-tag-input';
 
-const PublishModal = ({ show, modalClosed }) => {
+const PublishModal = ({ note, show, modalClosed }) => {
   const publishingStatus = useSelector(state => state.publishingStatus);
+  const publications = useSelector(state => state.publications);
   const dispatch = useDispatch();
   const [publication, setPublication] = useState(null);
   const [tags, setTags] = useState([]);
@@ -37,7 +38,9 @@ const PublishModal = ({ show, modalClosed }) => {
     setTags(newTags);
   }
 
-  console.log(publishingStatus);
+  // console.log(publishingStatus);
+  // console.log(publication);
+  console.log("note", note);
 
   return (
     <div className="publishModal">
@@ -82,19 +85,14 @@ const PublishModal = ({ show, modalClosed }) => {
                       className="modal__selectPub"
                       value={publication}
                       onChange={option => setPublication(option)}
-                      options={[
-                        { value: 'DevGenius', label: 'DevGenius'}
-                      ]} />
+                      options={publications.map(p => ({ value: p.id, label: p.name }))} />
                   </div>
 
                   <div 
                     // TODO: Need to actually publish the note, instead of just setting the status
                     // TODO: Make sure to add tags and the publication to note.
                     className="modal__publishButton"
-                    onClick={() => {
-                      dispatch(setPublishingStatus(1));
-                      setTimeout(() => dispatch(setPublishingStatus(2)), 3000)
-                      }}>
+                    onClick={() => dispatch(publishPost(note, tags, publication.value))}>
                       Publish Now
                   </div>
                 </div>
@@ -115,9 +113,10 @@ const PublishModal = ({ show, modalClosed }) => {
                     Finished publishing
                   </div>
                   <div className="modal__yourLink">
-                    Your post has been successfully posted on Medium. <a href="">Click here</a> to see the post.
+                    Your post has been successfully posted on Medium. <a href={note.mediumURL}>Click here</a> to see the post.
                   </div>
                 </div>
+                {/* TODO: publishingStatus === 3 for error */}
               </> : null}
             </div>
         </div>

@@ -17,6 +17,7 @@ const initialState = {
 
     // Notebooks and notes are also contained in here...
     user: {}, 
+    publications: [],
 
     // Compare these two numbers to determine whether saving is in progress or has saved, because multiple saves take place sometimes.
     savingNumber: 0, 
@@ -38,6 +39,9 @@ export default createReducer(initialState, {
     // Actions for Note
     SET_NOTE_TITLE: (state, action) => { state.user.notebooks[action.notePosition[0]].notes[action.notePosition[1]].title = action.title },
     UPDATE_NOTE_PUBLISHED: (state, action) => { state.user.notebooks[action.notePosition[0]].notes[action.notePosition[1]].published = true },
+
+    // update the mediumURL of note after publish, so we can show link in publish modal
+    UPDATE_NOTE_MEDIUM_URL: (state, action) => { state.user.notebooks[action.notePosition[0]].notes[action.notePosition[1]].mediumURL = action.mediumURL },
     SET_NOTE_CONTENT: (state, action) => { state.user.notebooks[action.notePosition[0]].notes[action.notePosition[1]].content = action.content },
     SET_NOTE_UPDATED_AT: (state, action) => { state.user.notebooks[action.notePosition[0]].notes[action.notePosition[1]].updatedAt = action.date }, 
     ADD_NOTE: (state, action) => { 
@@ -48,6 +52,7 @@ export default createReducer(initialState, {
     
     // Actions for User
     SET_USER: (state, action) => { state.user = action.user },
+    SET_PUBLICATIONS: (state, action) => { state.publications = action.publications },
 
     // activeNotebook
     SET_ACTIVE_NOTEBOOK: (state, action) => { state.activeNotebook = action.index },

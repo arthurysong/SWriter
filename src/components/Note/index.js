@@ -1,5 +1,5 @@
 import React from 'react'
-import { setNotePosition, setNoteContent, resetSaving } from '../../actions';
+import { setNotePosition, setNoteContent, resetSaving } from '../../redux/actions';
 import './Note.scss';
 import { useDispatch, useSelector } from 'react-redux';
 

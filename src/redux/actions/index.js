@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { API_URL } from '../utils/URL';
+import { API_URL } from '../../utils/URL';
+import { setPublishingStatus } from './publishingStatus';
 
 export const setNoteTitle = (notePosition, title) => ({ type: 'SET_NOTE_TITLE', notePosition, title })
 export const setNoteContent = (notePosition, content) => ({ type: 'SET_NOTE_CONTENT', notePosition, content })
@@ -23,8 +24,10 @@ export const getUser = (queryObject, history, setLoading) => async (dispatch, ge
         // Reset the access_token
         const { access_token, user } = resp.data;
         dispatch(setAuthTokens(access_token, refreshToken));
-
         dispatch(setUser(user));
+
+        // Get user's publications
+        dispatch(getPublications());
         setTimeout(() => setLoading(false), 1000);
 
     // Else if tokens are not available use query parameters from redirect to fetch User and login
@@ -41,6 +44,8 @@ export const getUser = (queryObject, history, setLoading) => async (dispatch, ge
             dispatch(setAuthTokens(access_token, refresh_token));
             dispatch(setUser(user));
 
+            // Get user's publications
+            dispatch(getPublications());
             setTimeout(() => setLoading(false), 1000);
         } catch (err) {
             history.replace('/login');
@@ -50,6 +55,25 @@ export const getUser = (queryObject, history, setLoading) => async (dispatch, ge
     } else {
         history.replace('/login');
     }
+}
+
+export const setPublications = publications => ({ type: 'SET_PUBLICATIONS', publications })
+export const getPublications = () => async (dispatch, getState) => {
+    // In order to get the publications I can write for I need to get the contributors for each publication I get and then see if I'm a contributor
+    // for that publication
+    const { accessToken, refreshToken } = getState().auth; 
+    const mediumId = getState().user.mediumId;
+    const resp = await axios.get(`${API_URL}/users/medium/${mediumId}/publications`, {
+        headers: {
+            'access_token': accessToken,
+            'refresh_token': refreshToken,
+        }
+    })
+
+    // console.log("response", resp);
+    const { access_token, refresh_token, publications } = resp.data;
+    dispatch(setAuthTokens(access_token, refresh_token));
+    dispatch(setPublications(publications));
 }
 
 export const logout = history => dispatch => {
@@ -95,17 +119,27 @@ export const deleteNote = note => async dispatch => {
     dispatch({ type: 'DELETE_NOTE' });
 }
 
-export const publishPost = note => async (dispatch, getState) => {
-    // TODO: Test publishing
-    // TODO: Create Readme for how formatting works..
+export const updateNoteMediumURL = (notePosition, mediumURL) => ({ type: 'UPDATE_NOTE_MEDIUM_URL', notePosition, mediumURL })
+export const updateNotePublished = (notePosition) => ({ type: 'UPDATE_NOTE_PUBLISHED', notePosition })
+
+export const publishPost = (note, tags, publication) => async (dispatch, getState) => {
     const { auth, notePosition } = getState();
 
-    await axios.post(`${API_URL}/notes/${note._id}/publish`, {
-        access_token: auth.accessToken,
-        refresh_token: auth.refreshToken,
-    })
+    dispatch(setPublishingStatus(1));
 
-    dispatch({ type: 'UPDATE_NOTE_PUBLISHED', notePosition });
+    // TODO: Try catch block and set status to 3 if error 
+    const resp = await axios.post(`${API_URL}/notes/${note._id}/publish`, {
+        tags, publication
+    },{
+        headers: {
+            access_token: auth.accessToken,
+            refresh_token: auth.refreshToken,
+        }
+    })
+    dispatch(setPublishingStatus(2));
+
+    dispatch(updateNotePublished(notePosition));
+    dispatch(updateNoteMediumURL(notePosition, resp.data.note.mediumURL))
 }
 
 // saveStatus Actions

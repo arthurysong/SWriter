@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux';
 import Client from '../Client';
-import { getUser } from '../../actions';
+import { getUser } from '../../redux/actions';
 import PacmanLoader from 'react-spinners/PacmanLoader';
 import qs from 'qs';
 import './ClientLoader.scss';
