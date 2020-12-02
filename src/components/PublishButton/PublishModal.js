@@ -38,10 +38,6 @@ const PublishModal = ({ note, show, modalClosed }) => {
     setTags(newTags);
   }
 
-  // console.log(publishingStatus);
-  // console.log(publication);
-  console.log("note", note);
-
   return (
     <div className="publishModal">
             {/* The black backdrop */}
@@ -92,7 +88,7 @@ const PublishModal = ({ note, show, modalClosed }) => {
                     // TODO: Need to actually publish the note, instead of just setting the status
                     // TODO: Make sure to add tags and the publication to note.
                     className="modal__publishButton"
-                    onClick={() => dispatch(publishPost(note, tags, publication.value))}>
+                    onClick={() => dispatch(publishPost(note, tags, publication?.value))}>
                       Publish Now
                   </div>
                 </div>
@@ -112,6 +108,7 @@ const PublishModal = ({ note, show, modalClosed }) => {
                   <div className="modal__finishedPublishing">
                     Finished publishing
                   </div>
+                  {/* Show title here */}
                   <div className="modal__yourLink">
                     Your post has been successfully posted on Medium. <a target="_blank" href={note.mediumURL}>Click here</a> to see the post.
                   </div>

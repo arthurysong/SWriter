@@ -1,3 +1,4 @@
+import zIndex from '@material-ui/core/styles/zIndex';
 import React from 'react'
 import './OptionsModal.scss';
 
@@ -13,8 +14,8 @@ const OptionsModal = ({ show, modalClosed, noteOptions, children }) => {
 
             {/* The actual modal */}
             <div className={`modal ${noteOptions ? 'modal--note' : '' }`} style={{
-                transform: show ? 'translateY(0)' : 'translateY(100vh)', // This is so it's out of the main browser pageand not blocking other components
-                opacity: show ? 1 : 0 // Animated in and out
+                opacity: show ? 1 : 0, // Animated in and out
+                zIndex: show ? 5 : -5 // When not shown, z index is negative so it goes behind everything
             }}>
                 {children}
             </div>
