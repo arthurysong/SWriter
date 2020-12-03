@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import './Main.scss';
 import { useSelector, useDispatch } from 'react-redux';
+import useSelectActiveNote from '../../redux/selectors/useSelectActiveNote';
 // import { setEditorFileId } from '../../actions';
 import { setActiveNotebook, setNotePosition } from '../../redux/actions';
 import TopBar from '../TopBar';
@@ -8,7 +9,7 @@ import Editor from '../Editor';
 
 const Main = () => {
     const dispatch = useDispatch();
-    const note = useSelector(state => state.user.notebooks[state.notePosition[0]]?.notes[state.notePosition[1]]);
+    const note = useSelectActiveNote();
     const notePosition = useSelector(state => state.notePosition);
     const user = useSelector(state => state.user);
 

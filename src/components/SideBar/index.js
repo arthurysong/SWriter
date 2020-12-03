@@ -9,7 +9,7 @@ import OptionsModal from './OptionsModal';
 import './SideBar.scss';
 
 function SideBar() {
-  const notebooks = useSelector(state => state.user.notebooks);
+  const notebooks = useSelector(state => Object.values(state.user.notebooks));
   const activeNotebook = useSelector(state => state.activeNotebook);
   const activeNotebookId = useSelector(state => state.user.notebooks[state.activeNotebook]);
   const { name, _id } = useSelector(state => state.user);
@@ -20,7 +20,7 @@ function SideBar() {
 
   return <div className="sideBar">
     {/* TODO: Maintain version number here ... */}
-    {/* 1.1.0 */}
+    {/* 1.2.0 */}
 
     <div className="sideBar__user" onClick={() => setUserOptions(true)}>
       <div className="sideBar__email">{name}</div>
@@ -41,7 +41,7 @@ function SideBar() {
       <div className="modal__separator" />
       <div className="modal__option" onClick={() => dispatch(logout(history))}>Sign out {name}</div>
       <div className="modal__separator" />
-      <div className="modal__option modal__option--disabled modal__option--version">MWriter Web v1.1.0</div>
+      <div className="modal__option modal__option--disabled modal__option--version">MWriter Web v1.2.0</div>
     </OptionsModal>
 
     <div onClick={() => dispatch(newNote(activeNotebookId, _id, activeNotebook))} className="sideBar__button">New Note</div>

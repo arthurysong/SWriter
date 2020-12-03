@@ -91,7 +91,7 @@ export const logout = history => dispatch => {
 }
 
 export const setActiveNotebook = index => ({ type: 'SET_ACTIVE_NOTEBOOK', index })
-export const setNotePosition = (notebookIndex, noteIndex) => ({ type: 'SET_NOTE_POSITION', notebookIndex, noteIndex })
+export const setNotePosition = note => ({ type: 'SET_NOTE_POSITION', note })
 
 export const saveNote = (note, body ) => async (dispatch, getState) => {
     const { notePosition } = getState();

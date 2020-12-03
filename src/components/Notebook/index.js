@@ -28,7 +28,7 @@ const Notebook = ({ notebook, notebookIndex }) => {
             &nbsp;<i className="notebook__bookIcon fas fa-book" />
             &nbsp;<div className="notebook__title">{notebook.name}</div>
         </div>
-        {toggled && notebook.notes.map((note, noteIndex) => <Note key={noteIndex} note={note} noteIndex={noteIndex} notebookIndex={notebookIndex}/>)}
+        {toggled && Object.values(notebook.notes).map((note, noteIndex) => <Note key={noteIndex} note={note} noteIndex={noteIndex} notebookIndex={notebookIndex}/>)}
     </div>
 }
 

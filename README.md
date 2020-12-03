@@ -38,7 +38,12 @@ Any **code snippets** will become a **gist** in the Medium article.
 <img src="pictures-for-readme/codesnippets2.png" width="500px" />
 
 ### TODO
-- TODO: Keep track of last Saved note in the database in the user model not in localStorage.
+
+CURRENTLY working on this one
+* TODO: Keep track of last Saved note in the database in the user model not in localStorage.
+1. Make sure it loads the last saved note.
+2. Make sure it's saving the right note on note switch
+
 - TODO: Allow ordering of notes.. by updatedAt, by createdAt?
 - TODO: Add Readme link that links to GitHub
 - TODO: New Notebook feature

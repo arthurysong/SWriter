@@ -8,7 +8,10 @@ const initialState = {
     // This is to find the note in the user array... 
     // index 0 => index of notebook in user.notebook
     // index 1 => index of note in user.notebook.notes
-    notePosition: [], 
+    notePosition: {
+        notebook: undefined,
+        note: undefined,
+    }, 
     
     // This is the last selected notebook...
     // So that we can select a notebook and then create a new file under the last selected notebook.
@@ -59,8 +62,8 @@ export default createReducer(initialState, {
 
     // notePosition
     SET_NOTE_POSITION: (state, action) => { 
-        state.notePosition[0] = action.notebookIndex;
-        state.notePosition[1] = action.noteIndex;
+        state.notePosition.notebook = action.note.notebook;
+        state.notePosition.note = action.note._id;
     },
     
     // Actions for the saving in progress status

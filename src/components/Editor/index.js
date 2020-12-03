@@ -9,6 +9,7 @@ import axios from 'axios';
 const Editor = ({ note, notePosition, dispatch }) => {
     const changeHandler = debounce(value => {
         localStorage.setItem("saved_content", value());
+        // TODO: DELETE THIS and use information from user 
         localStorage.setItem("last_saved_position", notePosition );
 
         dispatch(saveNote(note, { content: value() } ));
