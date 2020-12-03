@@ -38,7 +38,11 @@ Any **code snippets** will become a **gist** in the Medium article.
 <img src="pictures-for-readme/codesnippets2.png" width="500px" />
 
 ### TODO
-- TODO: Allow ordering of notes.. by updatedAt, by createdAt?
 - TODO: Keep track of last Saved note in the database in the user model not in localStorage.
+- TODO: Allow ordering of notes.. by updatedAt, by createdAt?
+- TODO: Add Readme link that links to GitHub
+- TODO: New Notebook feature
+- TODO: Should be able to move notes to different notebook?
+- TODO: Reorganize all the components into proper folders
 
 

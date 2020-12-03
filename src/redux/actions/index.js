@@ -7,6 +7,14 @@ export const setNoteContent = (notePosition, content) => ({ type: 'SET_NOTE_CONT
 export const setNoteUpdatedAt = (notePosition, date) => ({ type: 'SET_NOTE_UPDATED_AT', notePosition, date });
 export const setUser = user => ({ type: 'SET_USER', user });
 
+export const setUserFromArrayedUser = user => dispatch => {
+    for (const notebook of user.notebooks) {
+        notebook.notes = notebook.notes.reduce((notes, note) => ({ ...notes, [note._id]: note }), {})
+    }
+    user.notebooks = user.notebooks.reduce((notebooks, notebook) => ({ ...notebooks, [notebook._id]: notebook }), {});
+    dispatch(setUser(user));
+}
+
 export const setAuthTokens = (accessToken, refreshToken) => ({ type: 'SET_AUTH_TOKENS', accessToken, refreshToken });
 export const removeAuthTokens = () => ({ type: 'REMOVE_AUTH_TOKENS' })
 
@@ -24,7 +32,7 @@ export const getUser = (queryObject, history, setLoading) => async (dispatch, ge
         // Reset the access_token
         const { access_token, user } = resp.data;
         dispatch(setAuthTokens(access_token, refreshToken));
-        dispatch(setUser(user));
+        dispatch(setUserFromArrayedUser(user));
 
         // Get user's publications
         dispatch(getPublications());
@@ -42,7 +50,7 @@ export const getUser = (queryObject, history, setLoading) => async (dispatch, ge
 
             // Here set auth.accessToken and auth.refreshToken
             dispatch(setAuthTokens(access_token, refresh_token));
-            dispatch(setUser(user));
+            dispatch(setUserFromArrayedUser(user));
 
             // Get user's publications
             dispatch(getPublications());
