@@ -5,9 +5,6 @@ const initialState = {
     // this state is persisted between refreshes, so we can keep user logged in...
     auth: {},
 
-    // This is to find the note in the user array... 
-    // index 0 => index of notebook in user.notebook
-    // index 1 => index of note in user.notebook.notes
     notePosition: {
         notebook: undefined,
         note: undefined,
@@ -50,8 +47,12 @@ export default createReducer(initialState, {
     SET_NOTE_CONTENT: (state, action) => { getNoteFromPosition(state, action.notePosition).content = action.content },
     SET_NOTE_UPDATED_AT: (state, action) => { getNoteFromPosition(state, action.notePosition).updatedAt = action.date }, 
     ADD_NOTE: (state, action) => { 
-        state.user.notebooks[action.activeNotebook].notes.push(action.note)
-        state.notePosition = [action.activeNotebook, state.user.notebooks[action.activeNotebook].notes.length - 1]
+        // state.user.notebooks[action.activeNotebook].notes.push(action.note)
+        state.user.notebooks[action.activeNotebook].notes[action.note._id] = action.note;
+        state.notePosition = {
+            notebook: action.note.notebook,
+            note: action.note._id,
+        }
     },
     DELETE_NOTE: (state) => { delete state.user.notebooks[state.notePosition.notebook].notes[state.notePosition.note] },
     
@@ -60,7 +61,7 @@ export default createReducer(initialState, {
     SET_PUBLICATIONS: (state, action) => { state.publications = action.publications },
 
     // activeNotebook
-    SET_ACTIVE_NOTEBOOK: (state, action) => { state.activeNotebook = action.index },
+    SET_ACTIVE_NOTEBOOK: (state, action) => { state.activeNotebook = action.id },
 
     // notePosition
     SET_NOTE_POSITION: (state, action) => { 

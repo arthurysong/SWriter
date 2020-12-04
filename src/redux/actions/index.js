@@ -57,7 +57,7 @@ export const getUser = (queryObject, history, setLoading) => async (dispatch, ge
 
             // set the notePosition here.
             dispatch(setNotePosition(user.lastSavedNote));
-            
+
             // Get user's publications
             dispatch(getPublications());
             setTimeout(() => setLoading(false), 1000);
@@ -96,7 +96,7 @@ export const logout = history => dispatch => {
     history.replace('/login');
 }
 
-export const setActiveNotebook = index => ({ type: 'SET_ACTIVE_NOTEBOOK', index })
+export const setActiveNotebook = id => ({ type: 'SET_ACTIVE_NOTEBOOK', id })
 export const setNotePosition = note => ({ type: 'SET_NOTE_POSITION', note })
 
 export const saveNote = (note, body ) => async (dispatch, getState) => {

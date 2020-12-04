@@ -21,8 +21,8 @@ const Notebook = ({ notebook, notebookIndex }) => {
     }
 
 
-    return <div onClick={() => dispatch(setActiveNotebook(notebookIndex))} className="notebook">
-        <div onClick={() => setToggled(true)} className={`notebook__listItem ${activeNotebook === notebookIndex ? 'notebook--active' : '' }`}>
+    return <div onClick={() => dispatch(setActiveNotebook(notebook._id))} className="notebook">
+        <div onClick={() => setToggled(true)} className={`notebook__listItem ${activeNotebook === notebook._id ? 'notebook--active' : '' }`}>
             <i onClick={clickHandler}
                 className={`notebook__carrot fa ${toggled ? 'fa-caret-down' : 'fa-caret-right' }`} />
             &nbsp;<i className="notebook__bookIcon fas fa-book" />
