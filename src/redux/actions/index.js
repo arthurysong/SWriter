@@ -34,6 +34,9 @@ export const getUser = (queryObject, history, setLoading) => async (dispatch, ge
         dispatch(setAuthTokens(access_token, refreshToken));
         dispatch(setUserFromArrayedUser(user));
 
+        // set the notePosition here.
+        dispatch(setNotePosition(user.lastSavedNote));
+
         // Get user's publications
         dispatch(getPublications());
         setTimeout(() => setLoading(false), 1000);
@@ -52,6 +55,9 @@ export const getUser = (queryObject, history, setLoading) => async (dispatch, ge
             dispatch(setAuthTokens(access_token, refresh_token));
             dispatch(setUserFromArrayedUser(user));
 
+            // set the notePosition here.
+            dispatch(setNotePosition(user.lastSavedNote));
+            
             // Get user's publications
             dispatch(getPublications());
             setTimeout(() => setLoading(false), 1000);

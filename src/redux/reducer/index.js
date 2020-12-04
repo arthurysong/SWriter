@@ -34,24 +34,26 @@ const initialState = {
     publishingStatus: undefined,
 }
 
+const getNoteFromPosition = (state, notePosition) => state.user.notebooks[notePosition.notebook].notes[notePosition.note];
+
 export default createReducer(initialState, {
     // Actions for auth
     SET_AUTH_TOKENS: (state, action) => { state.auth = { accessToken: action.accessToken, refreshToken: action.refreshToken } },
     REMOVE_AUTH_TOKENS: state => { state.auth = {} },
 
     // Actions for Note
-    SET_NOTE_TITLE: (state, action) => { state.user.notebooks[action.notePosition[0]].notes[action.notePosition[1]].title = action.title },
-    UPDATE_NOTE_PUBLISHED: (state, action) => { state.user.notebooks[action.notePosition[0]].notes[action.notePosition[1]].published = true },
+    SET_NOTE_TITLE: (state, action) => { getNoteFromPosition(state, action.notePosition).title = action.title },
+    UPDATE_NOTE_PUBLISHED: (state, action) => { getNoteFromPosition(state, action.notePosition).published = true },
 
     // update the mediumURL of note after publish, so we can show link in publish modal
-    UPDATE_NOTE_MEDIUM_URL: (state, action) => { state.user.notebooks[action.notePosition[0]].notes[action.notePosition[1]].mediumURL = action.mediumURL },
-    SET_NOTE_CONTENT: (state, action) => { state.user.notebooks[action.notePosition[0]].notes[action.notePosition[1]].content = action.content },
-    SET_NOTE_UPDATED_AT: (state, action) => { state.user.notebooks[action.notePosition[0]].notes[action.notePosition[1]].updatedAt = action.date }, 
+    UPDATE_NOTE_MEDIUM_URL: (state, action) => { getNoteFromPosition(state, action.notePosition).mediumURL = action.mediumURL },
+    SET_NOTE_CONTENT: (state, action) => { getNoteFromPosition(state, action.notePosition).content = action.content },
+    SET_NOTE_UPDATED_AT: (state, action) => { getNoteFromPosition(state, action.notePosition).updatedAt = action.date }, 
     ADD_NOTE: (state, action) => { 
         state.user.notebooks[action.activeNotebook].notes.push(action.note)
         state.notePosition = [action.activeNotebook, state.user.notebooks[action.activeNotebook].notes.length - 1]
     },
-    DELETE_NOTE: (state) => { delete state.user.notebooks[state.notePosition[0]].notes[state.notePosition[1]] },
+    DELETE_NOTE: (state) => { delete state.user.notebooks[state.notePosition.notebook].notes[state.notePosition.note] },
     
     // Actions for User
     SET_USER: (state, action) => { state.user = action.user },

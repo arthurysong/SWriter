@@ -3,15 +3,13 @@ import { setNotePosition, setNoteContent, resetSaving } from '../../redux/action
 import './Note.scss';
 import { useDispatch, useSelector } from 'react-redux';
 
-const Note = ({ note, notebookIndex, noteIndex }) => {
+const Note = ({ note }) => {
     const dispatch = useDispatch();
     const notePosition = useSelector(state => state.notePosition);
 
     const clickHandler = () => {
         // Need note also because when note gets deleted we will have wrong notePosition
-        if (localStorage.getItem("saved_content") && notePosition.length && note ) {
-            // console.log('notePosition', notePosition);
-            // TODO: fix this make sure it saves the right note
+        if (localStorage.getItem("saved_content") && notePosition.notebook && notePosition.note && note ) {
             dispatch(setNoteContent(notePosition, localStorage.getItem("saved_content")));
             localStorage.removeItem("saved_content")
             dispatch(resetSaving());
@@ -20,7 +18,7 @@ const Note = ({ note, notebookIndex, noteIndex }) => {
     }
 
     return <div 
-        className={`note ${notePosition[0] === notebookIndex && notePosition[1] === noteIndex ? 'note--active': '' }`} 
+        className={`note ${notePosition.notebook === note.notebook && notePosition.note === note._id ? 'note--active': '' }`} 
         onClick={clickHandler}>
         <i className="fas fa-file-alt" />&nbsp;
         {note.title}
