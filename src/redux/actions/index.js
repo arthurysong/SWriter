@@ -129,7 +129,8 @@ export const newNote = (notebook, owner, activeNotebook) => async dispatch => {
 }
 
 export const deleteNote = note => async dispatch => {
-    await axios.delete(`${API_URL}/notes/${note}`);
+    const resp = await axios.delete(`${API_URL}/notes/${note}`);
+    console.log("response", resp);
     dispatch({ type: 'DELETE_NOTE' });
 }
 
