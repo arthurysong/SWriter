@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 import Notebook from '../Notebook';
-import { newNote, logout } from "../../redux/actions"
+import { newNote, logout, newNotebook } from "../../redux/actions"
 import OptionsModal from './OptionsModal';
 
 import './SideBar.scss';
@@ -46,6 +46,7 @@ function SideBar() {
 
     <div onClick={() => dispatch(newNote(activeNotebookId, _id, activeNotebook))} className="sideBar__button">New Note</div>
     <div className="sideBar__notes">
+      <div className="sideBar__newNotebookButton" onClick={() => dispatch(newNotebook(_id))}>+ Add Notebook</div>
       {notebooks.map((nb, index) => <Notebook key={index} notebook={nb} notebookIndex={index} />)}
     </div>
   </div>

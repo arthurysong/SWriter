@@ -55,6 +55,10 @@ export default createReducer(initialState, {
         }
     },
     DELETE_NOTE: (state) => { delete state.user.notebooks[state.notePosition.notebook].notes[state.notePosition.note] },
+    ADD_NOTEBOOK: (state, action) => {
+        state.user.notebooks[action.notebook._id] = action.notebook;
+        state.activeNotebook = action.notebook._id;
+    },
     
     // Actions for User
     SET_USER: (state, action) => { state.user = action.user },

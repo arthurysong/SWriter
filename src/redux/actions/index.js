@@ -128,6 +128,11 @@ export const newNote = (notebook, owner, activeNotebook) => async dispatch => {
     dispatch({ type: 'ADD_NOTE', note: resp.data, activeNotebook });
 }
 
+export const newNotebook = (owner) => async dispatch => {
+    const resp = await axios.post(`${API_URL}/notebooks`, { owner });
+    dispatch({ type: 'ADD_NOTEBOOK', notebook: resp.data })
+}
+
 export const deleteNote = note => async dispatch => {
     const resp = await axios.delete(`${API_URL}/notes/${note}`);
     console.log("response", resp);
