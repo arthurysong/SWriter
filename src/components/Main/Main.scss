@@ -6,6 +6,7 @@
     display: flex;
     flex-direction: column;
     background-color: #e7e7e7;
+    // z-index: 2; // need to set this to -2 and set top bar to z-index
 
     .main__placeHolder {
         color: rgba(24, 54, 14, 0.4);

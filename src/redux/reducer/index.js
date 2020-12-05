@@ -59,6 +59,10 @@ export default createReducer(initialState, {
         state.user.notebooks[action.notebook._id] = action.notebook;
         state.activeNotebook = action.notebook._id;
     },
+    SET_NOTEBOOK_NAME: (state, action) => { state.user.notebooks[action.activeNotebook].name = action.name },
+    DELETE_NOTEBOOK: (state, action) => {
+        delete state.user.notebooks[state.activeNotebook];
+    },
     
     // Actions for User
     SET_USER: (state, action) => { state.user = action.user },
@@ -69,8 +73,8 @@ export default createReducer(initialState, {
 
     // notePosition
     SET_NOTE_POSITION: (state, action) => { 
-        state.notePosition.notebook = action.note.notebook;
-        state.notePosition.note = action.note._id;
+        state.notePosition.notebook = action.note?.notebook;
+        state.notePosition.note = action.note?._id;
     },
     
     // Actions for the saving in progress status

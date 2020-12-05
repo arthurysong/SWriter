@@ -22,7 +22,7 @@ const TopBar = ({ note, notePosition, dispatch }) => {
     }
 
     const titleBlur = () => {
-        if (titleChanged) dispatch(saveNote(note, { title: note?.title}));
+        if (titleChanged) dispatch(saveNote(note, { title: note?.title }));
         setTitleChanged(false);
     }
 

@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 import Notebook from '../Notebook';
-import { newNote, logout, newNotebook } from "../../redux/actions"
+import { newNote, logout, newNotebook, deleteNotebook } from "../../redux/actions"
 import OptionsModal from './OptionsModal';
 
 import './SideBar.scss';
@@ -15,6 +15,7 @@ function SideBar() {
   const { name, _id } = useSelector(state => state.user);
   const history = useHistory();
   const dispatch = useDispatch();
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   const [userOptions, setUserOptions] = useState(false); // Used to toggle the options when User is clicked
 
@@ -47,8 +48,30 @@ function SideBar() {
     <div onClick={() => dispatch(newNote(activeNotebookId, _id, activeNotebook))} className="sideBar__button">New Note</div>
     <div className="sideBar__notes">
       <div className="sideBar__newNotebookButton" onClick={() => dispatch(newNotebook(_id))}>+ Add Notebook</div>
-      {notebooks.map((nb, index) => <Notebook key={index} notebook={nb} notebookIndex={index} />)}
+      {notebooks.map((nb, index) => <Notebook key={index} notebook={nb} notebookIndex={index} setShowDeleteModal={setShowDeleteModal} />)}
+      
     </div>
+
+    <OptionsModal 
+        backdropDark
+        // className="deleteModal"
+        show={showDeleteModal} 
+        deleteModal
+        modalClosed={() => setShowDeleteModal(false)} >
+      <h3>Delete Notebook</h3>
+      <p className="deleteModal__rusure">Are you sure you want to delete this notebook?</p>
+      <div className="deleteModal__buttons">
+        <div 
+          className="deleteModal__button deleteModal__button--red" 
+          onClick={() => {
+          dispatch(deleteNotebook());
+          setShowDeleteModal(false);
+        }}>Delete</div>
+        <div 
+          className="deleteModal__button"
+          onClick={() => setShowDeleteModal(false)}>Cancel</div>
+      </div>
+    </OptionsModal>
   </div>
 }
 

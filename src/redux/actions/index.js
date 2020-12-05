@@ -35,7 +35,9 @@ export const getUser = (queryObject, history, setLoading) => async (dispatch, ge
         dispatch(setUserFromArrayedUser(user));
 
         // set the notePosition here.
+        // TODO: If there is lastSavedNote
         dispatch(setNotePosition(user.lastSavedNote));
+        dispatch(setActiveNotebook(user.lastSavedNote?.notebook));
 
         // Get user's publications
         dispatch(getPublications());
@@ -57,6 +59,7 @@ export const getUser = (queryObject, history, setLoading) => async (dispatch, ge
 
             // set the notePosition here.
             dispatch(setNotePosition(user.lastSavedNote));
+            dispatch(setActiveNotebook(user.lastSavedNote?.notebook));
 
             // Get user's publications
             dispatch(getPublications());
@@ -128,17 +131,30 @@ export const newNote = (notebook, owner, activeNotebook) => async dispatch => {
     dispatch({ type: 'ADD_NOTE', note: resp.data, activeNotebook });
 }
 
-export const newNotebook = (owner) => async dispatch => {
-    const resp = await axios.post(`${API_URL}/notebooks`, { owner });
-    dispatch({ type: 'ADD_NOTEBOOK', notebook: resp.data })
-}
+
 
 export const deleteNote = note => async dispatch => {
     const resp = await axios.delete(`${API_URL}/notes/${note}`);
     console.log("response", resp);
     dispatch({ type: 'DELETE_NOTE' });
 }
+export const newNotebook = (owner) => async dispatch => {
+    const resp = await axios.post(`${API_URL}/notebooks`, { owner });
+    dispatch({ type: 'ADD_NOTEBOOK', notebook: resp.data })
+}
 
+export const saveNotebook = (notebook, body) => async dispatch => {
+    // const { }
+    const resp = await axios.put(`${API_URL}/notebooks/${notebook._id}`, body);
+    console.log("resp", resp);
+}
+
+export const deleteNotebook = () => async (dispatch, getState) => {
+    const resp = await axios.delete(`${API_URL}/notebooks/${getState().activeNotebook}`);
+    dispatch({ type: 'DELETE_NOTEBOOK' })
+}
+
+export const setNotebookName = (name, activeNotebook) => ({ type: 'SET_NOTEBOOK_NAME', activeNotebook, name })
 export const updateNoteMediumURL = (notePosition, mediumURL) => ({ type: 'UPDATE_NOTE_MEDIUM_URL', notePosition, mediumURL })
 export const updateNotePublished = (notePosition) => ({ type: 'UPDATE_NOTE_PUBLISHED', notePosition })
 

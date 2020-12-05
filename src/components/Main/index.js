@@ -14,13 +14,13 @@ const Main = () => {
     const user = useSelector(state => state.user);
 
     useEffect(() => {
-        if (localStorage.getItem("last_saved_position")) {
-            const [position1, position2] = localStorage.getItem("last_saved_position").split(',').map(n => parseInt(n));
-            if (user.notebooks[position1]?.notes[position2]) dispatch(setNotePosition(position1, position2)) // Should only set notebook position if there is a note there.
-            // If note was deleted and also the last saved, need the if (note) condition
+        // if (localStorage.getItem("last_saved_position")) {
+        //     const [position1, position2] = localStorage.getItem("last_saved_position").split(',').map(n => parseInt(n));
+        //     if (user.notebooks[position1]?.notes[position2]) dispatch(setNotePosition(position1, position2)) // Should only set notebook position if there is a note there.
+        //     // If note was deleted and also the last saved, need the if (note) condition
 
-            dispatch(setActiveNotebook(position1));
-        }
+        //     dispatch(setActiveNotebook(position1));
+        // }
         
     }, []);
 
