@@ -40,12 +40,11 @@ Any **code snippets** will become a **gist** in the Medium article.
 ### TODO
 
 CURRENTLY working on this one
-- TODO: New Notebook feature
-1. edit and delete
-
 - TODO: Allow ordering of notes.. by updatedAt, by createdAt?
 - TODO: Add Readme link that links to GitHub
+- TODO: When user first creates their account there should be an untitled note in the first Notebook, that automatically opens up...
 - TODO: Should be able to move notes to different notebook?
 - TODO: Reorganize all the components into proper folders
+- TODO: In production use https for API?
 
 
