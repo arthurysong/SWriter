@@ -49,12 +49,10 @@ function SideBar() {
     <div className="sideBar__notes">
       <div className="sideBar__newNotebookButton" onClick={() => dispatch(newNotebook(_id))}>+ Add Notebook</div>
       {notebooks.map((nb, index) => <Notebook key={index} notebook={nb} notebookIndex={index} setShowDeleteModal={setShowDeleteModal} />)}
-      
     </div>
 
     <OptionsModal 
         backdropDark
-        // className="deleteModal"
         show={showDeleteModal} 
         deleteModal
         modalClosed={() => setShowDeleteModal(false)} >

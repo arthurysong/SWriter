@@ -164,18 +164,23 @@ export const publishPost = (note, tags, publication) => async (dispatch, getStat
     dispatch(setPublishingStatus(1));
 
     // TODO: Try catch block and set status to 3 if error 
-    const resp = await axios.post(`${API_URL}/notes/${note._id}/publish`, {
-        tags, publication
-    },{
-        headers: {
-            access_token: auth.accessToken,
-            refresh_token: auth.refreshToken,
-        }
-    })
-    dispatch(setPublishingStatus(2));
+    try {
+        const resp = await axios.post(`${API_URL}/notes/${note._id}/publish`, {
+            tags, publication
+        },{
+            headers: {
+                access_token: auth.accessToken,
+                refresh_token: auth.refreshToken,
+            }
+        })
+        dispatch(setPublishingStatus(2));
 
-    dispatch(updateNotePublished(notePosition));
-    dispatch(updateNoteMediumURL(notePosition, resp.data.note.mediumURL))
+        dispatch(updateNotePublished(notePosition));
+        dispatch(updateNoteMediumURL(notePosition, resp.data.note.mediumURL))
+    } catch (e) {
+        console.log("error", e.response);
+        dispatch(setPublishingStatus(3));
+    }
 }
 
 // saveStatus Actions

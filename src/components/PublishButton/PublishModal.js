@@ -114,6 +114,11 @@ const PublishModal = ({ note, show, modalClosed }) => {
                   </div>
                 </div>
                 {/* TODO: publishingStatus === 3 for error */}
+              </> : publishingStatus === 3 ? <>
+                <div className="modal__container">
+                  <h3>Publishing Error</h3>
+                  <p style={{ marginTop: "24px" }}>Oops, something went wrong. Please make sure you are not publishing an empty note.</p>
+                </div>
               </> : null}
             </div>
         </div>
