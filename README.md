@@ -41,6 +41,7 @@ Any **code snippets** will become a **gist** in the Medium article.
 
 CURRENTLY working on this one
 - TODO: Allow ordering of notes.. by updatedAt, by createdAt?
+- TODO: Remove timeout in loading screen...
 - TODO: Add Readme link that links to GitHub
 - TODO: When user first creates their account there should be an untitled note in the first Notebook, that automatically opens up...
 - TODO: Should be able to move notes to different notebook?
