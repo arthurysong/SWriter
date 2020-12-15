@@ -46,5 +46,6 @@ CURRENTLY working on this one
 - TODO: Should be able to move notes to different notebook?
 - TODO: Reorganize all the components into proper folders
 - TODO: In production use https for API?
+- TODO: Make sure that when users have already logged in navigating to home page will redirect to the main client
 
 
