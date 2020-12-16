@@ -16,6 +16,7 @@ export const oauth2 = () => {
                     // 'redirect_uri': `${process.env.NODE_ENV === 'development' ? 'https://127.0.0.1:3000/client' : 'https://mwriter.herokuapp.com'}`,
                     // 'redirect_uri': 'https://mwriter.herokuapp.com/client',
                     'redirect_uri': `${CLIENT_URL}/client`,
+                    // 'redirect_uri': 'http://127.0.0.1:3000/client',
                     'response_type': 'code',
                     'scope': 'basicProfile,publishPost,listPublications',
                     'state': process.env.REACT_APP_MEDIUM_STATE,
