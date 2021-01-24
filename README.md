@@ -41,6 +41,7 @@ Any **code snippets** will become a **gist** in the Medium article.
 
 CURRENTLY working on this one
 - TODO: Allow ordering of notes.. by updatedAt, by createdAt?
+- TODO: Only allow publish if both the title and content are not empty...
 - TODO: Bug where creating a NB and adding multiple notes bugs.. and doesn't show the note created after first one
 - TODO: Remove timeout in loading screen...
 - TODO: Add Readme link that links to GitHub

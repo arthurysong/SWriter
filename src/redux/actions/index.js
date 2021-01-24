@@ -52,6 +52,7 @@ export const getUser = (queryObject, history, setLoading) => async (dispatch, ge
             })
 
             const { access_token, refresh_token, user } = resp.data;
+            console.log('resp');
 
             // Here set auth.accessToken and auth.refreshToken
             dispatch(setAuthTokens(access_token, refresh_token));
@@ -65,7 +66,8 @@ export const getUser = (queryObject, history, setLoading) => async (dispatch, ge
             dispatch(getPublications());
             setTimeout(() => setLoading(false), 1000);
         } catch (err) {
-            history.replace('/login');
+            console.log("err", err.response);
+            // history.replace('/login');
         }
     
     // if user tries to navigate to /client without tokens in storage, or without the query params just redirect to /login

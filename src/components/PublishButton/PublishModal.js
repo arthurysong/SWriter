@@ -67,11 +67,11 @@ const PublishModal = ({ note, show, modalClosed }) => {
                     handleDrag={handleDrag}
                     />
 
-                  <div className="modal__learnMore">
+                  {/* <div className="modal__learnMore">
                     <a href="https://help.medium.com/hc/en-us/articles/360018677974">
                       Learn more
                     </a> about what happens to your post when you publish.
-                  </div>
+                  </div> */}
 
                   <div className="modal__choosePublication">
                     Choose a publication you want to publish this note to.
@@ -83,6 +83,12 @@ const PublishModal = ({ note, show, modalClosed }) => {
                       onChange={option => setPublication(option)}
                       options={publications.map(p => ({ value: p.id, label: p.name }))} />
                   </div>
+
+                  <a className="modal__formatTip" target="_blank" href="https://github.com/arthurysong/swriter">
+                    Did you format your post correctly?
+                  </a>
+
+                  <p className="modal__warning">Once you publish your post, you can only make edits to the Medium post using Medium. Gists are not editable at this time.</p>
 
                   <div 
                     // TODO: Need to actually publish the note, instead of just setting the status

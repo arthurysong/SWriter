@@ -101,6 +101,17 @@
         }
       }
 
+      .modal__formatTip {
+        display: block;
+        margin-top: 18px;
+      }
+
+      .modal__warning {
+        display: block;
+        margin-top: 6px;
+        color: #eb3939;
+      }
+
 
       .modal__publishButton {
         display: inline-block;

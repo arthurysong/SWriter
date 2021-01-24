@@ -9,6 +9,7 @@ import axios from 'axios';
 const Editor = ({ note, notePosition, dispatch }) => {
     const changeHandler = debounce(value => {
         localStorage.setItem("saved_content", value());
+        console.log('value', { value: value() });
         // TODO: DELETE THIS and use information from user 
         // localStorage.setItem("last_saved_position", notePosition );
 
@@ -18,7 +19,7 @@ const Editor = ({ note, notePosition, dispatch }) => {
     return <div className="editor"> {/* I need this outer div for styling reasons. */}
         <MarkdownEditor 
             className="editor__content" 
-            placeholder="Write down something interesting..."
+            placeholder="Write something interesting..."
             key={note._id} 
             // Add a button that allows for dark mode?
             // dark={true}
