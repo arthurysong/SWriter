@@ -49,8 +49,6 @@ const StyledSideBar = styled.div`
       }
   }
 
-  
-
   .sideBar__notes {
       margin-top: 24px;
 
@@ -107,7 +105,7 @@ function SideBar() {
 
     <div onClick={() => dispatch(newNote(activeNotebookId, _id, activeNotebook))} className="sideBar__button">New Note</div>
     <div className="sideBar__notes">
-      <div className="sideBar__newNotebookButton" onClick={() => dispatch(newNotebook(_id))}>+ Add Notebook</div>
+      <div className="sideBar__newNotebookButton" onClick={() => dispatch(newNotebook(_id))}>+&nbsp;&nbsp;Add Notebook</div>
       {notebooks.map((nb, index) => <Notebook key={index} notebook={nb} notebookIndex={index} setShowDeleteModal={setShowDeleteModal} />)}
     </div>
 
