@@ -1,16 +1,28 @@
-import React, { useState, useRef } from 'react'
-import './FileOptions.scss';
+import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
+import styled from 'styled-components';
+
 import { deleteNote } from '../../redux/actions';
 import OptionsModal from '../SideBar/OptionsModal';
 import useSelectActiveNote from '../../redux/selectors/useSelectActiveNote';
+
+const StyledFileOptions = styled.div`
+  .fileOptions__button {
+    margin-right: 12px;
+    padding: 0 6px;
+
+    &:hover {
+        cursor: pointer;
+    }
+  }
+`;
 
 const FileOptions = () => {
     const [noteOptions, setNoteOptions] = useState(false);
     const dispatch = useDispatch();
     const note = useSelectActiveNote();
 
-    return <div className="fileOptions">
+    return <StyledFileOptions>
         <div className="fileOptions__button" onClick={() => setNoteOptions(true)}>
             <i className="fas fa-ellipsis-h"></i>
         </div>
@@ -28,7 +40,7 @@ const FileOptions = () => {
             <div className="modal__option modal__option--disabled">Print...</div>
             <div className="modal__option modal__option--delete" onClick={() => dispatch(deleteNote(note._id))}>Delete</div>
         </OptionsModal>
-    </div>
+    </StyledFileOptions>
 }
 
 export default FileOptions

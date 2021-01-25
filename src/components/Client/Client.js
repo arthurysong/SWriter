@@ -1,11 +1,12 @@
 import React from 'react'
-import Main from '../Main';
-import SideBar from '../SideBar';
 import styled from 'styled-components';
-import { useDispatch } from 'react-redux';
-import { getUser } from '../../redux/actions';
 import PacmanLoader from 'react-spinners/PacmanLoader';
+import { useDispatch } from 'react-redux';
 import qs from 'qs';
+
+import Main from './Main';
+import SideBar from '../SideBar';
+import { getUser } from '../../redux/actions';
 
 const Page = styled.div`
     height: 100%;
@@ -26,22 +27,22 @@ const LoaderPage = styled.div`
     height: 100vh;
     background-color: #eaeaea;
     text-align: center;
-`;
 
-const Wrapper = styled.div`
-    display: inline-block;
-    vertical-align: text-top;
-    position: relative;
-    top: 40%;
-    transform: translate(0, -50%);
-    text-align: center;
-`;
+    .page__wrapper {
+        display: inline-block;
+        vertical-align: text-top;
+        position: relative;
+        top: 40%;
+        transform: translate(0, -50%);
+        text-align: center;
+    }
 
-const Text = styled.div`
-    text-transform: uppercase;
-    letter-spacing: 6px;
-    color: #26a65b;
-    margin-bottom: 24px;
+    .page__text {
+        text-transform: uppercase;
+        letter-spacing: 6px;
+        color: #26a65b;
+        margin-bottom: 24px;
+    }
 `;
 
 const ClientLoader = ({ history }) => {
@@ -55,12 +56,12 @@ const ClientLoader = ({ history }) => {
 
     if (loading) {
         return <LoaderPage>
-            <Wrapper>
-                <Text>
+            <div className="page__wrapper">
+                <div className="page__text">
                     Loading your ideas :)
-                </Text>
+                </div>
                 <PacmanLoader css="margin-left: 70px;" loading={loading} color="#26a65b" size="32px" margin="4px"/>
-            </Wrapper>
+            </div>
         </LoaderPage>
     }
 

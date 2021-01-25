@@ -40,6 +40,9 @@ Any **code snippets** will become a **gist** in the Medium article.
 ### TODO
 
 CURRENTLY working on this one
+- TODO: Use imgur to upload images
+- TODO: Create a landing page
+- TODO: First post is a format post
 - TODO: Allow ordering of notes.. by updatedAt, by createdAt?
 - TODO: Only allow publish if both the title and content are not empty...
 - TODO: Bug where creating a NB and adding multiple notes bugs.. and doesn't show the note created after first one

@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react'
 import './Notebook.scss';
-import Note from '../Note';
+import Note from '../Client/Note';
 import { useDispatch, useSelector } from 'react-redux';
 import { setActiveNotebook, deleteNotebook, setNotebookName, saveNotebook } from '../../redux/actions/index';
 import OptionsModal from '../SideBar/OptionsModal';
@@ -33,7 +33,7 @@ const Notebook = ({ notebook, setShowDeleteModal }) => {
             className={`notebook__listItem ${activeNotebook === notebook._id ? 'notebook--active' : '' }`}>
             <i onClick={clickHandler}
                 className={`notebook__carrot fa ${toggled ? 'fa-caret-down' : 'fa-caret-right' }`} />
-            &nbsp;<i className="notebook__bookIcon fas fa-book" />
+            &nbsp;<i className="notebook__bookIcon fas fa-book" />&nbsp;
             {/* <input style={{width: "10px"}} ref={nameInput} /> */}
             &nbsp;{editingName ? <input 
                 className="notebook__nameInput"

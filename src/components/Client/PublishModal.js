@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import './PublishModal.scss';
+import styled from 'styled-components';
+
 import rainySpinner from '../../assets/images/rainy2.gif';
 import { useSelector, useDispatch } from 'react-redux';
 import { setPublishingStatus } from '../../redux/actions/publishingStatus';
@@ -7,9 +8,193 @@ import { publishPost } from '../../redux/actions';
 import Select from 'react-select';
 import { WithContext as ReactTags } from 'react-tag-input';
 
+const StyledPublishModal = styled.div`
+  .modal {
+    position: fixed;
+    background-color: white;
+    z-index: 500;
+    // margin: auto;
+    // transform: translate isn't working so using set numbers and margin to center
+    width: 500px;
+    height: 250px;
+    left: 50%;
+    top: 50%;
+    margin-left: -250px;
+    margin-top: -125px;
+    box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.4);
+    border-radius: 4px;
+    color: black;
+
+    &--big {
+      height: 450px;
+      margin-top: -225px;
+    }
+
+    .modal__closeButton {
+      position: absolute;
+      right: 0;
+      padding: 12px;
+      color: rgb(128, 128, 128);
+        // font-weight:00;
+
+      &:hover {
+        cursor: pointer;
+        color: rgb(102, 102, 102);
+      }
+    }
+
+    // PublishingStatus = 0 styles
+    .modal__container {
+      // padding: 60px 44px;
+      padding: 24px;
+      font-size: 13px;
+
+      .modal__publishingTo {
+        font-size: 16px;
+      }
+
+      .modal__addTags {
+        margin-top: 18px;
+      }
+
+      // ReactTag styles
+      .ReactTags__tags {
+        margin-top: 4px;
+      }
+
+      .ReactTags__selected .ReactTags__tag {
+        line-height: 32px; // Need the line-height, to make enough space for padding. It's weird...
+        padding: 4px 6px;
+        margin-right: 4px;
+        background-color: rgb(204, 204, 204);
+        border: 1px solid black;
+        border-radius: 3px;
+      }
+
+      .ReactTags__selected .ReactTags__remove {
+        margin-left: 6px;
+        padding: 2px;
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+
+      .ReactTags__tagInputField {
+        padding: 8px;
+        width: 100%;
+        box-sizing: border-box;
+
+        &:focus {
+          // border: none;
+          outline: none;
+        }
+      }
+
+      .modal__learnMore {
+        margin-top: 24px;
+        opacity: .6;
+
+        a {
+          color: black;
+        }
+      }
+
+      .modal__choosePublication {
+        margin-top: 24px;
+
+        .modal__selectPub {
+          margin-top: 12px;
+        }
+      }
+
+      .modal__formatTip {
+        display: block;
+        margin-top: 18px;
+      }
+
+      .modal__warning {
+        display: block;
+        margin-top: 6px;
+        color: #eb3939;
+      }
+
+
+      .modal__publishButton {
+        display: inline-block;
+        background-color: #358D35;
+        border-radius: 6px;
+        padding: 12px 16px;
+        color: #fff;
+        margin-right: 10px;
+        // margin-top: 44px;
+        margin-top: 22px;
+        font-size: 12px;
+    
+        &:hover {
+            cursor: pointer;
+            background-color: #2d792d;
+        }
+    
+        &:active {
+            cursor: pointer;
+            background-color: #276927;
+        }
+      }
+    }
+
+    // PublishingStatus = 1 styles
+
+    .modal__spinner {
+      display: block;
+      width: 100px;
+      margin: 32px auto 0px;
+    }
+
+    .modal__text {
+      text-align: center;
+      margin: 12px 55px 0px;
+      font-size: 14px;
+
+      .text__light {
+        margin-top: 10px;
+        opacity: .5;
+        font-size: .9em;
+      }
+    }
+
+    // PublishingStatus = 2 styles
+
+    .modal__finishedPublishing {
+      // margin-top: 24px;
+      font-size: 17px;
+    }
+
+    .modal__yourLink {
+      margin-top: 32px;
+
+      a {
+        color: black;
+      }
+    }
+  }
+
+  .backdrop {
+      width: 100%;
+      height: 100%;
+      position: fixed;
+      z-index: 100;
+      left: 0;
+      top: 0;
+      background-color: black;
+      opacity: .6;
+  }
+`;
+
 const PublishModal = ({ note, show, modalClosed }) => {
   const publishingStatus = useSelector(state => state.publishingStatus);
   const publications = useSelector(state => state.publications);
+  const user = useSelector(state => state.user);
   const dispatch = useDispatch();
   const [publication, setPublication] = useState(null);
   const [tags, setTags] = useState([]);
@@ -39,7 +224,8 @@ const PublishModal = ({ note, show, modalClosed }) => {
   }
 
   return (
-    <div className="publishModal">
+    // TODO: Refactor this component into smaller components and use styled-components...
+    <StyledPublishModal>
             {/* The black backdrop */}
             {show ? <div className="backdrop"></div> : null}
 
@@ -53,7 +239,7 @@ const PublishModal = ({ note, show, modalClosed }) => {
                 <div className="modal__container">
                   <div className="modal__publishingTo">
                     {/* TODO: Add real user name */}
-                    Publishing to: <strong>Arthur Song</strong>
+                    Publishing to: <strong>{user.name}</strong>
                   </div>
 
                   <div className="modal__addTags">Add (up to 3) tags so readers will know what your story is about</div>
@@ -131,7 +317,7 @@ const PublishModal = ({ note, show, modalClosed }) => {
                 </div>
               </> : null}
             </div>
-        </div>
+        </StyledPublishModal>
   )
 }
 
