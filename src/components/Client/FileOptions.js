@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
 import { deleteNote } from '../../redux/actions';
-import OptionsModal from '../SideBar/OptionsModal';
+import OptionsModal from './OptionsModal';
 import useSelectActiveNote from '../../redux/selectors/useSelectActiveNote';
 
 const StyledFileOptions = styled.div`
@@ -38,6 +38,7 @@ const FileOptions = () => {
             <div className="modal__option modal__option--disabled">Note info</div>
             <div className="modal__separator" />
             <div className="modal__option modal__option--disabled">Print...</div>
+            {/* TODO: This should show are you sure you want to delete? */}
             <div className="modal__option modal__option--delete" onClick={() => dispatch(deleteNote(note._id))}>Delete</div>
         </OptionsModal>
     </StyledFileOptions>

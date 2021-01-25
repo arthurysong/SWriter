@@ -1,12 +1,72 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import styled from 'styled-components';
 
-import Notebook from '../Notebook';
+import Notebook from './Notebook';
 import { newNote, logout, newNotebook, deleteNotebook } from "../../redux/actions"
 import OptionsModal from './OptionsModal';
 
-import './SideBar.scss';
+const StyledSideBar = styled.div`
+  height: 100%;
+  width: 225px;
+  background-color: #2e2e2e;
+  color: white;
+
+  .sideBar__user {
+      margin: 24px 12px;
+      opacity: .5;
+      display: flex;
+      justify-content: center;
+      
+      .sideBar__email {
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          display: inline-block
+      }
+
+      .sideBar__carrot {
+          margin-left: 14px;
+      }
+
+      &:hover {
+          opacity: .8;
+          cursor: pointer;
+      }
+  }
+
+  .sideBar__button {
+      background-color: #3aa82d;
+      border-radius: 14px;
+      padding: 8px;
+      text-align: center;
+      margin: 6px 18px 0px;
+
+      &:hover {
+          cursor: pointer;
+          background-color: #308e26;
+      }
+  }
+
+  
+
+  .sideBar__notes {
+      margin-top: 24px;
+
+      .sideBar__newNotebookButton {
+          align-items: center;
+          font-size: 12px;
+          padding: 4px 10px;
+
+          &:hover{
+              cursor: pointer;
+              color: rgb(204, 204, 204);
+          }
+      }
+      opacity: 0.9;
+  }
+`;
 
 function SideBar() {
   const notebooks = useSelector(state => Object.values(state.user.notebooks));
@@ -19,7 +79,7 @@ function SideBar() {
 
   const [userOptions, setUserOptions] = useState(false); // Used to toggle the options when User is clicked
 
-  return <div className="sideBar">
+  return <StyledSideBar>
     {/* TODO: Maintain version number here ... */}
     {/* 1.3.0 */}
 
@@ -70,7 +130,7 @@ function SideBar() {
           onClick={() => setShowDeleteModal(false)}>Cancel</div>
       </div>
     </OptionsModal>
-  </div>
+  </StyledSideBar>
 }
 
 export default SideBar

@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import qs from 'qs';
 
 import Main from './Main';
-import SideBar from '../SideBar';
+import SideBar from './SideBar';
 import { getUser } from '../../redux/actions';
 
 const Page = styled.div`

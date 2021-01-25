@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components';
 
 import { oauth2 } from '../../utils/medium';
-import wallpaper from '../../pictures/wallpaper.jpg';
+import wallpaper from '../../assets/images/wallpaper.jpg';
 
 const StyledLogin = styled.div`
     height: 100%;
@@ -70,7 +70,7 @@ const Login = () => {
             <h1 className="login__title">MWriter</h1>
             <p className="login__description">A journaling app that posts to Medium. Organize and automate blogging.</p>
             {/* <div className="login__button" onClick={oauth2}>Continue with Medium</div> */}
-            <div className="login__button" onClick={oauth2}><i class="fab fa-medium"></i> Sign in with Medium
+            <div className="login__button" onClick={oauth2}><i class="fab fa-medium"></i> Continue with Medium
             </div>
         </div>
     </StyledLogin>
