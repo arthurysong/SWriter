@@ -7,21 +7,21 @@ import axios from 'axios';
 import { saveNote } from '../../redux/actions';
 import { PROD_API_URL } from '../../utils/URL';
 
-const Wrapper = styled.div`
+const StyledMarkdownEditor = styled.div`
   flex: 1;
   overflow: auto;
   background-color: #e6e6e6;
-`;
+  // z-index: -2;
 
-const StyledMarkdownEditor = styled(MarkdownEditor)`
-  margin: 0 auto;
-  padding: 24px 0;
-  width: 816px;
-
-  .ProseMirror {
-    padding: 42px;
-    box-shadow: 0 4px 6px 0 hsla(0, 0%, 0%, 0.2);
-    font-family: ${props => props.theme.fontFamily.main};
+  .editor__content {
+      margin: 0 auto;
+      // padding: 24px 42px;
+      padding: 24px 0;
+      width: 816px;
+      .ProseMirror {
+          padding: 42px;
+          box-shadow: 0 4px 6px 0 hsla(0, 0%, 0%, 0.2);
+      }
   }
 `;
 
@@ -33,8 +33,10 @@ const Editor = ({ note, dispatch }) => {
       dispatch(saveNote(note, { content: value() } ));
   }, 500)
   
-  return <Wrapper>
-    <StyledMarkdownEditor
+  return <StyledMarkdownEditor>
+    <MarkdownEditor
+    // {/* <StyledMarkdownEditor */}
+      className="editor__content"
       placeholder="Write something interesting..."
       key={note._id} 
       // Add a button that allows for dark mode?
@@ -56,7 +58,7 @@ const Editor = ({ note, dispatch }) => {
       value={note?.content} 
       onChange={changeHandler}
       onSave={() => console.log('test: saved')}/>
-  </Wrapper>
+  </StyledMarkdownEditor>
 }
 
 export default Editor

@@ -42,6 +42,7 @@ Any **code snippets** will become a **gist** in the Medium article.
 CURRENTLY working on this one
 - TODO: Use imgur to upload images
 - TODO: Create a landing page
+- TODO: Make sure after publishing a post, the publish modal stage gets reset to first.
 - TODO: First post is a format post
 - TODO: Allow ordering of notes.. by updatedAt, by createdAt?
 - TODO: Only allow publish if both the title and content are not empty...
