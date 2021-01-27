@@ -15,7 +15,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   background-color: #e7e7e7;
 
-  .placeholder {
+  .main__placeholder {
     color: rgba(24, 54, 14, 0.4);
     text-align: center;
     position: relative;
@@ -36,7 +36,7 @@ const Main = () => {
     </Wrapper>
 
     return <Wrapper>
-      <div className="main__placeHolder">Hmm, it's very empty here...</div>
+      <div className="main__placeholder">Hmm, it's very empty here...</div>
     </Wrapper>
 }
 

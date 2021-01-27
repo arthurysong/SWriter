@@ -40,7 +40,9 @@ Any **code snippets** will become a **gist** in the Medium article.
 ### TODO
 
 CURRENTLY working on this one
+- TODO: Active notebook not showing
 - TODO: Use imgur to upload images
+- TODO: Fix bug when tabbing in text editor and it displays the not ready display
 - TODO: Create a landing page
 - TODO: Make sure after publishing a post, the publish modal stage gets reset to first.
 - TODO: First post is a format post
