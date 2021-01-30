@@ -11,6 +11,9 @@ const theme = {
   },
   disabled: {
     main: "grey",
+  },
+  black: {
+    main: "#000",
   }
 }
 

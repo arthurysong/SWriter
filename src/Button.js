@@ -2,14 +2,13 @@
 import styled from 'styled-components';
 
 const Button = styled.div`
-  display: inline-block;
-  // display: flex;
-  // align-items: center;
-  // line-height: 30px;
+  display: flex;
+  align-items: center;
+  padding: 0 36px;
+  height: 48px;
   background-color: ${props => props.disabled ? props.theme.disabled.main : props.theme.primary.main};
-  border-radius: 4px;
-  padding 0 16px;
-  // padding: 7px 16px 9px;
+  background-color: ${props => props.black ? "#000" : props.theme.primary.main};
+  border-radius: 24px;
   border: none;
   font-family: ${props => props.theme.fontFamily.main};
 
@@ -26,7 +25,7 @@ const Button = styled.div`
 
   &:hover {
     cursor: pointer;
-    background-color: ${props => props.theme.primary.dark};
+    // background-color: ${props => props.theme.primary.dark};
   }
 `;
 
