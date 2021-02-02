@@ -1,6 +1,8 @@
 import React from 'react'
 import styled from 'styled-components';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
+// import { useHistory } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
 
 import logo from '../../assets/images/logo.png';
 import blog from '../../assets/images/blog.svg';
@@ -102,22 +104,27 @@ const SmallP = styled.p`
   text-deocoration: unset;
 `;
 
+
 export default function LandingPage() {
+
   return (
     <StyledLandingPage>
       <TopBar >
         <img src={logo} alt="mwriter logo" width={100}/>
-        <Button >
-          <P>Get Started</P>
-        </Button>
+        <div style={{ display: 'flex', alignItems: 'center', }}>
+          <Link to="/login" style={{ marginRight: "30px" }}><P>Log In</P></Link>
+          <Link to="/login"><Button >
+            <P>Get Started</P>
+          </Button></Link>
+        </div>
       </TopBar>
       <section style={{ padding: '60px 0  75px', }}>
         <SectionContainer>
           <SectionText>
             <Title>Improve your Technical blogging with organization and automation</Title>
             <Subtitle>MWriter helps Medium technical writers share their ideas efficiently</Subtitle>
-            <Button black style={{ marginBottom: "24px", }}><P>Get Started</P></Button>
-            <Link>Already have an account? Log in</Link>
+            <Link to="/login"><Button black style={{ marginBottom: "24px", }}><P>Get Started</P></Button></Link>
+            <Link to="/login" style={{ textDecoration: 'underline', }}>Already have an account? Log in</Link>
           </SectionText>
           <img src={codereview} alt="someone writing a blog on their laptop" width={600}/>
         </SectionContainer>
@@ -281,14 +288,8 @@ const RippleButton = styled.button`
     animation: ripples 1s ease-out infinite;
   }
 
-  &:hover:before {
-    content: '';
-    width: 64px;
-    height: 64px;
-    position: absolute;
-    // z-index: 0;
-    border-radius: 100%;
-    animation: ripples 1s ease-out infinite;
+  &:hover {
+    cursor: pointer;
   }
 
   @keyframes ripples {
