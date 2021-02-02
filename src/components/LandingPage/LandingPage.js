@@ -22,8 +22,6 @@ import publishicon from '../../assets/images/publish.png';
 import folder from '../../assets/images/folder.png';
 import prettier from '../../assets/images/prettier.png';
 
-
-
 import Button from '../../Button';
 import Link from '../../Link';
 
