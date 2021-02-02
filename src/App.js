@@ -69,7 +69,7 @@ function App() {
         <Router><Routes /></Router>
       </div>
 
-      <div className="mediaSizeNotOkay">
+      {/* <div className="mediaSizeNotOkay">
         <h3>
           MWriter says...
         </h3>
@@ -83,7 +83,7 @@ function App() {
         <h1>
           Thanks!
         </h1>
-      </div>
+      </div> */}
     </StyledApp>
   );
 }
