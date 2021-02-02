@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 // import { useHistory } from 'react-router-dom';
 import { useHistory } from "react-router-dom";
@@ -59,6 +59,19 @@ const SectionText = styled.div`
   align-items: start;
 `;
 
+// const text = styled.keyframes``;
+const slideUp = keyframes`
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+`;
+
 const Title = styled.h1`
   font-size: 42px;
   letter-spacing: -.5px;
@@ -67,6 +80,8 @@ const Title = styled.h1`
   line-height; 60px;
   text-decoration: unset;
   margin-bottom: 25px;
+  // animation: ${slideUp} 1s ease;
+  animation: 1s ease 0.2s 1 normal forwards running ${slideUp}
 `;
 
 const Subtitle = styled.h3`
@@ -83,6 +98,8 @@ const Header = styled.h2`
   font-size: 32px;
   font-weight: normal;
   margin-bottom: 16px;
+  // animation: ${slideUp} 1s ease;
+  animation: 1s ease 0.2s 1 normal forwards running ${slideUp}
 `;
 
 const Text = styled.p`
@@ -110,6 +127,9 @@ const SmallP = styled.p`
   text-deocoration: unset;
 `;
 
+const Bold = styled.strong`
+  font-weight: 500;
+`;
 
 export default function LandingPage() {
 
@@ -118,9 +138,9 @@ export default function LandingPage() {
       <TopBar >
         <img src={logo} alt="mwriter logo" width={100}/>
         <div style={{ display: 'flex', alignItems: 'center', }}>
-          <Link to="/login" style={{ marginRight: "30px" }}><P>Log In</P></Link>
+          <Link to="/login" style={{ marginRight: "30px" }}><P as={Bold}>Log In</P></Link>
           <Link to="/login"><Button >
-            <P>Get Started</P>
+            <P as={Bold}>Get Started</P>
           </Button></Link>
         </div>
       </TopBar>
@@ -129,7 +149,7 @@ export default function LandingPage() {
           <SectionText>
             <Title>Improve your Technical blogging with organization and automation</Title>
             <Subtitle>MWriter helps Medium technical writers share their ideas efficiently</Subtitle>
-            <Link to="/login"><Button black style={{ marginBottom: "24px", }}><P>Get Started</P></Button></Link>
+            <Link to="/login"><Button black style={{ marginBottom: "24px", }}><P as={Bold}>Get Started</P></Button></Link>
             <Link to="/login" style={{ textDecoration: 'underline', }}>Already have an account? Log in</Link>
           </SectionText>
           <img src={codereview} alt="someone writing a blog on their laptop" width={600}/>
@@ -208,7 +228,7 @@ export default function LandingPage() {
               <SocialIcon src={medium} alt="medium"/>
             </div>
           </div>
-          <SmallP>© 2021 MWriter. All rights reserved.</SmallP>
+          <SmallP style={{ opacity: 0.6 }}>© 2021 MWriter. All rights reserved.</SmallP>
           <div>
 
           </div>
