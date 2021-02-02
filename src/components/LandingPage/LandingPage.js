@@ -18,6 +18,12 @@ import codeblocks from '../../assets/images/codeblocks.svg';
 import codereview from '../../assets/images/codereview.svg';
 import codetyping from '../../assets/images/codetyping.svg';
 
+import publishicon from '../../assets/images/publish.png';
+import folder from '../../assets/images/folder.png';
+import prettier from '../../assets/images/prettier.png';
+
+
+
 import Button from '../../Button';
 import Link from '../../Link';
 
@@ -145,6 +151,7 @@ export default function LandingPage() {
       <section style={{ borderTop: '1px solid #000', padding: '100px 0' }}>
         <SectionContainer style={{ marginBottom: 100 }} >
           <SectionText style={{ width: 560 }}>
+            <img src={folder} width={60} style={{ marginBottom: 20 }} />
             <Header>Note Organization</Header>
             <Text style={{ width: 430 }}>Keep your Medium drafts and published posts organized using notebooks.</Text>
             <InfoText />
@@ -154,6 +161,7 @@ export default function LandingPage() {
         <SectionContainer style={{ marginBottom: 100 }}>
           <img src={publish} alt="someone publishing a blog post" height={360}/>
           <SectionText style={{ width: 560 }}>
+            <img src={publishicon} width={60} style={{ marginBottom: 20 }} />
             <Header>Medium Integration</Header>
             <Text style={{ width: 430 }}>Publish directly to your Medium account with just one click. Before you select "Publish Now", select any tags you want for your post. You can also publish your note under any publications.</Text>
             <InfoText />
@@ -161,6 +169,7 @@ export default function LandingPage() {
         </SectionContainer>
         <SectionContainer>
           <SectionText style={{ width: 560 }}>
+            <img src={prettier} width={60} style={{ marginBottom: 20 }} />
             <Header>No More Ugly Medium Codeblocks</Header>
             <Text style={{ width: 430 }}>Take Advantage of GitHub Gist's syntax highlighting and prettier formatting. When you hit "Publish", MWriter will automatically create and import any code snippets as GitHub Gists!</Text>
             <InfoText />
