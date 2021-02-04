@@ -129,6 +129,12 @@ const Bold = styled.strong`
   font-weight: 500;
 `;
 
+const HoverUnderline = styled.span`
+  &:hover {
+    text-decoration: underline;
+  }
+`;
+
 export default function LandingPage() {
 
   return (
@@ -136,7 +142,7 @@ export default function LandingPage() {
       <TopBar >
         <img src={logo} alt="mwriter logo" width={100}/>
         <div style={{ display: 'flex', alignItems: 'center', }}>
-          <Link to="/login" style={{ marginRight: "30px" }}><P as={Bold}>Log In</P></Link>
+          <Link to="/login" style={{ marginRight: "30px" }}><P as={Bold}><HoverUnderline>Log In</HoverUnderline></P></Link>
           <Link to="/login"><Button >
             <P as={Bold}>Get Started</P>
           </Button></Link>
@@ -160,7 +166,7 @@ export default function LandingPage() {
           <div style={{ width: 450, textAlign: 'center', }}>
             <Header >Bug-free, Powerful Editor</Header>
             <Text>Draft your blog posts using a powerful, bug-free text editor. Easily include images, headers, links, code blocks and more with no hassle.</Text>
-            <GetStartedButton />
+            <Link to="/login"><GetStartedButton /></Link>
           </div>
           {/* </SectionText> */}
         </SectionContainer>
@@ -243,6 +249,7 @@ const SocialIcon = styled.img`
 
   &:hover {
     cursor: pointer;
+    color: #3aa82d;
   }
 `;
 
@@ -262,31 +269,46 @@ const ColumnItem = styled(P)`
   padding: 8px 0;
   &:hover {
     cursor: pointer;
+    text-decoration: underline;
   }
 `;
 
 export const InfoText = () => {
   return <StyledInfoText>
-    <svg style={{ fill: 'rgb(111, 120, 126)', marginRight: '16px' }} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm1 18h-2v-8h2v8zm-1-12.25c.69 0 1.25.56 1.25 1.25s-.56 1.25-1.25 1.25-1.25-.56-1.25-1.25.56-1.25 1.25-1.25z"/></svg>
+    <TurnGreenHover xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm1 18h-2v-8h2v8zm-1-12.25c.69 0 1.25.56 1.25 1.25s-.56 1.25-1.25 1.25-1.25-.56-1.25-1.25.56-1.25 1.25-1.25z"/></TurnGreenHover>
     <P style={{ fontWeight: 500 }}>Learn More</P>
   </StyledInfoText>
 }
 
+const TurnGreenHover = styled.svg`
+  fill: rgb(111, 120, 126);
+  margin-right: 16px;
+`;
+
 const StyledInfoText = styled.div`
   color: rgb(111, 120, 126);
   display: flex;
+  align-items: center;
+
 
   &:hover {
     cursor: pointer;
+    color: #3aa82d;
+
+    svg {
+      fill: #3aa82d;
+    }
   }
 `;
 
 export const GetStartedButton = () => {
   return <div style={{ display: 'flex', justifyContent: 'center' }}>
+    <HoverUnderline>
     <GetStarted>
       <RippleButton><ArrowForwardIcon /></RippleButton>
       <GetStartedText>Get Started</GetStartedText>
     </GetStarted>
+    </HoverUnderline>
   </div>
 }
 
@@ -317,6 +339,7 @@ const RippleButton = styled.button`
 
   &:hover {
     cursor: pointer;
+    background: #308e26;
   }
 
   @keyframes ripples {

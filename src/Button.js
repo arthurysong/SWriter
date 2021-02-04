@@ -25,7 +25,8 @@ const Button = styled.div`
 
   &:hover {
     cursor: pointer;
-    // background-color: ${props => props.theme.primary.dark};
+    background-color: ${props => props.black ? "#000" : props.theme.primary.dark };
+    color: ${props => props.black ? props.theme.primary.main : 'white'}
   }
 `;
 
