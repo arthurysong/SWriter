@@ -154,7 +154,7 @@ export default function LandingPage() {
           </Button></Link>
         </div>
       </TopBar>
-      <section style={{ padding: '60px 0  75px', }}>
+      <section style={{ padding: '60px 0 120px', }}>
         <SectionContainer>
           <SectionText>
             <Title>Improve your Technical blogging with organization and automation</Title>
