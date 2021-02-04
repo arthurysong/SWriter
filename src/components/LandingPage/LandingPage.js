@@ -17,6 +17,7 @@ import reddit2 from '../../assets/images/reddit2.svg';
 import codeblocks from '../../assets/images/codeblocks.svg';
 import codereview from '../../assets/images/codereview.svg';
 import codetyping from '../../assets/images/codetyping.svg';
+import demo from '../../assets/images/demo.gif';
 
 import publishicon from '../../assets/images/publish.png';
 import folder from '../../assets/images/folder.png';
@@ -48,6 +49,11 @@ const SectionContainer = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
+`;
+
+const FullWidth = styled.div`
+  width: auto;
+  // justify-content: s;
 `;
 
 const SectionText = styled.div`
@@ -160,14 +166,26 @@ export default function LandingPage() {
         </SectionContainer>
       </section>
 
-      <Section style={{ borderTop: '1px solid #000', padding: '72px 0', backgroundColor: 'rgb(240, 235, 230)' }}>
-        <SectionContainer>
-          {/* <SectionText style={{ display: 'flex', flexDirection: 'start', alignItems: 'center', }}> */}
-          <div style={{ width: 450, textAlign: 'center', }}>
-            <Header >Bug-free, Powerful Editor</Header>
-            <Text>Draft your blog posts using a powerful, bug-free text editor. Easily include images, headers, links, code blocks and more with no hassle.</Text>
-            <Link to="/login"><GetStartedButton /></Link>
+      <Section style={{ borderTop: '1px solid #000', padding: '72px 0', position: 'relative', backgroundColor: 'rgb(240, 235, 230)' }}>
+        <SectionContainer as={FullWidth}>
+          <div style={{ width: "50%", display: 'flex', justifyContent: 'flex-end', }}>
+            <img src={demo} width={700} style={{ 
+              // position: 'absolute',
+              // top: 350,
+              objectFit: 'cover', borderRadius: 2, boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)' }}/>
           </div>
+          {/* <SectionText style={{ display: 'flex', flexDirection: 'start', alignItems: 'center', }}> */}
+          <div style={{ width: "50%", }}>
+
+            <div style={{ width: 430, marginLeft: 150 }}>
+              <Header>Bug-free, Powerful Editor</Header>
+              <Text>Draft your blog posts using a powerful, bug-free text editor. Easily include images, headers, links, code blocks and more with no hassle.</Text>
+              <Link to="/login"><GetStartedButton /></Link>
+              
+            </div>
+          </div>
+          
+          
           {/* </SectionText> */}
         </SectionContainer>
       </Section>
@@ -302,7 +320,7 @@ const StyledInfoText = styled.div`
 `;
 
 export const GetStartedButton = () => {
-  return <div style={{ display: 'flex', justifyContent: 'center' }}>
+  return <div style={{ display: 'flex',  }}>
     <HoverUnderline>
     <GetStarted>
       <RippleButton><ArrowForwardIcon /></RippleButton>
