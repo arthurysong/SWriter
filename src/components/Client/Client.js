@@ -7,6 +7,7 @@ import qs from 'qs';
 import Main from './Main';
 import SideBar from './SideBar';
 import { getUser } from '../../redux/actions';
+import { PROD_API_URL, API_URL } from '../../utils/URL';
 
 const Page = styled.div`
     height: 100%;
@@ -50,6 +51,10 @@ const ClientLoader = ({ history }) => {
     const [loading, setLoading] = React.useState(true);
 
     React.useEffect(() => {
+        fetch(`${API_URL}/notes`)
+            .then(resp => resp.json())
+            .then(json => { console.log("json", json) });
+
         const queryObject = qs.parse(history.location.search.substring(1));
         dispatch(getUser(queryObject, history, setLoading));
     }, [])
