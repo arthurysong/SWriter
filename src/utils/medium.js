@@ -12,6 +12,7 @@ export const oauth2 = () => {
     // var params = {'client_id': credentials.web.client_id,
     // console.log(process.env.REACT_APP_MEDIUM_STATE);
     // console.log(process.env);
+    console.log('redirect_uri', `${CLIENT_URL}/client`);
     var params = {'client_id': process.env.REACT_APP_MEDIUM_ID,
                     // 'redirect_uri': `${process.env.NODE_ENV === 'development' ? 'https://127.0.0.1:3000/client' : 'https://mwriter.herokuapp.com'}`,
                     // 'redirect_uri': 'https://mwriter.herokuapp.com/client',
