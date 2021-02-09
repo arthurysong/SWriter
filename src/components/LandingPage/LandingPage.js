@@ -136,8 +136,71 @@ const Bold = styled.strong`
 `;
 
 const HoverUnderline = styled.span`
+  // &:before {
+  //   content: "";
+  //   position: absolute;
+  //   width: 100%;
+  //   height: 3px;
+  //   bottom: 0;
+  //   left: 0;
+  //   background: #9CF5A6;
+  //   visibility: hidden;
+  //   border-radius: 5px;
+  //   transform: scaleX(0);
+  //   transition: .25s linear;
+  // }
+
+  // &:hover:before {
+  //   visibility: visible;
+  //   transform: scaleX(1);
+  // }
   &:hover {
     text-decoration: underline;
+  }
+`;
+
+const DropInUnderline = styled.span`
+  // font-size: 20px;
+  // color: #584E4A;
+  position: relative;
+  // text-transform: uppercase;
+  text-decoration: none;
+  padding-bottom: 8px;
+
+  &:before,
+  &:after {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    left: 0; right: 0;
+    height: 2px;
+    background-color: #ADB968;
+  }
+  &:before {
+    opacity: 0;
+    transform: translateY(-8px);
+    transition: transform 0s cubic-bezier(0.175, 0.885, 0.320, 1.275), opacity 0s;
+  }
+  &:after {
+    opacity: 0;
+    transform: translateY(8px/2);
+    transition: transform .2s cubic-bezier(0.175, 0.885, 0.320, 1.275), opacity .2s;
+  }
+  &:hover,
+  &:focus {
+
+    cursor: pointer;
+    &:before,
+    &:after {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    &:before {
+      transition: transform .2s cubic-bezier(0.175, 0.885, 0.320, 1.275), opacity .2s;
+    }
+    &:after {
+      transition: transform 0s .2s cubic-bezier(0.175, 0.885, 0.320, 1.275), opacity 0s .2s;
+    }
   }
 `;
 
@@ -146,9 +209,16 @@ export default function LandingPage() {
   return (
     <StyledLandingPage>
       <TopBar >
-        <img src={logo} alt="mwriter logo" width={100}/>
+        <Link to="/"><img src={logo} alt="mwriter logo" width={100}/></Link>
         <div style={{ display: 'flex', alignItems: 'center', }}>
-          <Link to="/login" style={{ marginRight: "30px" }}><P as={Bold}><HoverUnderline>Log In</HoverUnderline></P></Link>
+          <Link to="/login" style={{ marginRight: "30px" }}>
+            <P as={Bold}>
+              {/* <HoverUnderline>Log In
+              </HoverUnderline> */}
+              <DropInUnderline distance={20}>Log In
+              </DropInUnderline>
+            </P>
+          </Link>
           <Link to="/login"><Button >
             <P as={Bold}>Get Started</P>
           </Button></Link>
@@ -157,12 +227,14 @@ export default function LandingPage() {
       <section style={{ padding: '60px 0 120px', }}>
         <SectionContainer>
           <SectionText>
-            <Title>Improve your Technical blogging with organization and automation</Title>
+            {/* <Title>Improve your Technical blogging with organization and automation</Title> */}
+            <Title>Enhance your technical blogging through the utilization of organization and automation</Title>
+            {/* <Subtitle>MWriter helps Medium technical writers share their ideas efficiently</Subtitle> */}
             <Subtitle>MWriter helps Medium technical writers share their ideas efficiently</Subtitle>
             <Link to="/login"><Button black style={{ marginBottom: "24px", }}><P as={Bold}>Get Started</P></Button></Link>
-            <Link to="/login" style={{ textDecoration: 'underline', }}>Already have an account? Log in</Link>
+            <Link to="/login" style={{ textDecoration: 'underline' }}>Already have an account? Log in</Link>
           </SectionText>
-          <img src={codereview} alt="someone writing a blog on their laptop" width={600}/>
+          <img src={blog} alt="someone writing a blog on their laptop" width={600}/>
         </SectionContainer>
       </section>
 
@@ -178,8 +250,9 @@ export default function LandingPage() {
           <div style={{ width: "50%", }}>
 
             <div style={{ width: 430, marginLeft: 150 }}>
-              <Header>Bug-free, Powerful Editor</Header>
-              <Text>Draft your blog posts using a powerful, bug-free text editor. Easily include images, headers, links, code blocks and more with no hassle.</Text>
+              <Header>A Powerful Editor</Header>
+              {/* <Text>Draft your blog posts using a powerful, bug-free text editor. Easily include images, headers, links, code blocks and more with no hassle.</Text> */}
+              <Text>Compose blog posts through the use of a powerful, bug-free text editor. Seamlessly, incorporate elements such as images, headers, links, code blocks, and more.</Text>
               <Link to="/login"><GetStartedButton /></Link>
               
             </div>
@@ -205,15 +278,17 @@ export default function LandingPage() {
           <SectionText style={{ width: 560 }}>
             <img src={publishicon} width={60} style={{ marginBottom: 20 }} />
             <Header>Medium Integration</Header>
-            <Text style={{ width: 430 }}>Publish directly to your Medium account with just one click. Before you select "Publish Now", select any tags you want for your post. You can also publish your note under any publications.</Text>
+            {/* <Text style={{ width: 430 }}>Publish directly to your Medium account with just one click. Before you select "Publish Now", select any tags you want for your post. You can also publish your note under any publications.</Text> */}
+            <Text style={{ width: 430 }}>Publish posts directly to your Medium account with a single click. MWriter enables users to tag posts and publish notes under publications.</Text>
             <InfoText />
           </SectionText>
         </SectionContainer>
         <SectionContainer>
           <SectionText style={{ width: 560 }}>
             <img src={prettier} width={60} style={{ marginBottom: 20 }} />
-            <Header>No More Ugly Medium Codeblocks</Header>
-            <Text style={{ width: 430 }}>Take Advantage of GitHub Gist's syntax highlighting and prettier formatting. When you hit "Publish", MWriter will automatically create and import any code snippets as GitHub Gists!</Text>
+            <Header>No More Unattractive Medium Codeblocks</Header>
+            {/* <Text style={{ width: 430 }}>Take Advantage of GitHub Gist's syntax highlighting and prettier formatting. When you hit "Publish", MWriter will automatically create and import any code snippets as GitHub Gists!</Text> */}
+            <Text style={{ width: 430 }}>Utilize GitHub Gist's syntax highlighting and streamlined format. Code snippets are automatically created and imported as GitHub Gists upon publishing.</Text>
             <InfoText />
           </SectionText>
           <img src={codeblocks} alt="someone publishing a blog post" height={360}/>
@@ -222,7 +297,7 @@ export default function LandingPage() {
       <section style={{ padding: '80px 0', }}>
         <SectionContainer style={{ display: 'block' }}>
           <div style={{ paddingBottom: 48, marginBottom: 48, borderBottom: '3px solid #000' }}>
-            <img src={logo} alt="mwriter logo" width={100}/>
+            <Link to="/" ><img src={logo} alt="mwriter logo" width={100}/></Link>
           </div>
           <div style={{ display: 'flex', marginBottom: 35, paddingBottom: 60, borderBottom: '1px solid rgba(136,139,141,0.5)', }}>
             <Column>
@@ -282,14 +357,20 @@ const ColumnHeader = styled(P)`
   padding: 8px 0;
 `;
 
-const ColumnItem = styled(P)`
+const ColumnItem = ({ children }) => (
+  <P style={{ padding: "8px 0" }}>
+    <DropInUnderline>{children}</DropInUnderline>
+  </P>
+)
+
+// const ColumnItem = styled(P)`
   // margin-top: 8px;
-  padding: 8px 0;
-  &:hover {
-    cursor: pointer;
-    text-decoration: underline;
-  }
-`;
+  // padding: 8px 0;
+  // &:hover {
+  //   cursor: pointer;
+  //   text-decoration: underline;
+  // }
+// `;
 
 export const InfoText = () => {
   return <StyledInfoText>
@@ -321,12 +402,10 @@ const StyledInfoText = styled.div`
 
 export const GetStartedButton = () => {
   return <div style={{ display: 'flex',  }}>
-    <HoverUnderline>
     <GetStarted>
       <RippleButton><ArrowForwardIcon /></RippleButton>
-      <GetStartedText>Get Started</GetStartedText>
+      <GetStartedText><DropInUnderline>Get Started</DropInUnderline></GetStartedText>
     </GetStarted>
-    </HoverUnderline>
   </div>
 }
 

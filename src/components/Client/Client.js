@@ -51,9 +51,10 @@ const ClientLoader = ({ history }) => {
     const [loading, setLoading] = React.useState(true);
 
     React.useEffect(() => {
-        fetch(`${API_URL}/notes`)
-            .then(resp => resp.json())
-            .then(json => { console.log("json", json) });
+        // This is for testing"
+        // fetch(`${API_URL}/notes`)
+        //     .then(resp => resp.json())
+        //     .then(json => { console.log("json", json) });
 
         const queryObject = qs.parse(history.location.search.substring(1));
         dispatch(getUser(queryObject, history, setLoading));
